@@ -1,0 +1,8 @@
+@Finals_HostAddress = http://localhost:5040
+
+GET {{Finals_HostAddress}}/api/register
+Accept: application/json
+
+###
+GET {{Finals_HostAddress}}/api/login
+Accept: application/json
