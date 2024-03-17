@@ -23,7 +23,7 @@ public class UserService : IUserService
 
     public async Task<IdentityResult> RegisterUser(RegisterRequestDto request)
     {
-        var user = new ApplicationUser { UserName = request.Username, Email = request.Email, Role = Role.Customer };
+        var user = new ApplicationUser { UserName = request.Username, Email = request.Email, Role = Role.Customer, LastName = request.LastName, FirstName = request.FirstName, IsBlocked = false, Salary = request.Salary, Age = request.Age };
         var result = await _userManager.CreateAsync(user, request.Password!);
         return result;
     }
