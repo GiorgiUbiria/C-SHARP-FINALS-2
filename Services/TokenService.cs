@@ -1,12 +1,13 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Finals.Interfaces;
 using Finals.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Finals.Services;
 
-public class TokenService
+public class TokenService : ITokenService
 {
     private const int ExpirationMinutes = 30;
     private readonly ILogger<TokenService> _logger;

@@ -1,9 +1,5 @@
-using Finals.Contexts;
 using Finals.Dtos;
-using Finals.Enums;
-using Finals.Models;
 using Finals.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Finals.Controllers;
@@ -12,18 +8,13 @@ namespace Finals.Controllers;
 [Route("/api/[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly ApplicationDbContext _context;
-    private readonly TokenService _tokenService;
+    private readonly IUserService _userService;
 
-    public UsersController(UserManager<ApplicationUser> userManager, ApplicationDbContext context, TokenService tokenService, ILogger<UsersController> logger)
+    public UsersController(IUserService userService)
     {
-        _userManager = userManager;
-        _context = context;
-        _tokenService = tokenService;
+        _userService = userService;
     }
 
-    
     [HttpPost]
     [Route("register")]
     public async Task<IActionResult> Register(RegisterRequestDto request)
@@ -32,11 +23,8 @@ public class UsersController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        
-        var result = await _userManager.CreateAsync(
-            new ApplicationUser { UserName = request.Username, Email = request.Email, Role = Role.Customer },
-            request.Password!
-        );
+
+        var result = await _userService.RegisterUser(request);
 
         if (result.Succeeded)
         {
@@ -51,8 +39,7 @@ public class UsersController : ControllerBase
 
         return BadRequest(ModelState);
     }
-    
-    
+
     [HttpPost]
     [Route("login")]
     public async Task<ActionResult<AuthResponseDto>> Authenticate([FromBody] LoginRequestDto request)
@@ -62,32 +49,11 @@ public class UsersController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var managedUser = await _userManager.FindByEmailAsync(request.Email!);
-        if (managedUser == null)
+        var authResponse = await _userService.AuthenticateUser(request);
+        if (authResponse == null)
         {
             return BadRequest("Bad credentials");
         }
 
-        var isPasswordValid = await _userManager.CheckPasswordAsync(managedUser, request.Password!);
-        if (!isPasswordValid)
-        {
-            return BadRequest("Bad credentials");
-        }
-
-        var userInDb = _context.Users.FirstOrDefault(u => u.Email == request.Email);
-        
-        if (userInDb is null)
-        {
-            return Unauthorized();
-        }
-        
-        var accessToken = _tokenService.CreateToken(userInDb);
-        await _context.SaveChangesAsync();
-        
-        return Ok(new AuthResponseDto
-        {
-            Email = userInDb.Email,
-            Token = accessToken,
-        });
-    }
-}
+        return Ok(authResponse);
+    }}
