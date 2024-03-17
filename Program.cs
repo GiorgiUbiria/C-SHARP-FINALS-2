@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using Finals.Contexts;
+using Finals.Interfaces;
 using Finals.Models;
 using Finals.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -48,7 +49,9 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlite("Data Source=localDb.db"));
 
-builder.Services.AddScoped<TokenService, TokenService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ILoanService, LoanService>();
 
 builder.Services.AddControllers().AddJsonOptions(opt =>
 {

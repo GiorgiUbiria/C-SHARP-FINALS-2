@@ -1,5 +1,4 @@
 using Asp.Versioning;
-using Finals.Contexts;
 using Finals.Dtos;
 using Finals.Interfaces;
 using Finals.Models;
@@ -20,8 +19,8 @@ public class LoansController : ControllerBase
         _loanService = loanService;
     }
 
-    [Authorize(Roles = "Accountant")]
-    [HttpPost("new")]
+    [Authorize]
+    [HttpPost("new_loan")]
     public async Task<ActionResult<Loan>> CreateLoan(LoanDto loanDto)
     {
         if (!ModelState.IsValid)
@@ -29,10 +28,16 @@ public class LoansController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var loan = await _loanService.CreateLoan(loanDto);
-        return CreatedAtAction(nameof(GetLoan), new { id = loan.Id }, loan);
+        try
+        {
+            var loan = await _loanService.CreateLoan(loanDto);
+            return CreatedAtAction(nameof(GetLoan), new { id = loan.Id }, loan);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
-
     [HttpGet("{id:int}")]
     public async Task<ActionResult<LoanDto>> GetLoan(int id)
     {
@@ -46,8 +51,15 @@ public class LoansController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<LoanDtos> GetAllLoans()
+    public async Task<IActionResult> GetAllLoans()
     {
-        return await _loanService.GetAllLoans();
+        var loanDtos = await _loanService.GetAllLoans();
+
+        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        {
+            return NoContent();
+        }
+
+        return Ok(loanDtos);
     }
 }

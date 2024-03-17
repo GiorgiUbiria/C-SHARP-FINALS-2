@@ -16,4 +16,6 @@ public class ApplicationUser : IdentityUser
     public int Age { get; set; }
     
     public int Salary { get; set; }
+    
+    public ICollection<Loan> Loans { get; set; }
 }
