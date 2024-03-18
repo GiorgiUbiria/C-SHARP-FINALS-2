@@ -38,6 +38,7 @@ public class LoansController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+    
     [HttpGet("{id:int}")]
     public async Task<ActionResult<LoanDto>> GetLoan(int id)
     {

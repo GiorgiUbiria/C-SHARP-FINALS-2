@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Finals.Contexts;
 using Finals.Dtos;
 using Finals.Enums;
@@ -5,6 +6,7 @@ using Finals.Interfaces;
 using Finals.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Finals.Services;
 
@@ -13,18 +15,20 @@ public class LoanService : ILoanService
     private readonly ApplicationDbContext _dbContext;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly ILogger<LoanService> _logger;
 
-    public LoanService(ApplicationDbContext dbContext, IHttpContextAccessor httpContextAccessor,
-        UserManager<ApplicationUser> userManager)
+    public LoanService(ApplicationDbContext dbContext,
+        UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, ILogger<LoanService> logger)
     {
         _dbContext = dbContext;
+        _logger = logger;
         _httpContextAccessor = httpContextAccessor;
         _userManager = userManager;
     }
 
     public async Task<Loan> CreateLoan(LoanDto loanDto)
     {
-        var user = await GetUserFromHttpContext();
+        var user = await GetUser();
         if (user == null)
         {
             throw new InvalidOperationException("User not found.");
@@ -52,7 +56,7 @@ public class LoanService : ILoanService
 
     public async Task<LoanDto> GetLoan(int id)
     {
-        var user = await GetUserFromHttpContext();
+        var user = await GetUser();
         if (user == null)
         {
             return null;
@@ -77,7 +81,7 @@ public class LoanService : ILoanService
 
     public async Task<LoanDtos> GetAllLoans()
     {
-        var user = await GetUserFromHttpContext();
+        var user = await GetUser();
         if (user == null)
         {
             return null;
@@ -117,14 +121,20 @@ public class LoanService : ILoanService
         return loansDto;
     }
 
-    private async Task<ApplicationUser> GetUserFromHttpContext()
+    public async Task<ApplicationUser> GetUser()
     {
-        if (!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        var userIdClaim = _httpContextAccessor.HttpContext?.User.Claims
+            .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier && c.Value == "80c8b6b1-e2b6-45e8-b044-8f2178a90111")?.Value;        
+        
+        var claims = _httpContextAccessor.HttpContext?.User.Claims;
+
+        if (userIdClaim == null)
         {
             return null;
         }
 
-        var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userIdClaim);
+
         if (user == null)
         {
             return null;
