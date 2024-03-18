@@ -6,7 +6,6 @@ using Finals.Interfaces;
 using Finals.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Finals.Services;
 
@@ -25,7 +24,73 @@ public class LoanService : ILoanService
         _httpContextAccessor = httpContextAccessor;
         _userManager = userManager;
     }
+    
+    public async Task<bool> DeleteLoan(int id)
+    {
+        var user = await GetUser();
+        if (user == null)
+        {
+            throw new InvalidOperationException("User not found.");
+        }
 
+        var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
+        if (loan == null)
+        {
+            throw new InvalidOperationException("Loan not found.");
+        }
+
+        if (user.Role == Role.Accountant)
+        {
+            _dbContext.Loans.Remove(loan);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+        else if (user.Role == Role.Customer && loan.LoanStatus != LoanStatus.PENDING)
+        {
+            _dbContext.Loans.Remove(loan);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        return false;
+    }
+
+    public async Task<LoanDto> ModifyLoan(int id, LoanDto loanDto)
+    {
+        var user = await GetUser();
+        if (user == null)
+        {
+            throw new InvalidOperationException("User not found.");
+        }
+
+        var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
+        if (loan == null)
+        {
+            throw new InvalidOperationException("Loan not found.");
+        }
+
+        if (user.Role == Role.Accountant)
+        {
+            loan.Amount = loanDto.Amount;
+            loan.LoanPeriod = loanDto.LoanPeriod;
+            loan.LoanCurrency = loanDto.LoanCurrency;
+            loan.LoanType = loanDto.LoanType;
+            await _dbContext.SaveChangesAsync();
+            return loanDto;
+        }
+        else if (user.Role == Role.Customer && loan.LoanStatus != LoanStatus.PENDING)
+        {
+            loan.Amount = loanDto.Amount;
+            loan.LoanPeriod = loanDto.LoanPeriod;
+            loan.LoanCurrency = loanDto.LoanCurrency;
+            loan.LoanType = loanDto.LoanType;
+            await _dbContext.SaveChangesAsync();
+            return loanDto;
+        }
+
+        throw new InvalidOperationException("Operation not allowed.");
+    }
+    
     public async Task<Loan> CreateLoan(LoanDto loanDto)
     {
         var user = await GetUser();
@@ -73,7 +138,8 @@ public class LoanService : ILoanService
             Amount = loan.Amount,
             LoanPeriod = loan.LoanPeriod,
             LoanType = loan.LoanType,
-            LoanCurrency = loan.LoanCurrency
+            LoanCurrency = loan.LoanCurrency,
+            LoanStatus = loan.LoanStatus
         };
 
         return loanDto;
@@ -112,7 +178,8 @@ public class LoanService : ILoanService
                 Amount = loan.Amount,
                 LoanPeriod = loan.LoanPeriod,
                 LoanType = loan.LoanType,
-                LoanCurrency = loan.LoanCurrency
+                LoanCurrency = loan.LoanCurrency,
+                LoanStatus = loan.LoanStatus
             };
 
             loansDto.Loans.Add(loanDto);

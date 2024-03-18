@@ -9,4 +9,6 @@ public interface ILoanService
     Task<LoanDto> GetLoan(int id);
     Task<LoanDtos> GetAllLoans();
     Task<ApplicationUser> GetUser();
+    Task<bool> DeleteLoan(int id);
+    Task<LoanDto> ModifyLoan(int id, LoanDto loanDto);
 }

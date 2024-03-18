@@ -18,6 +18,8 @@ public class Loan
     
     public Currency LoanCurrency { get; set; }
     
+    public LoanStatus LoanStatus { get; set; }
+    
     public string ApplicationUserId { get; set; }
     
     public ApplicationUser ApplicationUser { get; set; }
