@@ -16,13 +16,16 @@ public class UserService : IUserService
     private readonly ApplicationDbContext _context;
     private readonly ITokenService _tokenService;
     private readonly GetUserFromContext _getUserFromContext;
+    private readonly ILogger<UserService> _logger;
 
     public UserService(UserManager<ApplicationUser> userManager, ApplicationDbContext context,
-        ITokenService tokenService)
+        ITokenService tokenService, GetUserFromContext getUserFromContext, ILogger<UserService> logger)
     {
         _userManager = userManager;
         _context = context;
         _tokenService = tokenService;
+        _getUserFromContext = getUserFromContext;
+        _logger = logger;
     }
 
     public async Task<IdentityResult> RegisterUser(RegisterRequestDto request)
@@ -59,19 +62,23 @@ public class UserService : IUserService
         var accessToken = _tokenService.CreateToken(userInDb);
         return new AuthResponseDto
         {
-            Email = userInDb.Email,
+            Email = userInDb.Email!,
             Token = accessToken,
         };
     }
 
     public async Task<ApplicationUser> GetCurrentUser(ClaimsPrincipal userClaims)
     {
-        var currentUser = await _getUserFromContext.GetUser();
-        if (currentUser == null)
+        try
         {
+            var currentUser = await _getUserFromContext.GetUser();
+            return currentUser;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
             return null;
         }
-        return currentUser;
     }
 
     public async Task<ApplicationUser> GetUserByEmail(string email, ClaimsPrincipal userClaims)
