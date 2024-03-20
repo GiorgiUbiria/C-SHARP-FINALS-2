@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using Finals.Contexts;
+using Finals.Helpers;
 using Finals.Interfaces;
 using Finals.Models;
 using Finals.Services;
@@ -69,6 +70,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILoanService, LoanService>();
+builder.Services.AddScoped<GetUserFromContext>();
+
 
 builder.Services.AddControllers().AddJsonOptions(opt =>
 {

@@ -1,10 +1,9 @@
-using System.Security.Claims;
 using Finals.Contexts;
 using Finals.Dtos;
 using Finals.Enums;
+using Finals.Helpers;
 using Finals.Interfaces;
 using Finals.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Finals.Services;
@@ -12,22 +11,20 @@ namespace Finals.Services;
 public class LoanService : ILoanService
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly UserManager<ApplicationUser> _userManager;
     private readonly ILogger<LoanService> _logger;
+    private readonly GetUserFromContext _getUserFromContext;
 
     public LoanService(ApplicationDbContext dbContext,
-        UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, ILogger<LoanService> logger)
+        ILogger<LoanService> logger, GetUserFromContext getUserFromContext)
     {
         _dbContext = dbContext;
         _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
-        _userManager = userManager;
+        _getUserFromContext = getUserFromContext;
     }
-    
+
     public async Task<bool> DeleteLoan(int id)
     {
-        var user = await GetUser();
+        var user = await _getUserFromContext.GetUser();
         if (user == null)
         {
             throw new InvalidOperationException("User not found.");
@@ -39,13 +36,12 @@ public class LoanService : ILoanService
             throw new InvalidOperationException("Loan not found.");
         }
 
-        if (user.Role == Role.Accountant)
+        if (user.Role == Role.Customer && (loan.ApplicationUserId != user.Id || loan.LoanStatus != LoanStatus.PENDING))
         {
-            _dbContext.Loans.Remove(loan);
-            await _dbContext.SaveChangesAsync();
-            return true;
+            return false;
         }
-        else if (user.Role == Role.Customer && loan.LoanStatus != LoanStatus.PENDING)
+
+        if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
         {
             _dbContext.Loans.Remove(loan);
             await _dbContext.SaveChangesAsync();
@@ -57,7 +53,7 @@ public class LoanService : ILoanService
 
     public async Task<LoanDto> ModifyLoan(int id, LoanDto loanDto)
     {
-        var user = await GetUser();
+        var user = await _getUserFromContext.GetUser();
         if (user == null)
         {
             throw new InvalidOperationException("User not found.");
@@ -69,16 +65,12 @@ public class LoanService : ILoanService
             throw new InvalidOperationException("Loan not found.");
         }
 
-        if (user.Role == Role.Accountant)
+        if (user.Role == Role.Customer && (loan.ApplicationUserId != user.Id || loan.LoanStatus != LoanStatus.PENDING))
         {
-            loan.Amount = loanDto.Amount;
-            loan.LoanPeriod = loanDto.LoanPeriod;
-            loan.LoanCurrency = loanDto.LoanCurrency;
-            loan.LoanType = loanDto.LoanType;
-            await _dbContext.SaveChangesAsync();
-            return loanDto;
+            throw new InvalidOperationException("Operation not allowed.");
         }
-        else if (user.Role == Role.Customer && loan.LoanStatus != LoanStatus.PENDING)
+
+        if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
         {
             loan.Amount = loanDto.Amount;
             loan.LoanPeriod = loanDto.LoanPeriod;
@@ -90,10 +82,10 @@ public class LoanService : ILoanService
 
         throw new InvalidOperationException("Operation not allowed.");
     }
-    
+
     public async Task<Loan> CreateLoan(LoanDto loanDto)
     {
-        var user = await GetUser();
+        var user = await _getUserFromContext.GetUser();
         if (user == null)
         {
             throw new InvalidOperationException("User not found.");
@@ -121,7 +113,7 @@ public class LoanService : ILoanService
 
     public async Task<LoanDto> GetLoan(int id)
     {
-        var user = await GetUser();
+        var user = await _getUserFromContext.GetUser();
         if (user == null)
         {
             return null;
@@ -147,7 +139,7 @@ public class LoanService : ILoanService
 
     public async Task<LoanDtos> GetAllLoans()
     {
-        var user = await GetUser();
+        var user = await _getUserFromContext.GetUser();
         if (user == null)
         {
             return null;
@@ -186,27 +178,5 @@ public class LoanService : ILoanService
         }
 
         return loansDto;
-    }
-
-    public async Task<ApplicationUser> GetUser()
-    {
-        var userIdClaim = _httpContextAccessor.HttpContext?.User.Claims
-            .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier && c.Value == "80c8b6b1-e2b6-45e8-b044-8f2178a90111")?.Value;        
-        
-        var claims = _httpContextAccessor.HttpContext?.User.Claims;
-
-        if (userIdClaim == null)
-        {
-            return null;
-        }
-
-        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userIdClaim);
-
-        if (user == null)
-        {
-            return null;
-        }
-
-        return user;
     }
 }
