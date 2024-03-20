@@ -72,4 +72,85 @@ public class LoansController : ControllerBase
 
         return Ok(loanDtos);
     }
+
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Accountant")]
+    public async Task<IActionResult> DeleteLoan(int id)
+    {
+        try
+        {
+            var result = await _loanService.DeleteLoan(id);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Customer, Accountant")]
+    public async Task<IActionResult> ModifyLoan(int id, [FromBody] LoanDto loanDto)
+    {
+        try
+        {
+            var modifiedLoanDto = await _loanService.ModifyLoan(id, loanDto);
+            return Ok(modifiedLoanDto);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("{id}/accept")]
+    [Authorize(Roles = "Accountant")]
+    public async Task<IActionResult> AcceptLoan(int id)
+    {
+        try
+        {
+            var result = await _loanService.AcceptLoan(id);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("{id}/decline")]
+    [Authorize(Roles = "Accountant")]
+    public async Task<IActionResult> DeclineLoan(int id)
+    {
+        try
+        {
+            var result = await _loanService.DeclineLoan(id);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }
