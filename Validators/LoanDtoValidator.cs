@@ -10,7 +10,7 @@ public class LoanDtoValidator : AbstractValidator<LoanDto>
             .GreaterThan(0).WithMessage("Amount must be greater than 0");
 
         RuleFor(x => x.LoanPeriod)
-            .GreaterThanOrEqualTo(DateTime.Now).WithMessage("Loan period must be in the future");
+            .IsInEnum().WithMessage("Invalid loan period");
 
         RuleFor(x => x.LoanType)
             .IsInEnum().WithMessage("Invalid loan type");

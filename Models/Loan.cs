@@ -12,7 +12,7 @@ public class Loan
     
     public int Amount { get; set; }
     
-    public DateTime LoanPeriod { get; set; }
+    public LoanPeriod LoanPeriod { get; set; }
     
     public LoanType LoanType { get; set; }
     

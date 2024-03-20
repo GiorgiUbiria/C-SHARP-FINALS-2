@@ -2,9 +2,9 @@ using Finals.Enums;
 
 public class LoanDto
 {
-    public required int Amount { get; set; } = 0;
+    public required int Amount { get; set; } = 300;
 
-    public required DateTime LoanPeriod { get; set; } = DateTime.Now;
+    public required LoanPeriod LoanPeriod { get; set; } = LoanPeriod.OneYear;
 
     public required LoanType LoanType { get; set; } = LoanType.FAST;
 
