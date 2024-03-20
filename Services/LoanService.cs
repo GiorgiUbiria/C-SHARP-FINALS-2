@@ -72,7 +72,9 @@ public class LoanService : ILoanService
 
         if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
         {
-            loan.Amount = loanDto.Amount;
+            loan.RequstedAmount = loanDto.RequestedAmount;
+            loan.FinalAmount = loanDto.RequestedAmount +
+                               (loanDto.RequestedAmount * ((int)loanDto.LoanPeriod / 100));
             loan.LoanPeriod = loanDto.LoanPeriod;
             loan.LoanCurrency = loanDto.LoanCurrency;
             loan.LoanType = loanDto.LoanType;
@@ -96,9 +98,55 @@ public class LoanService : ILoanService
             throw new InvalidOperationException("User is blocked.");
         }
 
+        decimal maxAmount = 0;
+        switch (loanDto.LoanPeriod)
+        {
+            case LoanPeriod.HalfYear:
+            case LoanPeriod.OneYear:
+                if (user.Salary >= 1000 && user.Salary < 1500)
+                {
+                    maxAmount = 2000;
+                }
+                else if (user.Salary >= 1500)
+                {
+                    maxAmount = 2000;
+                }
+
+                break;
+            case LoanPeriod.TwoYears:
+            case LoanPeriod.FiveYears:
+                if (user.Salary >= 1500 && user.Salary < 3500)
+                {
+                    maxAmount = 7500;
+                }
+                else if (user.Salary >= 3500)
+                {
+                    maxAmount = 7500;
+                }
+
+                break;
+            case LoanPeriod.TenYears:
+                if (user.Salary >= 3500)
+                {
+                    maxAmount = 20000;
+                }
+
+                break;
+            default:
+                throw new ArgumentException("Invalid loan type.");
+        }
+
+        if (loanDto.RequestedAmount > maxAmount)
+        {
+            throw new InvalidOperationException(
+                $"Requested loan amount exceeds the maximum allowed amount ({maxAmount}).");
+        }
+
         var loan = new Loan
         {
-            Amount = loanDto.Amount,
+            RequstedAmount = loanDto.RequestedAmount,
+            FinalAmount = loanDto.RequestedAmount +
+                          (loanDto.RequestedAmount * ((int)loanDto.LoanPeriod / 100)),
             LoanPeriod = loanDto.LoanPeriod,
             LoanCurrency = loanDto.LoanCurrency,
             LoanType = loanDto.LoanType,
@@ -127,7 +175,8 @@ public class LoanService : ILoanService
 
         var loanDto = new LoanDto
         {
-            Amount = loan.Amount,
+            RequestedAmount = loan.RequstedAmount,
+            FinalAmount = loan.FinalAmount,
             LoanPeriod = loan.LoanPeriod,
             LoanType = loan.LoanType,
             LoanCurrency = loan.LoanCurrency,
@@ -167,7 +216,8 @@ public class LoanService : ILoanService
         {
             var loanDto = new LoanDto
             {
-                Amount = loan.Amount,
+                RequestedAmount = loan.RequstedAmount,
+                FinalAmount = loan.FinalAmount,
                 LoanPeriod = loan.LoanPeriod,
                 LoanType = loan.LoanType,
                 LoanCurrency = loan.LoanCurrency,

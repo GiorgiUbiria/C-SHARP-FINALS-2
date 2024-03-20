@@ -2,8 +2,9 @@ using Finals.Enums;
 
 public class LoanDto
 {
-    public required int Amount { get; set; } = 300;
-
+    public required int RequestedAmount { get; set; } = 300;
+    
+    public required decimal FinalAmount { get; set; } = 300 + (300 * ((decimal)LoanPeriod.OneYear / 100));
     public required LoanPeriod LoanPeriod { get; set; } = LoanPeriod.OneYear;
 
     public required LoanType LoanType { get; set; } = LoanType.FAST;

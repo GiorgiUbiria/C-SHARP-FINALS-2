@@ -10,7 +10,9 @@ public class Loan
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     
-    public int Amount { get; set; }
+    public int RequstedAmount { get; set; }
+    
+    public int FinalAmount { get; set; }
     
     public LoanPeriod LoanPeriod { get; set; }
     
