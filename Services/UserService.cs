@@ -66,9 +66,12 @@ public class UserService : IUserService
 
     public async Task<ApplicationUser> GetCurrentUser(ClaimsPrincipal userClaims)
     {
-        var userEmail = userClaims.FindFirstValue(ClaimTypes.Email);
-        var user = await _userManager.FindByEmailAsync(userEmail);
-        return user;
+        var currentUser = await _getUserFromContext.GetUser();
+        if (currentUser == null)
+        {
+            return null;
+        }
+        return currentUser;
     }
 
     public async Task<ApplicationUser> GetUserByEmail(string email, ClaimsPrincipal userClaims)
@@ -150,6 +153,41 @@ public class UserService : IUserService
 
         userToUnblock.IsBlocked = false;
         var result = await _userManager.UpdateAsync(userToUnblock);
+
+        return result.Succeeded;
+    }
+    
+    public async Task<bool> MakeAccountant(string userId)
+    {
+        var currentUser = await _getUserFromContext.GetUser();
+        if (currentUser == null)
+        {
+            throw new InvalidOperationException("Current user not found.");
+        }
+
+        if (currentUser.Role != Role.Accountant)
+        {
+            throw new UnauthorizedAccessException("Only users with the Accountant role can unblock other users.");
+        }
+
+        var userToModify = await _userManager.FindByIdAsync(userId);
+        if (userToModify == null)
+        {
+            throw new InvalidOperationException("User to unblock not found.");
+        }
+
+        if (userToModify.Role != Role.Customer)
+        {
+            throw new InvalidOperationException("Only users with the Customer role can be upgraded to Accountant.");
+        }
+
+        if (userToModify.IsBlocked)
+        {
+            throw new InvalidOperationException("User is blocked.");
+        }
+
+        userToModify.Role = Role.Accountant;
+        var result = await _userManager.UpdateAsync(userToModify);
 
         return result.Succeeded;
     }

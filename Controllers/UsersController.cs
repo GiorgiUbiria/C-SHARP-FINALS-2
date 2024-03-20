@@ -1,6 +1,7 @@
 using Finals.Dtos;
 using Finals.Models;
 using Finals.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Finals.Controllers;
@@ -89,6 +90,87 @@ public class UsersController : ControllerBase
         catch (UnauthorizedAccessException)
         {
             return Forbid();
+        }
+    }
+    
+    [HttpPost]
+    [Route("block")]
+    [Authorize(Roles = "Accountant")]
+    public async Task<IActionResult> BlockUser(string userId)
+    {
+        try
+        {
+            var result = await _userService.BlockUser(userId);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(500);
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return StatusCode(403);
+        }
+    }
+    
+    [HttpPost]
+    [Route("unblock")]
+    [Authorize(Roles = "Accountant")]
+    public async Task<IActionResult> UnblockUser(string userId)
+    {
+        try
+        {
+            var result = await _userService.UnblockUser(userId);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(500);
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return StatusCode(403);
+        }
+    }
+    
+    [HttpPost]
+    [Route("make-accountant")]
+    [Authorize(Roles = "Accountant")]
+    public async Task<IActionResult> MakeAccountant(string userId)
+    {
+        try
+        {
+            var result = await _userService.MakeAccountant(userId);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(500);
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return StatusCode(403);
         }
     }
 }
