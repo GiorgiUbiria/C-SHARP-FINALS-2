@@ -1,4 +1,5 @@
 using Finals.Dtos;
+using Finals.Models;
 using Finals.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,5 +57,38 @@ public class UsersController : ControllerBase
         }
 
         return Ok(authResponse);
+    }
+
+    [HttpGet]
+    [Route("me")]
+    public async Task<ActionResult<ApplicationUser>> GetCurrentUser()
+    {
+        var user = await _userService.GetCurrentUser(User);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(user);
+    }
+
+    [HttpGet]
+    [Route("user")]
+    public async Task<ActionResult<ApplicationUser>> GetUserByEmail([FromQuery] string email)
+    {
+        try
+        {
+            var user = await _userService.GetUserByEmail(email, User);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Forbid();
+        }
     }
 }

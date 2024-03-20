@@ -144,3 +144,10 @@
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/obj/Debug/net8.0/Finals.pdb
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/obj/Debug/net8.0/Finals.genruntimeconfig.cache
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/obj/Debug/net8.0/ref/Finals.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/NLOG.config
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/FluentValidation.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/FluentValidation.AspNetCore.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/FluentValidation.DependencyInjectionExtensions.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/NLog.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/NLog.Extensions.Logging.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/NLog.Web.AspNetCore.dll
