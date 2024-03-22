@@ -1,6 +1,7 @@
 using Finals.Dtos;
 using Finals.Models;
 using Finals.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +13,16 @@ public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
     private readonly ILogger<UsersController> _logger;
+    private readonly IValidator<RegisterRequestDto> _registerValidator;
+    private readonly IValidator<AuthRequestDto> _authValidator;
 
-    public UsersController(IUserService userService, ILogger<UsersController> logger)
+    public UsersController(IUserService userService, ILogger<UsersController> logger,
+        IValidator<AuthRequestDto> authValidator, IValidator<RegisterRequestDto> registerValidator)
     {
         _userService = userService;
         _logger = logger;
+        _registerValidator = registerValidator;
+        _authValidator = authValidator;
     }
 
     [HttpPost]
@@ -25,10 +31,11 @@ public class UsersController : ControllerBase
     {
         _logger.LogInformation("Attempting to register user with email: {Email}", request.Email);
 
-        if (!ModelState.IsValid)
+        var validationResult = await _registerValidator.ValidateAsync(request);
+        if (!validationResult.IsValid)
         {
             _logger.LogInformation("Invalid model state.");
-            return BadRequest(ModelState);
+            return BadRequest(validationResult.Errors);
         }
 
         var result = await _userService.RegisterUser(request);
@@ -51,14 +58,15 @@ public class UsersController : ControllerBase
 
     [HttpPost]
     [Route("login")]
-    public async Task<ActionResult<AuthResponseDto>> Authenticate([FromBody] LoginRequestDto request)
+    public async Task<ActionResult<AuthResponseDto>> Authenticate([FromBody] AuthRequestDto request)
     {
         _logger.LogInformation("Attempting user authentication.");
 
-        if (!ModelState.IsValid)
+        var validationResult = await _authValidator.ValidateAsync(request);
+        if (!validationResult.IsValid)
         {
             _logger.LogInformation("Invalid model state.");
-            return BadRequest(ModelState);
+            return BadRequest(validationResult.Errors);
         }
 
         var authResponse = await _userService.AuthenticateUser(request);

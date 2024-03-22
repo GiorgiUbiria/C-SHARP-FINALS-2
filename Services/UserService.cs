@@ -55,7 +55,7 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<AuthResponseDto> AuthenticateUser(LoginRequestDto request)
+    public async Task<AuthResponseDto> AuthenticateUser(AuthRequestDto request)
     {
         try
         {
