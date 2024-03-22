@@ -80,9 +80,17 @@
               "target": "Package",
               "version": "[8.0.2, )"
             },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[7.4.1, )"
+            },
+            "NLog.Database": {
+              "target": "Package",
+              "version": "[5.2.8, )"
             },
             "NLog.Web.AspNetCore": {
               "target": "Package",
@@ -91,6 +99,14 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.118, )"
+            },
+            "System.Data.SQLite.EF6": {
+              "target": "Package",
+              "version": "[1.0.118, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",

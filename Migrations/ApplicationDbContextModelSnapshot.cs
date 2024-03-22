@@ -106,7 +106,7 @@ namespace Finals.Migrations
                             Id = "80c8b6b1-e2b6-45e8-b044-8f2178a90111",
                             AccessFailedCount = 0,
                             Age = 20,
-                            ConcurrencyStamp = "63be232e-aa8f-4b9e-a971-b0540fac010a",
+                            ConcurrencyStamp = "a30c6549-ccfd-4972-9301-9d56386fa1ca",
                             Email = "accountant@test.com",
                             EmailConfirmed = false,
                             FirstName = "Giorgi",
@@ -115,11 +115,11 @@ namespace Finals.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ACCOUNTANT@TEST.COM",
                             NormalizedUserName = "ACCOUNTANT@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPYc6FSk/4Gc955g9baS4EV9Z+JxBwzXfkUgoE9qvA6+64T1g7kmLpOm+R2DSQNpIg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAy+UpMcl2ZV7Zy93zEv2LeItRdl8RVf/pGGruLQZc5L4sAzaZhhc55qBoifIgkXUw==",
                             PhoneNumberConfirmed = false,
                             Role = 1,
                             Salary = 1500,
-                            SecurityStamp = "3a25b70a-480d-42fa-ab55-14f19e7e1f0d",
+                            SecurityStamp = "b23dc7f4-93b0-4b86-bea5-48724f9057d5",
                             TwoFactorEnabled = false,
                             UserName = "Accountant"
                         });
@@ -158,6 +158,44 @@ namespace Finals.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Loans");
+                });
+
+            modelBuilder.Entity("Finals.Models.Log", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Exception")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Logger")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StackTrace")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

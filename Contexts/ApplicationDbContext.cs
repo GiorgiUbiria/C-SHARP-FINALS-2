@@ -11,6 +11,7 @@ public class ApplicationDbContext : IdentityUserContext<ApplicationUser>
     private readonly ILogger<ApplicationDbContext> _logger;
     private readonly IConfiguration _configuration;
     public DbSet<Loan> Loans => Set<Loan>();
+    public DbSet<Log> Logs => Set<Log>();
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILogger<ApplicationDbContext> logger,
         IConfiguration configuration) : base(options)
