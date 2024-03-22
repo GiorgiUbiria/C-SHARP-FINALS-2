@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Finals.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240320152853_DeclinedTypeForLoanStatus")]
-    partial class DeclinedTypeForLoanStatus
+    [Migration("20240322135545_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,7 +109,7 @@ namespace Finals.Migrations
                             Id = "80c8b6b1-e2b6-45e8-b044-8f2178a90111",
                             AccessFailedCount = 0,
                             Age = 20,
-                            ConcurrencyStamp = "58192d5f-cf37-42e5-b1be-1cd5e1bf78b6",
+                            ConcurrencyStamp = "63be232e-aa8f-4b9e-a971-b0540fac010a",
                             Email = "accountant@test.com",
                             EmailConfirmed = false,
                             FirstName = "Giorgi",
@@ -118,11 +118,11 @@ namespace Finals.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ACCOUNTANT@TEST.COM",
                             NormalizedUserName = "ACCOUNTANT@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENo1uD5n2+hhmjAPn6uiKSyBEVpGiUlBB7M/MJ/3LRa0GiuqhlBAJ8Zf1qIMlzqa1g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPYc6FSk/4Gc955g9baS4EV9Z+JxBwzXfkUgoE9qvA6+64T1g7kmLpOm+R2DSQNpIg==",
                             PhoneNumberConfirmed = false,
                             Role = 1,
                             Salary = 1500,
-                            SecurityStamp = "77e32dde-3a6a-4957-b412-c8f44740a52a",
+                            SecurityStamp = "3a25b70a-480d-42fa-ab55-14f19e7e1f0d",
                             TwoFactorEnabled = false,
                             UserName = "Accountant"
                         });
@@ -134,23 +134,26 @@ namespace Finals.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("FinalAmount")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("LoanCurrency")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("LoanPeriod")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("LoanPeriod")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("LoanStatus")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("LoanType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RequstedAmount")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

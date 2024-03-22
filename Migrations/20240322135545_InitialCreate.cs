@@ -109,10 +109,12 @@ namespace Finals.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Amount = table.Column<int>(type: "INTEGER", nullable: false),
-                    LoanPeriod = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    RequstedAmount = table.Column<int>(type: "INTEGER", nullable: false),
+                    FinalAmount = table.Column<int>(type: "INTEGER", nullable: false),
+                    LoanPeriod = table.Column<int>(type: "INTEGER", nullable: false),
                     LoanType = table.Column<int>(type: "INTEGER", nullable: false),
                     LoanCurrency = table.Column<int>(type: "INTEGER", nullable: false),
+                    LoanStatus = table.Column<int>(type: "INTEGER", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -129,7 +131,7 @@ namespace Finals.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsBlocked", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "Salary", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "80c8b6b1-e2b6-45e8-b044-8f2178a90111", 0, 20, "67b9707a-3b07-493f-a2f9-fa10568be080", "accountant@test.com", false, "Giorgi", false, "Ubiria", false, null, "ACCOUNTANT@TEST.COM", "ACCOUNTANT@TEST.COM", "AQAAAAIAAYagAAAAEI/4Vr4cEIMYT7wgKTdy3PxgrT08DjOfC38kLY9cLGkMVUwUTlaVNn0IpeKVUnC0+Q==", null, false, 1, 1500, "e13359cd-8c9d-4edf-8466-2849a72712e2", false, "Accountant" });
+                values: new object[] { "80c8b6b1-e2b6-45e8-b044-8f2178a90111", 0, 20, "63be232e-aa8f-4b9e-a971-b0540fac010a", "accountant@test.com", false, "Giorgi", false, "Ubiria", false, null, "ACCOUNTANT@TEST.COM", "ACCOUNTANT@TEST.COM", "AQAAAAIAAYagAAAAEPYc6FSk/4Gc955g9baS4EV9Z+JxBwzXfkUgoE9qvA6+64T1g7kmLpOm+R2DSQNpIg==", null, false, 1, 1500, "3a25b70a-480d-42fa-ab55-14f19e7e1f0d", false, "Accountant" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",

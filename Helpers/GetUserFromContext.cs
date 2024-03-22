@@ -9,26 +9,35 @@ public class GetUserFromContext
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly ILogger<GetUserFromContext> _logger;
 
+    public GetUserFromContext(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager, ILogger<GetUserFromContext> logger)
+    {
+        _httpContextAccessor = httpContextAccessor;
+        _userManager = userManager;
+        _logger = logger;
+    } 
+    
     public async Task<ApplicationUser> GetUser()
     {
-        var userIdClaim = _httpContextAccessor.HttpContext?.User.Claims
-            .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier && c.Value == "80c8b6b1-e2b6-45e8-b044-8f2178a90111")?.Value;        
-        
+        _logger.LogInformation("GetUser method is being called.");
         var claims = _httpContextAccessor.HttpContext?.User.Claims;
-
-        if (userIdClaim == null)
+        if (claims != null)
         {
-            return null;
+            var userIdClaims = claims.Where(c => c.Type == ClaimTypes.NameIdentifier).ToList();
+            if (userIdClaims.Count > 1)
+            {
+                var userIdClaim = userIdClaims[1].Value;
+                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userIdClaim);
+                if (user != null)
+                {
+                    _logger.LogInformation("Found the current User.");
+                    return user;
+                }
+            }
         }
 
-        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userIdClaim);
-
-        if (user == null)
-        {
-            return null;
-        }
-
-        return user;
+        _logger.LogWarning("User ID claim not found or user not found.");
+        return null;
     }
 }

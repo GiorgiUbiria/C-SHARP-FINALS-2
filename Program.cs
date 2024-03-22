@@ -13,20 +13,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Host.ConfigureLogging(logging =>
-{
-    logging.ClearProviders();
-    logging.AddNLog(builder.Configuration);
-});
-
-builder.Services.AddLogging(loggingBuilder =>
-{
-    loggingBuilder.ClearProviders();
-    loggingBuilder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-});
 
 builder.Services.AddControllers();
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoanDtoValidator>());
@@ -72,7 +61,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILoanService, LoanService>();
 builder.Services.AddScoped<GetUserFromContext>();
 
-
 builder.Services.AddControllers().AddJsonOptions(opt =>
 {
     opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -117,6 +105,10 @@ builder.Services.AddAuthentication(options => {
             ),
         };
     });
+
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(LogLevel.Trace);
+builder.Host.UseNLog();
 
 var app = builder.Build();
 

@@ -1,0 +1,114 @@
+2024-03-22 18:05:47.9235||Microsoft.Hosting.Lifetime|INFO|Now listening on: http://localhost:5040 
+2024-03-22 18:05:47.9572||Microsoft.Hosting.Lifetime|INFO|Application started. Press Ctrl+C to shut down. 
+2024-03-22 18:05:47.9578||Microsoft.Hosting.Lifetime|INFO|Hosting environment: Development 
+2024-03-22 18:05:47.9578||Microsoft.Hosting.Lifetime|INFO|Content root path: /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals 
+2024-03-22 18:06:38.1329||Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware|WARN|Failed to determine the https port for redirect. 
+2024-03-22 18:06:38.3782||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:06:38.8336||Finals.Contexts.ApplicationDbContext|INFO|Created an accountant user. 
+2024-03-22 18:06:39.4464||Finals.Services.TokenService|INFO|JWT Token created 
+2024-03-22 18:07:13.2514||Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware|ERROR|An unhandled exception has occurred while executing the request. System.NullReferenceException: Object reference not set to an instance of an object.
+   at Finals.Helpers.GetUserFromContext.GetUser() in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Helpers/GetUserFromContext.cs:line 15
+   at Finals.Services.LoanService.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Services/LoanService.cs:line 27
+   at Finals.Controllers.LoansController.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Controllers/LoansController.cs:line 40
+   at lambda_method177(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-03-22 18:10:33.7111||Microsoft.Hosting.Lifetime|INFO|Application is shutting down... 
+2024-03-22 18:10:37.7211||Microsoft.Hosting.Lifetime|INFO|Now listening on: http://localhost:5040 
+2024-03-22 18:10:37.7526||Microsoft.Hosting.Lifetime|INFO|Application started. Press Ctrl+C to shut down. 
+2024-03-22 18:10:37.7526||Microsoft.Hosting.Lifetime|INFO|Hosting environment: Development 
+2024-03-22 18:10:37.7535||Microsoft.Hosting.Lifetime|INFO|Content root path: /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals 
+2024-03-22 18:10:56.4429||Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware|WARN|Failed to determine the https port for redirect. 
+2024-03-22 18:10:56.6877||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:10:57.4158||Finals.Contexts.ApplicationDbContext|INFO|Created an accountant user. 
+2024-03-22 18:10:58.5455||Finals.Services.TokenService|INFO|JWT Token created 
+2024-03-22 18:11:21.2198||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:11:21.2966||Finals.Helpers.GetUserFromContext|WARN|User with ID 345h098bb8reberbwr4vvb8945 not found. 
+2024-03-22 18:11:21.2978||Finals.Controllers.LoansController|ERROR|Error creating loan: User not found. System.InvalidOperationException: User not found.
+   at Finals.Services.LoanService.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Services/LoanService.cs:line 30
+   at Finals.Controllers.LoansController.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Controllers/LoansController.cs:line 40
+2024-03-22 18:14:12.0786||Microsoft.Hosting.Lifetime|INFO|Application is shutting down... 
+2024-03-22 18:14:16.2189||Microsoft.Hosting.Lifetime|INFO|Now listening on: http://localhost:5040 
+2024-03-22 18:14:16.2519||Microsoft.Hosting.Lifetime|INFO|Application started. Press Ctrl+C to shut down. 
+2024-03-22 18:14:16.2524||Microsoft.Hosting.Lifetime|INFO|Hosting environment: Development 
+2024-03-22 18:14:16.2524||Microsoft.Hosting.Lifetime|INFO|Content root path: /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals 
+2024-03-22 18:14:30.3848||Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware|WARN|Failed to determine the https port for redirect. 
+2024-03-22 18:14:30.6283||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:14:31.3514||Finals.Contexts.ApplicationDbContext|INFO|Created an accountant user. 
+2024-03-22 18:14:32.4939||Finals.Services.TokenService|INFO|JWT Token created 
+2024-03-22 18:15:02.3381||Finals.Helpers.GetUserFromContext|INFO|GetUser method called. 
+2024-03-22 18:15:02.3393||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:15:02.4170||Finals.Helpers.GetUserFromContext|WARN|User with ID 345h098bb8reberbwr4vvb8945 not found. 
+2024-03-22 18:15:02.4183||Finals.Controllers.LoansController|ERROR|Error creating loan: User not found. System.InvalidOperationException: User not found.
+   at Finals.Services.LoanService.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Services/LoanService.cs:line 30
+   at Finals.Controllers.LoansController.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Controllers/LoansController.cs:line 40
+2024-03-22 18:16:37.1145||Finals.Helpers.GetUserFromContext|INFO|GetUser method called. 
+2024-03-22 18:16:37.1145||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:16:37.1339||Finals.Helpers.GetUserFromContext|WARN|User with ID 345h098bb8reberbwr4vvb8945 not found. 
+2024-03-22 18:16:37.1339||Finals.Controllers.LoansController|ERROR|Error creating loan: User not found. System.InvalidOperationException: User not found.
+   at Finals.Services.LoanService.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Services/LoanService.cs:line 30
+   at Finals.Controllers.LoansController.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Controllers/LoansController.cs:line 40
+2024-03-22 18:18:41.1363||Microsoft.Hosting.Lifetime|INFO|Application is shutting down... 
+2024-03-22 18:18:43.3948||Microsoft.Hosting.Lifetime|INFO|Now listening on: http://localhost:5040 
+2024-03-22 18:18:43.4278||Microsoft.Hosting.Lifetime|INFO|Application started. Press Ctrl+C to shut down. 
+2024-03-22 18:18:43.4278||Microsoft.Hosting.Lifetime|INFO|Hosting environment: Development 
+2024-03-22 18:18:43.4288||Microsoft.Hosting.Lifetime|INFO|Content root path: /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals 
+2024-03-22 18:19:14.8876||Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware|WARN|Failed to determine the https port for redirect. 
+2024-03-22 18:19:15.1359||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:19:15.8613||Finals.Contexts.ApplicationDbContext|INFO|Created an accountant user. 
+2024-03-22 18:19:17.0019||Finals.Services.TokenService|INFO|JWT Token created 
+2024-03-22 18:19:42.4709||Finals.Helpers.GetUserFromContext|INFO|GetUser method called. 
+2024-03-22 18:19:42.4722||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:19:42.5510||Finals.Helpers.GetUserFromContext|WARN|User with ID 345h098bb8reberbwr4vvb8945 not found. 
+2024-03-22 18:19:42.5523||Finals.Controllers.LoansController|ERROR|Error creating loan: User not found. System.InvalidOperationException: User not found.
+   at Finals.Services.LoanService.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Services/LoanService.cs:line 30
+   at Finals.Controllers.LoansController.CreateLoan(LoanDto loanDto) in /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Controllers/LoansController.cs:line 40
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|GetUser method called. 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Logging user claims: 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier, Claim Value: 345h098bb8reberbwr4vvb8945 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: jti, Claim Value: 4b293438-d86d-4513-be24-f2f73acb01d1 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: iat, Claim Value: 1711117156 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier, Claim Value: 80c8b6b1-e2b6-45e8-b044-8f2178a90111 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name, Claim Value: Accountant 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress, Claim Value: accountant@test.com 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: http://schemas.microsoft.com/ws/2008/06/identity/claims/role, Claim Value: Accountant 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: exp, Claim Value: 1711118956 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: iss, Claim Value: ExampleValidIssuer 
+2024-03-22 18:21:53.1459||Finals.Helpers.GetUserFromContext|INFO|Claim Type: aud, Claim Value: ExampleValidAudience 
+2024-03-22 18:21:53.1466||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:21:53.1662||Finals.Helpers.GetUserFromContext|WARN|User with ID 345h098bb8reberbwr4vvb8945 not found. 
+2024-03-22 18:21:53.1662||Finals.Controllers.LoansController|ERROR|Error creating loan: User not found. System.InvalidOperationException: User not found.
+   at Finals.Services.LoanService.CreateLoan(LoanDto loanDto)
+   at Finals.Controllers.LoansController.CreateLoan(LoanDto loanDto)
+2024-03-22 18:25:22.6572||Microsoft.Hosting.Lifetime|INFO|Application is shutting down... 
+2024-03-22 18:25:26.4823||Microsoft.Hosting.Lifetime|INFO|Now listening on: http://localhost:5040 
+2024-03-22 18:25:26.5161||Microsoft.Hosting.Lifetime|INFO|Application started. Press Ctrl+C to shut down. 
+2024-03-22 18:25:26.5167||Microsoft.Hosting.Lifetime|INFO|Hosting environment: Development 
+2024-03-22 18:25:26.5167||Microsoft.Hosting.Lifetime|INFO|Content root path: /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals 
+2024-03-22 18:25:33.7187||Microsoft.Hosting.Lifetime|INFO|Application is shutting down... 
+2024-03-22 18:25:35.3490||Microsoft.Hosting.Lifetime|INFO|Now listening on: http://localhost:5040 
+2024-03-22 18:25:35.4097||Microsoft.Hosting.Lifetime|INFO|Application started. Press Ctrl+C to shut down. 
+2024-03-22 18:25:35.4107||Microsoft.Hosting.Lifetime|INFO|Hosting environment: Development 
+2024-03-22 18:25:35.4107||Microsoft.Hosting.Lifetime|INFO|Content root path: /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals 
+2024-03-22 18:25:59.2791||Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware|WARN|Failed to determine the https port for redirect. 
+2024-03-22 18:25:59.4482||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:25:59.8118||Finals.Contexts.ApplicationDbContext|INFO|Created an accountant user. 
+2024-03-22 18:26:00.4087||Finals.Services.TokenService|INFO|JWT Token created 
+2024-03-22 18:26:31.4848||Finals.Helpers.GetUserFromContext|INFO|GetUser method is being called. 
+2024-03-22 18:26:31.4863||Finals.Contexts.ApplicationDbContext|INFO|Using connection string: Data Source=localDb.db 
+2024-03-22 18:26:31.8593||Finals.Controllers.LoansController|INFO|Loan created successfully. 
+2024-03-22 18:27:20.9867||Microsoft.Hosting.Lifetime|INFO|Application is shutting down... 

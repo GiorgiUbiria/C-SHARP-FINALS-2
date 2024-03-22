@@ -12,8 +12,8 @@ public class ApplicationDbContext : IdentityUserContext<ApplicationUser>
     private readonly IConfiguration _configuration;
     public DbSet<Loan> Loans => Set<Loan>();
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILogger<ApplicationDbContext> logger, IConfiguration configuration)
-        : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILogger<ApplicationDbContext> logger,
+        IConfiguration configuration) : base(options)
     {
         _logger = logger;
         _configuration = configuration;
@@ -22,16 +22,13 @@ public class ApplicationDbContext : IdentityUserContext<ApplicationUser>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        
         string connectionString = _configuration.GetConnectionString("DefaultConnection");
-
         _logger.LogInformation("Using connection string: {ConnectionString}", connectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
 
         try
         {
@@ -43,7 +40,6 @@ public class ApplicationDbContext : IdentityUserContext<ApplicationUser>
             var accountantPassword =
                 new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("SiteSettings")[
                     "AccountantPassword"];
-
 
             modelBuilder.Entity<Loan>()
                 .HasOne(l => l.ApplicationUser)
@@ -67,6 +63,7 @@ public class ApplicationDbContext : IdentityUserContext<ApplicationUser>
                     Role = Role.Accountant
                 }
             );
+            _logger.LogInformation("Created an accountant user.");
         }
         catch (Exception ex)
         {

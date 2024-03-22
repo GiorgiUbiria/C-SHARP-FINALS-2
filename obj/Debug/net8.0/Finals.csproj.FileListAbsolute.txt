@@ -151,3 +151,4 @@
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/NLog.dll
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/NLog.Extensions.Logging.dll
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/NLog.Web.AspNetCore.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/obj/Debug/net8.0/Finals.sourcelink.json
