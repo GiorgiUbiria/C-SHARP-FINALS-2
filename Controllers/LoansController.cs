@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Finals.Dtos;
 using Finals.Interfaces;
 using Finals.Models;
 using FluentValidation;
@@ -14,9 +15,10 @@ public class LoansController : ControllerBase
 {
     private readonly ILoanService _loanService;
     private readonly ILogger<LoansController> _logger;
-    private readonly IValidator<LoanDto> _validator;
+    private readonly IValidator<LoanRequestDto> _validator;
 
-    public LoansController(ILoanService loanService, ILogger<LoansController> logger, IValidator<LoanDto> validator)
+    public LoansController(ILoanService loanService, ILogger<LoansController> logger,
+        IValidator<LoanRequestDto> validator)
     {
         _loanService = loanService;
         _logger = logger;
@@ -25,8 +27,10 @@ public class LoansController : ControllerBase
 
     [Authorize]
     [HttpPost("new_loan")]
-    public async Task<ActionResult<Loan>> CreateLoan([FromBody] LoanDto loanDto)
+    public async Task<ActionResult<Loan>> CreateLoan([FromBody] LoanRequestDto loanDto)
     {
+        _logger.LogInformation("Attempting to create a new loan.");
+
         var validationResult = await _validator.ValidateAsync(loanDto);
 
         if (!validationResult.IsValid)
@@ -51,25 +55,33 @@ public class LoansController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<ActionResult<LoanDto>> GetLoan(int id)
     {
+        _logger.LogInformation("Attempting to retrieve loan with ID: {LoanId}", id);
+
         var loanDto = await _loanService.GetLoan(id);
         if (loanDto == null)
         {
+            _logger.LogInformation("Loan with ID {LoanId} not found.", id);
             return NotFound();
         }
 
+        _logger.LogInformation("Loan with ID {LoanId} retrieved successfully.", id);
         return loanDto;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAllLoans()
     {
+        _logger.LogInformation("Attempting to retrieve all loans.");
+
         var loanDtos = await _loanService.GetAllLoans();
 
         if (loanDtos == null || loanDtos.Loans.Count == 0)
         {
+            _logger.LogInformation("No loans found.");
             return NoContent();
         }
 
+        _logger.LogInformation("All loans retrieved successfully.");
         return Ok(loanDtos);
     }
 
@@ -77,35 +89,52 @@ public class LoansController : ControllerBase
     [Authorize(Roles = "Accountant")]
     public async Task<IActionResult> DeleteLoan(int id)
     {
+        _logger.LogInformation("Attempting to delete loan with ID: {LoanId}", id);
+
         try
         {
             var result = await _loanService.DeleteLoan(id);
             if (result)
             {
+                _logger.LogInformation("Loan with ID {LoanId} deleted successfully.", id);
                 return Ok();
             }
             else
             {
+                _logger.LogInformation("Loan with ID {LoanId} not found.", id);
                 return NotFound();
             }
         }
         catch (InvalidOperationException ex)
         {
+            _logger.LogError(ex, "Error deleting loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
             return BadRequest(ex.Message);
         }
     }
 
     [HttpPut("{id}")]
     [Authorize(Roles = "Customer, Accountant")]
-    public async Task<IActionResult> ModifyLoan(int id, [FromBody] LoanDto loanDto)
+    public async Task<IActionResult> ModifyLoan(int id, [FromBody] LoanRequestDto loanDto)
     {
+        _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
+
+        var validationResult = await _validator.ValidateAsync(loanDto);
+
+        if (!validationResult.IsValid)
+        {
+            _logger.LogInformation("Form Data is Invalid.");
+            return BadRequest(validationResult.Errors);
+        }
+
         try
         {
             var modifiedLoanDto = await _loanService.ModifyLoan(id, loanDto);
+            _logger.LogInformation("Loan with ID {LoanId} modified successfully.", id);
             return Ok(modifiedLoanDto);
         }
         catch (InvalidOperationException ex)
         {
+            _logger.LogError(ex, "Error modifying loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
             return BadRequest(ex.Message);
         }
     }
@@ -114,20 +143,25 @@ public class LoansController : ControllerBase
     [Authorize(Roles = "Accountant")]
     public async Task<IActionResult> AcceptLoan(int id)
     {
+        _logger.LogInformation("Attempting to accept loan with ID: {LoanId}", id);
+
         try
         {
             var result = await _loanService.AcceptLoan(id);
             if (result)
             {
+                _logger.LogInformation("Loan with ID {LoanId} accepted successfully.", id);
                 return Ok();
             }
             else
             {
+                _logger.LogInformation("Loan with ID {LoanId} not found.", id);
                 return NotFound();
             }
         }
         catch (InvalidOperationException ex)
         {
+            _logger.LogError(ex, "Error accepting loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
             return BadRequest(ex.Message);
         }
     }
@@ -136,20 +170,25 @@ public class LoansController : ControllerBase
     [Authorize(Roles = "Accountant")]
     public async Task<IActionResult> DeclineLoan(int id)
     {
+        _logger.LogInformation("Attempting to decline loan with ID: {LoanId}", id);
+
         try
         {
             var result = await _loanService.DeclineLoan(id);
             if (result)
             {
+                _logger.LogInformation("Loan with ID {LoanId} declined successfully.", id);
                 return Ok();
             }
             else
             {
+                _logger.LogInformation("Loan with ID {LoanId} not found.", id);
                 return NotFound();
             }
         }
         catch (InvalidOperationException ex)
         {
+            _logger.LogError(ex, "Error declining loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
             return BadRequest(ex.Message);
         }
     }

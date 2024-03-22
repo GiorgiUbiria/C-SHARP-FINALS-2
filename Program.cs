@@ -18,7 +18,7 @@ using NLog.Web;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoanDtoValidator>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoanRequestDtoValidator>());
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(option =>

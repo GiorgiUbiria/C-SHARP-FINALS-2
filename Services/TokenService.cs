@@ -11,32 +11,41 @@ public class TokenService : ITokenService
 {
     private const int ExpirationMinutes = 30;
     private readonly ILogger<TokenService> _logger;
-    
+
     public TokenService(ILogger<TokenService> logger)
     {
         _logger = logger;
     }
-    
+
     public string CreateToken(ApplicationUser user)
     {
-        var expiration = DateTime.UtcNow.AddMinutes(ExpirationMinutes);
-        var token = CreateJwtToken(
-            CreateClaims(user),
-            CreateSigningCredentials(),
-            expiration
-        );
-        var tokenHandler = new JwtSecurityTokenHandler();
-        
-        _logger.LogInformation("JWT Token created");
-        
-        return tokenHandler.WriteToken(token);
+        try
+        {
+            var expiration = DateTime.UtcNow.AddMinutes(ExpirationMinutes);
+            var token = CreateJwtToken(
+                CreateClaims(user),
+                CreateSigningCredentials(),
+                expiration
+            );
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            _logger.LogInformation("JWT Token created successfully");
+
+            return tokenHandler.WriteToken(token);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while creating JWT Token: {ErrorMessage}", ex.Message);
+            throw;
+        }
     }
-    
-    private JwtSecurityToken CreateJwtToken(List<Claim> claims, SigningCredentials credentials,
-        DateTime expiration) =>
-        new(
-            new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("JwtTokenSettings")["ValidIssuer"],
-            new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("JwtTokenSettings")["ValidAudience"],
+
+    private JwtSecurityToken CreateJwtToken(List<Claim> claims, SigningCredentials credentials, DateTime expiration) =>
+        new JwtSecurityToken(
+            new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("JwtTokenSettings")[
+                "ValidIssuer"],
+            new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("JwtTokenSettings")[
+                "ValidAudience"],
             claims,
             expires: expiration,
             signingCredentials: credentials
@@ -44,10 +53,11 @@ public class TokenService : ITokenService
 
     private List<Claim> CreateClaims(ApplicationUser user)
     {
-        var jwtSub = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("JwtTokenSettings")["JwtRegisteredClaimNamesSub"];
-        
         try
         {
+            var jwtSub =
+                new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("JwtTokenSettings")[
+                    "JwtRegisteredClaimNamesSub"];
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, jwtSub),
@@ -58,25 +68,32 @@ public class TokenService : ITokenService
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             };
-            
+
             return claims;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            Console.WriteLine(e);
+            _logger.LogError(ex, "Error occurred while creating claims: {ErrorMessage}", ex.Message);
             throw;
         }
     }
 
     private SigningCredentials CreateSigningCredentials()
     {
-        var symmetricSecurityKey = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("JwtTokenSettings")["SymmetricSecurityKey"];
-        
-        return new SigningCredentials(
-            new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(symmetricSecurityKey)
-            ),
-            SecurityAlgorithms.HmacSha256
-        );
+        try
+        {
+            var symmetricSecurityKey =
+                new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("JwtTokenSettings")[
+                    "SymmetricSecurityKey"];
+            return new SigningCredentials(
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(symmetricSecurityKey)),
+                SecurityAlgorithms.HmacSha256
+            );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while creating signing credentials: {ErrorMessage}", ex.Message);
+            throw;
+        }
     }
 }

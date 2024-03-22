@@ -11,18 +11,23 @@ namespace Finals.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly ILogger<UsersController> _logger;
 
-    public UsersController(IUserService userService)
+    public UsersController(IUserService userService, ILogger<UsersController> logger)
     {
         _userService = userService;
+        _logger = logger;
     }
 
     [HttpPost]
     [Route("register")]
     public async Task<IActionResult> Register(RegisterRequestDto request)
     {
+        _logger.LogInformation("Attempting to register user with email: {Email}", request.Email);
+
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation("Invalid model state.");
             return BadRequest(ModelState);
         }
 
@@ -31,6 +36,7 @@ public class UsersController : ControllerBase
         if (result.Succeeded)
         {
             request.Password = "";
+            _logger.LogInformation("User registered successfully.");
             return CreatedAtAction(nameof(Register), new { email = request.Email }, request);
         }
 
@@ -39,6 +45,7 @@ public class UsersController : ControllerBase
             ModelState.AddModelError(error.Code, error.Description);
         }
 
+        _logger.LogInformation("Failed to register user.");
         return BadRequest(ModelState);
     }
 
@@ -46,17 +53,22 @@ public class UsersController : ControllerBase
     [Route("login")]
     public async Task<ActionResult<AuthResponseDto>> Authenticate([FromBody] LoginRequestDto request)
     {
+        _logger.LogInformation("Attempting user authentication.");
+
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation("Invalid model state.");
             return BadRequest(ModelState);
         }
 
         var authResponse = await _userService.AuthenticateUser(request);
         if (authResponse == null)
         {
+            _logger.LogInformation("Authentication failed: Bad credentials.");
             return BadRequest("Bad credentials");
         }
 
+        _logger.LogInformation("User authenticated successfully.");
         return Ok(authResponse);
     }
 
@@ -64,12 +76,16 @@ public class UsersController : ControllerBase
     [Route("me")]
     public async Task<ActionResult<ApplicationUser>> GetCurrentUser()
     {
+        _logger.LogInformation("Attempting to retrieve current user.");
+
         var user = await _userService.GetCurrentUser(User);
         if (user == null)
         {
+            _logger.LogInformation("Current user not found.");
             return NotFound();
         }
 
+        _logger.LogInformation("Current user retrieved successfully.");
         return Ok(user);
     }
 
@@ -77,99 +93,123 @@ public class UsersController : ControllerBase
     [Route("user")]
     public async Task<ActionResult<ApplicationUser>> GetUserByEmail([FromQuery] string email)
     {
+        _logger.LogInformation("Attempting to retrieve user by email: {Email}", email);
+
         try
         {
             var user = await _userService.GetUserByEmail(email, User);
             if (user == null)
             {
+                _logger.LogInformation("User with email {Email} not found.", email);
                 return NotFound();
             }
 
+            _logger.LogInformation("User with email {Email} retrieved successfully.", email);
             return Ok(user);
         }
         catch (UnauthorizedAccessException)
         {
+            _logger.LogInformation("Unauthorized access: User not authenticated.");
             return Forbid();
         }
     }
-    
+
     [HttpPost]
     [Route("block")]
     [Authorize(Roles = "Accountant")]
     public async Task<IActionResult> BlockUser(string userId)
     {
+        _logger.LogInformation("Attempting to block user with ID: {UserId}", userId);
+
         try
         {
             var result = await _userService.BlockUser(userId);
             if (result)
             {
+                _logger.LogInformation("User with ID {UserId} blocked successfully.", userId);
                 return Ok();
             }
             else
             {
+                _logger.LogInformation("Failed to block user with ID {UserId}.", userId);
                 return StatusCode(500);
             }
         }
         catch (InvalidOperationException ex)
         {
+            _logger.LogError(ex, "Error blocking user with ID {UserId}: {ErrorMessage}", userId, ex.Message);
             return BadRequest(ex.Message);
         }
         catch (UnauthorizedAccessException)
         {
+            _logger.LogInformation("Unauthorized access: User not authorized to block.");
             return StatusCode(403);
         }
     }
-    
+
     [HttpPost]
     [Route("unblock")]
     [Authorize(Roles = "Accountant")]
     public async Task<IActionResult> UnblockUser(string userId)
     {
+        _logger.LogInformation("Attempting to unblock user with ID: {UserId}", userId);
+
         try
         {
             var result = await _userService.UnblockUser(userId);
             if (result)
             {
+                _logger.LogInformation("User with ID {UserId} unblocked successfully.", userId);
                 return Ok();
             }
             else
             {
+                _logger.LogInformation("Failed to unblock user with ID {UserId}.", userId);
                 return StatusCode(500);
             }
         }
         catch (InvalidOperationException ex)
         {
+            _logger.LogError(ex, "Error unblocking user with ID {UserId}: {ErrorMessage}", userId, ex.Message);
             return BadRequest(ex.Message);
         }
         catch (UnauthorizedAccessException)
         {
+            _logger.LogInformation("Unauthorized access: User not authorized to unblock.");
             return StatusCode(403);
         }
     }
-    
+
     [HttpPost]
     [Route("make-accountant")]
     [Authorize(Roles = "Accountant")]
     public async Task<IActionResult> MakeAccountant(string userId)
     {
+        _logger.LogInformation("Attempting to make user with ID: {UserId} an accountant.", userId);
+
         try
         {
             var result = await _userService.MakeAccountant(userId);
             if (result)
             {
+                _logger.LogInformation("User with ID {UserId} made accountant successfully.", userId);
                 return Ok();
             }
             else
             {
+                _logger.LogInformation("Failed to make user with ID {UserId} an accountant.", userId);
                 return StatusCode(500);
             }
         }
         catch (InvalidOperationException ex)
         {
+            _logger.LogError(ex, "Error making user with ID {UserId} an accountant: {ErrorMessage}", userId,
+                ex.Message);
             return BadRequest(ex.Message);
         }
         catch (UnauthorizedAccessException)
         {
+            _logger.LogInformation("Unauthorized access: User not authorized to make accountant.");
             return StatusCode(403);
         }
     }

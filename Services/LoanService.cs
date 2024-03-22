@@ -22,7 +22,7 @@ public class LoanService : ILoanService
         _getUserFromContext = getUserFromContext;
     }
 
-    public async Task<Loan> CreateLoan(LoanDto loanDto)
+    public async Task<Loan> CreateLoan(LoanRequestDto loanDto)
     {
         var user = await _getUserFromContext.GetUser();
         if (user == null)
@@ -98,59 +98,24 @@ public class LoanService : ILoanService
 
     public async Task<LoanDto> GetLoan(int id)
     {
-        var user = await _getUserFromContext.GetUser();
-        if (user == null)
+        try
         {
-            return null;
-        }
+            _logger.LogInformation("Attempting to retrieve loan with ID: {LoanId}", id);
 
-        var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id && l.ApplicationUserId == user.Id);
-        if (loan == null)
-        {
-            return null;
-        }
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                return null;
+            }
 
-        var loanDto = new LoanDto
-        {
-            RequestedAmount = loan.RequstedAmount,
-            FinalAmount = loan.FinalAmount,
-            LoanPeriod = loan.LoanPeriod,
-            LoanType = loan.LoanType,
-            LoanCurrency = loan.LoanCurrency,
-            LoanStatus = loan.LoanStatus
-        };
+            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id && l.ApplicationUserId == user.Id);
+            if (loan == null)
+            {
+                _logger.LogInformation("Loan not found.");
+                return null;
+            }
 
-        return loanDto;
-    }
-
-    public async Task<LoanDtos> GetAllLoans()
-    {
-        var user = await _getUserFromContext.GetUser();
-        if (user == null)
-        {
-            return null;
-        }
-
-        IQueryable<Loan> loansFromDb = Enumerable.Empty<Loan>().AsQueryable();
-
-        if (user.Role == Role.Accountant)
-        {
-            loansFromDb = _dbContext.Loans.AsQueryable();
-        }
-        else if (user.Role == Role.Customer)
-        {
-            loansFromDb = _dbContext.Loans.Where(l => l.ApplicationUserId == user.Id).AsQueryable();
-        }
-
-        var loansDto = new LoanDtos();
-
-        if (loansFromDb == null || !loansFromDb.Any())
-        {
-            return loansDto;
-        }
-
-        foreach (var loan in loansFromDb)
-        {
             var loanDto = new LoanDto
             {
                 RequestedAmount = loan.RequstedAmount,
@@ -161,132 +126,261 @@ public class LoanService : ILoanService
                 LoanStatus = loan.LoanStatus
             };
 
-            loansDto.Loans.Add(loanDto);
+            _logger.LogInformation("Loan with ID {LoanId} retrieved successfully.", id);
+            return loanDto;
         }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving loan with ID: {LoanId}. Error: {ErrorMessage}", id,
+                ex.Message);
+            throw;
+        }
+    }
 
-        return loansDto;
+    public async Task<LoanDtos> GetAllLoans()
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to retrieve all loans.");
+
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                return null;
+            }
+
+            IQueryable<Loan> loansFromDb = Enumerable.Empty<Loan>().AsQueryable();
+
+            if (user.Role == Role.Accountant)
+            {
+                loansFromDb = _dbContext.Loans.AsQueryable();
+            }
+            else if (user.Role == Role.Customer)
+            {
+                loansFromDb = _dbContext.Loans.Where(l => l.ApplicationUserId == user.Id).AsQueryable();
+            }
+
+            var loansDto = new LoanDtos();
+
+            if (loansFromDb == null || !loansFromDb.Any())
+            {
+                _logger.LogInformation("No loans found for the user.");
+                return loansDto;
+            }
+
+            foreach (var loan in loansFromDb)
+            {
+                var loanDto = new LoanDto
+                {
+                    RequestedAmount = loan.RequstedAmount,
+                    FinalAmount = loan.FinalAmount,
+                    LoanPeriod = loan.LoanPeriod,
+                    LoanType = loan.LoanType,
+                    LoanCurrency = loan.LoanCurrency,
+                    LoanStatus = loan.LoanStatus
+                };
+
+                loansDto.Loans.Add(loanDto);
+            }
+
+            _logger.LogInformation("All loans retrieved successfully.");
+            return loansDto;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving all loans: {ErrorMessage}", ex.Message);
+            throw;
+        }
     }
 
     public async Task<bool> DeleteLoan(int id)
     {
-        var user = await _getUserFromContext.GetUser();
-        if (user == null)
+        try
         {
-            throw new InvalidOperationException("User not found.");
-        }
+            _logger.LogInformation("Attempting to delete loan with ID: {LoanId}", id);
 
-        var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
-        if (loan == null)
-        {
-            throw new InvalidOperationException("Loan not found.");
-        }
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                throw new InvalidOperationException("User not found.");
+            }
 
-        if (user.Role == Role.Customer && (loan.ApplicationUserId != user.Id || loan.LoanStatus != LoanStatus.PENDING))
-        {
+            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
+            if (loan == null)
+            {
+                _logger.LogInformation("Loan not found.");
+                throw new InvalidOperationException("Loan not found.");
+            }
+
+            if (user.Role == Role.Customer &&
+                (loan.ApplicationUserId != user.Id || loan.LoanStatus != LoanStatus.PENDING))
+            {
+                _logger.LogInformation("User does not have permission to delete the loan.");
+                return false;
+            }
+
+            if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
+            {
+                _dbContext.Loans.Remove(loan);
+                await _dbContext.SaveChangesAsync();
+                _logger.LogInformation("Loan deleted successfully.");
+                return true;
+            }
+
+            _logger.LogInformation("User does not have permission to delete the loan.");
             return false;
         }
-
-        if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
+        catch (Exception ex)
         {
-            _dbContext.Loans.Remove(loan);
-            await _dbContext.SaveChangesAsync();
-            return true;
+            _logger.LogError(ex, "Error occurred while deleting loan with ID: {LoanId}. Error: {ErrorMessage}", id,
+                ex.Message);
+            throw;
         }
-
-        return false;
     }
 
-    public async Task<LoanDto> ModifyLoan(int id, LoanDto loanDto)
+    public async Task<Loan> ModifyLoan(int id, LoanRequestDto loanDto)
     {
-        var user = await _getUserFromContext.GetUser();
-        if (user == null)
+        try
         {
-            throw new InvalidOperationException("User not found.");
-        }
+            _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
 
-        var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
-        if (loan == null)
-        {
-            throw new InvalidOperationException("Loan not found.");
-        }
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                throw new InvalidOperationException("User not found.");
+            }
 
-        if (user.Role == Role.Customer && (loan.ApplicationUserId != user.Id || loan.LoanStatus != LoanStatus.PENDING))
-        {
+            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
+            if (loan == null)
+            {
+                _logger.LogInformation("Loan not found.");
+                throw new InvalidOperationException("Loan not found.");
+            }
+
+            if (user.Role == Role.Customer &&
+                (loan.ApplicationUserId != user.Id || loan.LoanStatus != LoanStatus.PENDING))
+            {
+                _logger.LogInformation("Operation not allowed.");
+                throw new InvalidOperationException("Operation not allowed.");
+            }
+
+            if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
+            {
+                loan.RequstedAmount = loanDto.RequestedAmount;
+                loan.FinalAmount = loanDto.RequestedAmount +
+                                   (loanDto.RequestedAmount * ((int)loanDto.LoanPeriod / 100));
+                loan.LoanPeriod = loanDto.LoanPeriod;
+                loan.LoanCurrency = loanDto.LoanCurrency;
+                loan.LoanType = loanDto.LoanType;
+                await _dbContext.SaveChangesAsync();
+
+                _logger.LogInformation("Loan modified successfully.");
+                return loan;
+            }
+
+            _logger.LogInformation("Operation not allowed.");
             throw new InvalidOperationException("Operation not allowed.");
         }
-
-        if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
+        catch (Exception ex)
         {
-            loan.RequstedAmount = loanDto.RequestedAmount;
-            loan.FinalAmount = loanDto.RequestedAmount +
-                               (loanDto.RequestedAmount * ((int)loanDto.LoanPeriod / 100));
-            loan.LoanPeriod = loanDto.LoanPeriod;
-            loan.LoanCurrency = loanDto.LoanCurrency;
-            loan.LoanType = loanDto.LoanType;
-            await _dbContext.SaveChangesAsync();
-            return loanDto;
+            _logger.LogError(ex, "Error occurred while modifying loan with ID: {LoanId}. Error: {ErrorMessage}", id,
+                ex.Message);
+            throw;
         }
-
-        throw new InvalidOperationException("Operation not allowed.");
     }
 
     public async Task<bool> AcceptLoan(int id)
     {
-        var user = await _getUserFromContext.GetUser();
-        if (user == null)
+        try
         {
-            throw new InvalidOperationException("User not found.");
-        }
+            _logger.LogInformation("Attempting to accept loan with ID: {LoanId}", id);
 
-        if (user.Role != Role.Accountant)
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                throw new InvalidOperationException("User not found.");
+            }
+
+            if (user.Role != Role.Accountant)
+            {
+                _logger.LogInformation("Operation not allowed.");
+                throw new UnauthorizedAccessException("Only users with the Accountant role can accept loans.");
+            }
+
+            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
+            if (loan == null)
+            {
+                _logger.LogInformation("Loan not found.");
+                throw new InvalidOperationException("Loan not found.");
+            }
+
+            if (loan.LoanStatus != LoanStatus.PENDING)
+            {
+                _logger.LogInformation("Loan is not in a PENDING status.");
+                throw new InvalidOperationException("Loan is not in a PENDING status.");
+            }
+
+            loan.LoanStatus = LoanStatus.ACCEPTED;
+            await _dbContext.SaveChangesAsync();
+
+            _logger.LogInformation("Loan accepted successfully.");
+            return true;
+        }
+        catch (Exception ex)
         {
-            throw new UnauthorizedAccessException("Only users with the Accountant role can accept loans.");
+            _logger.LogError(ex, "Error occurred while accepting loan with ID: {LoanId}. Error: {ErrorMessage}", id,
+                ex.Message);
+            throw;
         }
-
-        var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
-        if (loan == null)
-        {
-            throw new InvalidOperationException("Loan not found.");
-        }
-
-        if (loan.LoanStatus != LoanStatus.PENDING)
-        {
-            throw new InvalidOperationException("Loan is not in a PENDING status.");
-        }
-
-        loan.LoanStatus = LoanStatus.ACCEPTED;
-        await _dbContext.SaveChangesAsync();
-
-        return true;
     }
 
     public async Task<bool> DeclineLoan(int id)
     {
-        var user = await _getUserFromContext.GetUser();
-        if (user == null)
+        try
         {
-            throw new InvalidOperationException("User not found.");
-        }
+            _logger.LogInformation("Attempting to decline loan with ID: {LoanId}", id);
 
-        if (user.Role != Role.Accountant)
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                throw new InvalidOperationException("User not found.");
+            }
+
+            if (user.Role != Role.Accountant)
+            {
+                _logger.LogInformation("Operation not allowed.");
+                throw new UnauthorizedAccessException("Only users with the Accountant role can decline loans.");
+            }
+
+            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
+            if (loan == null)
+            {
+                _logger.LogInformation("Loan not found.");
+                throw new InvalidOperationException("Loan not found.");
+            }
+
+            if (loan.LoanStatus != LoanStatus.PENDING)
+            {
+                _logger.LogInformation("Loan is not in a PENDING status.");
+                throw new InvalidOperationException("Loan is not in a PENDING status.");
+            }
+
+            loan.LoanStatus = LoanStatus.DECLINED;
+            await _dbContext.SaveChangesAsync();
+
+            _logger.LogInformation("Loan declined successfully.");
+            return true;
+        }
+        catch (Exception ex)
         {
-            throw new UnauthorizedAccessException("Only users with the Accountant role can decline loans.");
+            _logger.LogError(ex, "Error occurred while declining loan with ID: {LoanId}. Error: {ErrorMessage}", id,
+                ex.Message);
+            throw;
         }
-
-        var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
-        if (loan == null)
-        {
-            throw new InvalidOperationException("Loan not found.");
-        }
-
-        if (loan.LoanStatus != LoanStatus.PENDING)
-        {
-            throw new InvalidOperationException("Loan is not in a PENDING status.");
-        }
-
-        loan.LoanStatus = LoanStatus.DECLINED;
-        await _dbContext.SaveChangesAsync();
-
-        return true;
     }
 }

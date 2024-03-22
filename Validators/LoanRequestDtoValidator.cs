@@ -1,16 +1,15 @@
+using Finals.Dtos;
 using Finals.Enums;
 using FluentValidation;
 
 namespace Finals.Validators;
 
-public class LoanDtoValidator : AbstractValidator<LoanDto>
+public class LoanRequestDtoValidator : AbstractValidator<LoanRequestDto>
 {
-    public LoanDtoValidator()
+    public LoanRequestDtoValidator()
     {
         RuleFor(x => x.RequestedAmount)
             .GreaterThanOrEqualTo(300).WithMessage("Requested Amount must be greater than 300");
-        RuleFor(x => x.FinalAmount)
-            .GreaterThanOrEqualTo(300 + (300 * ((decimal)LoanPeriod.HalfYear / 100))).WithMessage("Final Amount must be greater than 5% more than minimal requested amount");
         RuleFor(x => x.LoanPeriod)
             .IsInEnum().WithMessage("Invalid loan period");
         RuleFor(x => x.LoanType)
