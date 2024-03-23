@@ -150,7 +150,7 @@ namespace Finals.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsBlocked", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "Salary", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "80c8b6b1-e2b6-45e8-b044-8f2178a90111", 0, 20, "dc5dad2b-78be-491d-858c-01e3d637fd68", "accountant@test.com", false, "Giorgi", false, "Ubiria", false, null, "ACCOUNTANT@TEST.COM", "ACCOUNTANT@TEST.COM", "AQAAAAIAAYagAAAAEJIoXzMYcEU045fMHcudwIJptdEx+xaJOHhghwbrtHoFsp18vLUxvWo0L/BrSFHcGQ==", null, false, 1, 1500, "ae28b046-3d8e-44f6-9b1a-8e60a8cf9d41", false, "Accountant" });
+                values: new object[] { "80c8b6b1-e2b6-45e8-b044-8f2178a90111", 0, 20, "46be1f13-0db9-4a2d-85e4-d1b9d136e29f", "accountant@test.com", false, "Giorgi", false, "Ubiria", false, null, "ACCOUNTANT@TEST.COM", "ACCOUNTANT@TEST.COM", "AQAAAAIAAYagAAAAEDZa8fGm4wpdKgf12OeS/1Hw/TMMytsc2xFHFp4GVZg1bQWgVSA/vN09IaaFbWmtbQ==", null, false, 1, 1500, "179c3266-e4fb-49eb-a006-79ce7f487528", false, "Accountant" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",

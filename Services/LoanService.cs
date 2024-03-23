@@ -195,6 +195,180 @@ public class LoanService : ILoanService
         }
     }
 
+    public async Task<LoanDtos> GetPendingLoans()
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to retrieve pending loans.");
+
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                return null;
+            }
+
+            IQueryable<Loan> loansFromDb = Enumerable.Empty<Loan>().AsQueryable();
+
+            if (user.Role == Role.Accountant)
+            {
+                loansFromDb = _dbContext.Loans.Where(l => l.LoanStatus == LoanStatus.PENDING).AsQueryable();
+            }
+            else if (user.Role == Role.Customer)
+            {
+                loansFromDb = _dbContext.Loans
+                    .Where(l => l.ApplicationUserId == user.Id && l.LoanStatus == LoanStatus.PENDING).AsQueryable();
+            }
+
+            var loansDto = new LoanDtos();
+
+            if (loansFromDb == null || !loansFromDb.Any())
+            {
+                _logger.LogInformation("No pending loans found for the user.");
+                return loansDto;
+            }
+
+            foreach (var loan in loansFromDb)
+            {
+                var loanDto = new LoanDto
+                {
+                    RequestedAmount = loan.RequstedAmount,
+                    FinalAmount = loan.FinalAmount,
+                    LoanPeriod = loan.LoanPeriod,
+                    LoanType = loan.LoanType,
+                    LoanCurrency = loan.LoanCurrency,
+                    LoanStatus = loan.LoanStatus
+                };
+
+                loansDto.Loans.Add(loanDto);
+            }
+
+            _logger.LogInformation("Pending loans retrieved successfully.");
+            return loansDto;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving pending loans: {ErrorMessage}", ex.Message);
+            throw;
+        }
+    }
+
+    public async Task<LoanDtos> GetAcceptedLoans()
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to retrieve accepted loans.");
+
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                return null;
+            }
+
+            IQueryable<Loan> loansFromDb = Enumerable.Empty<Loan>().AsQueryable();
+
+            if (user.Role == Role.Accountant)
+            {
+                loansFromDb = _dbContext.Loans.Where(l => l.LoanStatus == LoanStatus.ACCEPTED).AsQueryable();
+            }
+            else if (user.Role == Role.Customer)
+            {
+                loansFromDb = _dbContext.Loans
+                    .Where(l => l.ApplicationUserId == user.Id && l.LoanStatus == LoanStatus.ACCEPTED).AsQueryable();
+            }
+
+            var loansDto = new LoanDtos();
+
+            if (loansFromDb == null || !loansFromDb.Any())
+            {
+                _logger.LogInformation("No accepted loans found for the user.");
+                return loansDto;
+            }
+
+            foreach (var loan in loansFromDb)
+            {
+                var loanDto = new LoanDto
+                {
+                    RequestedAmount = loan.RequstedAmount,
+                    FinalAmount = loan.FinalAmount,
+                    LoanPeriod = loan.LoanPeriod,
+                    LoanType = loan.LoanType,
+                    LoanCurrency = loan.LoanCurrency,
+                    LoanStatus = loan.LoanStatus
+                };
+
+                loansDto.Loans.Add(loanDto);
+            }
+
+            _logger.LogInformation("Accepted loans retrieved successfully.");
+            return loansDto;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving accepted loans: {ErrorMessage}", ex.Message);
+            throw;
+        }
+    }
+
+    public async Task<LoanDtos> GetDeclinedLoans()
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to retrieve declined loans.");
+
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                return null;
+            }
+
+            IQueryable<Loan> loansFromDb = Enumerable.Empty<Loan>().AsQueryable();
+
+            if (user.Role == Role.Accountant)
+            {
+                loansFromDb = _dbContext.Loans.Where(l => l.LoanStatus == LoanStatus.DECLINED).AsQueryable();
+            }
+            else if (user.Role == Role.Customer)
+            {
+                loansFromDb = _dbContext.Loans
+                    .Where(l => l.ApplicationUserId == user.Id && l.LoanStatus == LoanStatus.DECLINED).AsQueryable();
+            }
+
+            var loansDto = new LoanDtos();
+
+            if (loansFromDb == null || !loansFromDb.Any())
+            {
+                _logger.LogInformation("No declined loans found for the user.");
+                return loansDto;
+            }
+
+            foreach (var loan in loansFromDb)
+            {
+                var loanDto = new LoanDto
+                {
+                    RequestedAmount = loan.RequstedAmount,
+                    FinalAmount = loan.FinalAmount,
+                    LoanPeriod = loan.LoanPeriod,
+                    LoanType = loan.LoanType,
+                    LoanCurrency = loan.LoanCurrency,
+                    LoanStatus = loan.LoanStatus
+                };
+
+                loansDto.Loans.Add(loanDto);
+            }
+
+            _logger.LogInformation("Declined loans retrieved successfully.");
+            return loansDto;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving declined loans: {ErrorMessage}", ex.Message);
+            throw;
+        }
+    }
+
     public async Task<bool> DeleteLoan(int id)
     {
         try

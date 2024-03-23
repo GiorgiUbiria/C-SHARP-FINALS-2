@@ -47,7 +47,7 @@ public class ApplicationDbContext : IdentityUserContext<ApplicationUser>
                 .WithMany(u => u.Loans)
                 .HasForeignKey(l => l.ApplicationUserId)
                 .IsRequired();
-
+            
             modelBuilder.Entity<ApplicationUser>().HasData(
                 new ApplicationUser
                 {

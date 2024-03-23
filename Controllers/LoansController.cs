@@ -25,8 +25,8 @@ public class LoansController : ControllerBase
         _validator = validator;
     }
 
-    [Authorize]
     [HttpPost("new_loan")]
+    [Authorize]
     public async Task<ActionResult<Loan>> CreateLoan([FromBody] LoanRequestDto loanDto)
     {
         _logger.LogInformation("Attempting to create a new loan.");
@@ -53,6 +53,7 @@ public class LoansController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [Authorize]
     public async Task<ActionResult<LoanDto>> GetLoan(int id)
     {
         _logger.LogInformation("Attempting to retrieve loan with ID: {LoanId}", id);
@@ -69,6 +70,7 @@ public class LoansController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAllLoans()
     {
         _logger.LogInformation("Attempting to retrieve all loans.");
@@ -82,6 +84,63 @@ public class LoansController : ControllerBase
         }
 
         _logger.LogInformation("All loans retrieved successfully.");
+        return Ok(loanDtos);
+    }
+
+    [HttpGet]
+    [Authorize]
+    [Route("pending")]
+    public async Task<IActionResult> GetPendingLoans()
+    {
+        _logger.LogInformation($"Attempting to retrieve pending loans.");
+
+        var loanDtos = await _loanService.GetPendingLoans();
+
+        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        {
+            _logger.LogInformation("No pending loans found.");
+            return NoContent();
+        }
+
+        _logger.LogInformation($"Pending loans retrieved successfully.");
+        return Ok(loanDtos);
+    }
+
+    [HttpGet]
+    [Authorize]
+    [Route("declined")]
+    public async Task<IActionResult> GetDeclinedLoans()
+    {
+        _logger.LogInformation($"Attempting to retrieve declined loans.");
+
+        var loanDtos = await _loanService.GetDeclinedLoans();
+
+        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        {
+            _logger.LogInformation("No declined loans found.");
+            return NoContent();
+        }
+
+        _logger.LogInformation($"Declined loans retrieved successfully.");
+        return Ok(loanDtos);
+    }
+
+    [HttpGet]
+    [Authorize]
+    [Route("accepted")]
+    public async Task<IActionResult> GetAccpetedLoans()
+    {
+        _logger.LogInformation($"Attempting to retrieve accepted loans.");
+
+        var loanDtos = await _loanService.GetAcceptedLoans();
+
+        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        {
+            _logger.LogInformation("No accepted loans found.");
+            return NoContent();
+        }
+
+        _logger.LogInformation($"Accepted loans retrieved successfully.");
         return Ok(loanDtos);
     }
 

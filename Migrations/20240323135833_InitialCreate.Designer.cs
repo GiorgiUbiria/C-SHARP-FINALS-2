@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Finals.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240322150450_InitialCreate")]
+    [Migration("20240323135833_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -109,7 +109,7 @@ namespace Finals.Migrations
                             Id = "80c8b6b1-e2b6-45e8-b044-8f2178a90111",
                             AccessFailedCount = 0,
                             Age = 20,
-                            ConcurrencyStamp = "dc5dad2b-78be-491d-858c-01e3d637fd68",
+                            ConcurrencyStamp = "46be1f13-0db9-4a2d-85e4-d1b9d136e29f",
                             Email = "accountant@test.com",
                             EmailConfirmed = false,
                             FirstName = "Giorgi",
@@ -118,11 +118,11 @@ namespace Finals.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ACCOUNTANT@TEST.COM",
                             NormalizedUserName = "ACCOUNTANT@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJIoXzMYcEU045fMHcudwIJptdEx+xaJOHhghwbrtHoFsp18vLUxvWo0L/BrSFHcGQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDZa8fGm4wpdKgf12OeS/1Hw/TMMytsc2xFHFp4GVZg1bQWgVSA/vN09IaaFbWmtbQ==",
                             PhoneNumberConfirmed = false,
                             Role = 1,
                             Salary = 1500,
-                            SecurityStamp = "ae28b046-3d8e-44f6-9b1a-8e60a8cf9d41",
+                            SecurityStamp = "179c3266-e4fb-49eb-a006-79ce7f487528",
                             TwoFactorEnabled = false,
                             UserName = "Accountant"
                         });
