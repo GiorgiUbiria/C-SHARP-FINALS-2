@@ -11,6 +11,4 @@ public class LoanRequestDto
     public required LoanType LoanType { get; set; } = LoanType.FAST;
 
     public required Currency LoanCurrency { get; set; } = Currency.GEL;
-
-    public required LoanStatus LoanStatus { get; set; } = LoanStatus.PENDING;
 }

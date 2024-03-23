@@ -16,7 +16,5 @@ public class LoanRequestDtoValidator : AbstractValidator<LoanRequestDto>
             .IsInEnum().WithMessage("Invalid loan type");
         RuleFor(x => x.LoanCurrency)
             .IsInEnum().WithMessage("Invalid currency");
-        RuleFor(x => x.LoanStatus)
-            .IsInEnum().WithMessage("Invalid loan status");
     }
 }

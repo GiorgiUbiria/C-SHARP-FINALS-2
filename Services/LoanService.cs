@@ -87,6 +87,7 @@ public class LoanService : ILoanService
             LoanPeriod = loanDto.LoanPeriod,
             LoanCurrency = loanDto.LoanCurrency,
             LoanType = loanDto.LoanType,
+            LoanStatus = LoanStatus.PENDING,
             ApplicationUser = user
         };
 
