@@ -205,11 +205,11 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<bool> UnblockUser(string userId)
+    public async Task<bool> UnblockUser(string email)
     {
         try
         {
-            _logger.LogInformation("Attempting to unblock user with ID: {UserId}", userId);
+            _logger.LogInformation("Attempting to unblock user with Email: {email}", email);
 
             var currentUser = await _getUserFromContext.GetUser();
             if (currentUser == null)
@@ -224,7 +224,7 @@ public class UserService : IUserService
                 throw new UnauthorizedAccessException("Only users with the Accountant role can unblock other users.");
             }
 
-            var userToUnblock = await _userManager.FindByIdAsync(userId);
+            var userToUnblock = await _userManager.FindByEmailAsync(email);
             if (userToUnblock == null)
             {
                 _logger.LogInformation("User to unblock not found.");
@@ -248,20 +248,20 @@ public class UserService : IUserService
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID {UserId} unblocked successfully.", userId);
+                _logger.LogInformation("User with Email {email} unblocked successfully.", email);
                 return true;
             }
             else
             {
-                _logger.LogError("Failed to unblock user with ID {UserId}: {Errors}", userId,
+                _logger.LogError("Failed to unblock user with Email {email}: {Errors}", email,
                     string.Join(", ", result.Errors));
                 return false;
             }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while unblocking user with ID: {UserId}. Error: {ErrorMessage}",
-                userId, ex.Message);
+            _logger.LogError(ex, "Error occurred while unblocking user with Email: {email}. Error: {ErrorMessage}",
+                email, ex.Message);
             throw;
         }
     }

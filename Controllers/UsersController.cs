@@ -158,27 +158,27 @@ public class UsersController : ControllerBase
     [HttpPost]
     [Route("unblock")]
     [Authorize(Roles = "Accountant")]
-    public async Task<IActionResult> UnblockUser(string userId)
+    public async Task<IActionResult> UnblockUser(string email)
     {
-        _logger.LogInformation("Attempting to unblock user with ID: {UserId}", userId);
+        _logger.LogInformation("Attempting to unblock user with Email: {email}", email);
 
         try
         {
-            var result = await _userService.UnblockUser(userId);
+            var result = await _userService.UnblockUser(email);
             if (result)
             {
-                _logger.LogInformation("User with ID {UserId} unblocked successfully.", userId);
+                _logger.LogInformation("User with Email {email} unblocked successfully.", email);
                 return Ok();
             }
             else
             {
-                _logger.LogInformation("Failed to unblock user with ID {UserId}.", userId);
+                _logger.LogInformation("Failed to unblock user with Email {email}.", email);
                 return StatusCode(500);
             }
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Error unblocking user with ID {UserId}: {ErrorMessage}", userId, ex.Message);
+            _logger.LogError(ex, "Error unblocking user with Email {email}: {ErrorMessage}", email, ex.Message);
             return BadRequest(ex.Message);
         }
         catch (UnauthorizedAccessException)
