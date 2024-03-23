@@ -266,11 +266,11 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<bool> MakeAccountant(string userId)
+    public async Task<bool> MakeAccountant(string email)
     {
         try
         {
-            _logger.LogInformation("Attempting to make user with ID: {UserId} an accountant.", userId);
+            _logger.LogInformation("Attempting to make user with Email: {email} an accountant.", email);
 
             var currentUser = await _getUserFromContext.GetUser();
             if (currentUser == null)
@@ -286,7 +286,7 @@ public class UserService : IUserService
                     "Only users with the Accountant role can upgrade other users to Accountant.");
             }
 
-            var userToModify = await _userManager.FindByIdAsync(userId);
+            var userToModify = await _userManager.FindByEmailAsync(email);
             if (userToModify == null)
             {
                 _logger.LogInformation("User to modify not found.");
@@ -310,12 +310,12 @@ public class UserService : IUserService
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID {UserId} upgraded to Accountant successfully.", userId);
+                _logger.LogInformation("User with Email {email} upgraded to Accountant successfully.", email);
                 return true;
             }
             else
             {
-                _logger.LogError("Failed to upgrade user with ID {UserId} to Accountant: {Errors}", userId,
+                _logger.LogError("Failed to upgrade user with Email {email} to Accountant: {Errors}", email,
                     string.Join(", ", result.Errors));
                 return false;
             }
@@ -323,7 +323,7 @@ public class UserService : IUserService
         catch (Exception ex)
         {
             _logger.LogError(ex,
-                "Error occurred while making user with ID: {UserId} an accountant. Error: {ErrorMessage}", userId,
+                "Error occurred while making user with Email: {email} an accountant. Error: {ErrorMessage}", email,
                 ex.Message);
             throw;
         }

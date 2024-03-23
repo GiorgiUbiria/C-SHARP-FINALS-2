@@ -11,7 +11,7 @@ public interface IUserService
     Task<AuthResponseDto> AuthenticateUser(AuthRequestDto request);
     Task<ApplicationUser> GetCurrentUser(ClaimsPrincipal userClaims);
     Task<ApplicationUser> GetUserByEmail(string email, ClaimsPrincipal userClaims);
-    Task<bool> BlockUser(string userId);
-    Task<bool> UnblockUser(string userId);
-    Task<bool> MakeAccountant(string userId);
+    Task<bool> BlockUser(string email);
+    Task<bool> UnblockUser(string email);
+    Task<bool> MakeAccountant(string email);
 }

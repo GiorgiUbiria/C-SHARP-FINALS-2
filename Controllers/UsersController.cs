@@ -191,27 +191,27 @@ public class UsersController : ControllerBase
     [HttpPost]
     [Route("make-accountant")]
     [Authorize(Roles = "Accountant")]
-    public async Task<IActionResult> MakeAccountant(string userId)
+    public async Task<IActionResult> MakeAccountant(string email)
     {
-        _logger.LogInformation("Attempting to make user with ID: {UserId} an accountant.", userId);
+        _logger.LogInformation("Attempting to make user with Email: {email} an accountant.", email);
 
         try
         {
-            var result = await _userService.MakeAccountant(userId);
+            var result = await _userService.MakeAccountant(email);
             if (result)
             {
-                _logger.LogInformation("User with ID {UserId} made accountant successfully.", userId);
+                _logger.LogInformation("User with Email {email} made accountant successfully.",email);
                 return Ok();
             }
             else
             {
-                _logger.LogInformation("Failed to make user with ID {UserId} an accountant.", userId);
+                _logger.LogInformation("Failed to make user with Email {email} an accountant.", email);
                 return StatusCode(500);
             }
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Error making user with ID {UserId} an accountant: {ErrorMessage}", userId,
+            _logger.LogError(ex, "Error making user with Email {email} an accountant: {ErrorMessage}", email,
                 ex.Message);
             return BadRequest(ex.Message);
         }
