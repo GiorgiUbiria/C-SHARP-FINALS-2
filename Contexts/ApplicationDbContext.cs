@@ -50,6 +50,15 @@ public class ApplicationDbContext : IdentityUserContext<ApplicationUser>
                 .WithMany(u => u.Loans)
                 .HasForeignKey(l => l.ApplicationUserId)
                 .IsRequired();
+            
+            modelBuilder.Entity<Loan>()
+                .HasOne(l => l.Product)
+                .WithOne() // No navigation property on Product side
+                .HasForeignKey<Loan>(l => l.ProductId) // Explicitly specify the foreign key
+                .IsRequired(false);
+            
+            modelBuilder.Entity<Loan>()
+                .HasCheckConstraint("CK_Loan_Product_For_Installment", "((LoanType = 2 AND ProductId IS NOT NULL) OR LoanType != 2)");
 
             modelBuilder.Entity<ApplicationUser>().HasData(
                 new ApplicationUser
