@@ -25,7 +25,7 @@ public class LoansController : ControllerBase
         _validator = validator;
     }
 
-    [HttpPost("new_loan")]
+    [HttpPost("new-loan")]
     [Authorize]
     public async Task<ActionResult<Loan>> CreateLoan([FromBody] LoanRequestDto loanDto)
     {
