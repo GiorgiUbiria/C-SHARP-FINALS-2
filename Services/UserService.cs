@@ -144,11 +144,11 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<bool> BlockUser(string userId)
+    public async Task<bool> BlockUser(string email)
     {
         try
         {
-            _logger.LogInformation("Attempting to block user with ID: {UserId}", userId);
+            _logger.LogInformation("Attempting to block user with Email: {email}", email);
 
             var currentUser = await _getUserFromContext.GetUser();
             if (currentUser == null)
@@ -163,7 +163,7 @@ public class UserService : IUserService
                 throw new UnauthorizedAccessException("Only users with the Accountant role can block other users.");
             }
 
-            var userToBlock = await _userManager.FindByIdAsync(userId);
+            var userToBlock = await _userManager.FindByEmailAsync(email);
             if (userToBlock == null)
             {
                 _logger.LogInformation("User to block not found.");
@@ -187,19 +187,19 @@ public class UserService : IUserService
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID {UserId} blocked successfully.", userId);
+                _logger.LogInformation("User with Email {email} blocked successfully.", email);
                 return true;
             }
             else
             {
-                _logger.LogError("Failed to block user with ID {UserId}: {Errors}", userId,
+                _logger.LogError("Failed to block user with Email {email}: {Errors}", email,
                     string.Join(", ", result.Errors));
                 return false;
             }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while blocking user with ID: {UserId}. Error: {ErrorMessage}", userId,
+            _logger.LogError(ex, "Error occurred while blocking user with ID: {UserId}. Error: {ErrorMessage}", email,
                 ex.Message);
             throw;
         }

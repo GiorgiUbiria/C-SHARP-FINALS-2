@@ -125,27 +125,27 @@ public class UsersController : ControllerBase
     [HttpPost]
     [Route("block")]
     [Authorize(Roles = "Accountant")]
-    public async Task<IActionResult> BlockUser(string userId)
+    public async Task<IActionResult> BlockUser(string email)
     {
-        _logger.LogInformation("Attempting to block user with ID: {UserId}", userId);
+        _logger.LogInformation("Attempting to block user with Email: {email}", email);
 
         try
         {
-            var result = await _userService.BlockUser(userId);
+            var result = await _userService.BlockUser(email);
             if (result)
             {
-                _logger.LogInformation("User with ID {UserId} blocked successfully.", userId);
+                _logger.LogInformation("User with Email {email} blocked successfully.", email);
                 return Ok();
             }
             else
             {
-                _logger.LogInformation("Failed to block user with ID {UserId}.", userId);
+                _logger.LogInformation("Failed to block user with Email {email}.", email);
                 return StatusCode(500);
             }
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Error blocking user with ID {UserId}: {ErrorMessage}", userId, ex.Message);
+            _logger.LogError(ex, "Error blocking user with Email {email}: {ErrorMessage}", email, ex.Message);
             return BadRequest(ex.Message);
         }
         catch (UnauthorizedAccessException)
