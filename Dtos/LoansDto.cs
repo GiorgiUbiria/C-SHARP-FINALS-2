@@ -1,6 +1,6 @@
 namespace Finals.Dtos;
 
-public class LoanDtos
+public class LoansDto
 {
     public List<LoanDto> Loans { get; set; } = new List<LoanDto>();
 }

@@ -138,7 +138,7 @@ public class LoanService : ILoanService
         }
     }
 
-    public async Task<LoanDtos> GetAllLoans()
+    public async Task<LoansDto> GetAllLoans()
     {
         try
         {
@@ -162,7 +162,7 @@ public class LoanService : ILoanService
                 loansFromDb = _dbContext.Loans.Where(l => l.ApplicationUserId == user.Id).AsQueryable();
             }
 
-            var loansDto = new LoanDtos();
+            var loansDto = new LoansDto();
 
             if (loansFromDb == null || !loansFromDb.Any())
             {
@@ -195,7 +195,7 @@ public class LoanService : ILoanService
         }
     }
 
-    public async Task<LoanDtos> GetPendingLoans()
+    public async Task<LoansDto> GetPendingLoans()
     {
         try
         {
@@ -220,7 +220,7 @@ public class LoanService : ILoanService
                     .Where(l => l.ApplicationUserId == user.Id && l.LoanStatus == LoanStatus.PENDING).AsQueryable();
             }
 
-            var loansDto = new LoanDtos();
+            var loansDto = new LoansDto();
 
             if (loansFromDb == null || !loansFromDb.Any())
             {
@@ -253,7 +253,7 @@ public class LoanService : ILoanService
         }
     }
 
-    public async Task<LoanDtos> GetAcceptedLoans()
+    public async Task<LoansDto> GetAcceptedLoans()
     {
         try
         {
@@ -278,7 +278,7 @@ public class LoanService : ILoanService
                     .Where(l => l.ApplicationUserId == user.Id && l.LoanStatus == LoanStatus.ACCEPTED).AsQueryable();
             }
 
-            var loansDto = new LoanDtos();
+            var loansDto = new LoansDto();
 
             if (loansFromDb == null || !loansFromDb.Any())
             {
@@ -311,7 +311,7 @@ public class LoanService : ILoanService
         }
     }
 
-    public async Task<LoanDtos> GetDeclinedLoans()
+    public async Task<LoansDto> GetDeclinedLoans()
     {
         try
         {
@@ -336,7 +336,7 @@ public class LoanService : ILoanService
                     .Where(l => l.ApplicationUserId == user.Id && l.LoanStatus == LoanStatus.DECLINED).AsQueryable();
             }
 
-            var loansDto = new LoanDtos();
+            var loansDto = new LoansDto();
 
             if (loansFromDb == null || !loansFromDb.Any())
             {
