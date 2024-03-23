@@ -81,6 +81,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     [Route("me")]
     public async Task<ActionResult<ApplicationUser>> GetCurrentUser()
     {
@@ -98,6 +99,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     [Route("user")]
     public async Task<ActionResult<ApplicationUser>> GetUserByEmail([FromQuery] string email)
     {
@@ -123,8 +125,8 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    [Route("block")]
     [Authorize(Roles = "Accountant")]
+    [Route("block")]
     public async Task<IActionResult> BlockUser(string email)
     {
         _logger.LogInformation("Attempting to block user with Email: {email}", email);
@@ -156,8 +158,8 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    [Route("unblock")]
     [Authorize(Roles = "Accountant")]
+    [Route("unblock")]
     public async Task<IActionResult> UnblockUser(string email)
     {
         _logger.LogInformation("Attempting to unblock user with Email: {email}", email);
@@ -189,8 +191,8 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    [Route("make-accountant")]
     [Authorize(Roles = "Accountant")]
+    [Route("make-accountant")]
     public async Task<IActionResult> MakeAccountant(string email)
     {
         _logger.LogInformation("Attempting to make user with Email: {email} an accountant.", email);
