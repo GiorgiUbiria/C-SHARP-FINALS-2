@@ -3,6 +3,7 @@ using System;
 using Finals.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Finals.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240323150700_FixedProductsSeedThird")]
+    partial class FixedProductsSeedThird
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -106,7 +109,7 @@ namespace Finals.Migrations
                             Id = "80c8b6b1-e2b6-45e8-b044-8f2178a90111",
                             AccessFailedCount = 0,
                             Age = 20,
-                            ConcurrencyStamp = "59905d5e-5d5b-48e1-b9d2-da938eecb66c",
+                            ConcurrencyStamp = "8bec2f34-cd93-4c90-ba2b-102c0b146115",
                             Email = "accountant@test.com",
                             EmailConfirmed = false,
                             FirstName = "Giorgi",
@@ -115,11 +118,11 @@ namespace Finals.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ACCOUNTANT@TEST.COM",
                             NormalizedUserName = "ACCOUNTANT@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEiRtJ/olJk7qQD4OQjqntE4Z6BEnLu8ZnsEa0eCIokngmOFvO8tWo3bW8OKrLeDdw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOuOZGUsUz+px5Rs6EMqmjRf20Ck6AmF1nvzbPYmoAvGY73P1jQNMNGuF9zoAwOiig==",
                             PhoneNumberConfirmed = false,
                             Role = 1,
                             Salary = 1500,
-                            SecurityStamp = "eb787a57-bfee-461f-95b1-3a1626d0246b",
+                            SecurityStamp = "321c278f-70d2-4f08-82d8-3a0166b9c83a",
                             TwoFactorEnabled = false,
                             UserName = "Accountant"
                         });

@@ -3,6 +3,7 @@ using System;
 using Finals.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Finals.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240323144716_FixedProductsSeed")]
+    partial class FixedProductsSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -106,7 +109,7 @@ namespace Finals.Migrations
                             Id = "80c8b6b1-e2b6-45e8-b044-8f2178a90111",
                             AccessFailedCount = 0,
                             Age = 20,
-                            ConcurrencyStamp = "59905d5e-5d5b-48e1-b9d2-da938eecb66c",
+                            ConcurrencyStamp = "121f75e1-9630-45c7-bd62-9006ef56ac5a",
                             Email = "accountant@test.com",
                             EmailConfirmed = false,
                             FirstName = "Giorgi",
@@ -115,11 +118,11 @@ namespace Finals.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ACCOUNTANT@TEST.COM",
                             NormalizedUserName = "ACCOUNTANT@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEiRtJ/olJk7qQD4OQjqntE4Z6BEnLu8ZnsEa0eCIokngmOFvO8tWo3bW8OKrLeDdw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHuYFdISvP5FnU47fQ5zHDhnZ+JGZVx2C430VUmDnfL3XfFfvDQMPhFzN8bMosQPuQ==",
                             PhoneNumberConfirmed = false,
                             Role = 1,
                             Salary = 1500,
-                            SecurityStamp = "eb787a57-bfee-461f-95b1-3a1626d0246b",
+                            SecurityStamp = "e5753a66-4426-4688-992f-8daaa59d2f0a",
                             TwoFactorEnabled = false,
                             UserName = "Accountant"
                         });
@@ -214,44 +217,6 @@ namespace Finals.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 9,
-                            Price = 64m,
-                            Title = "WD 2TB Elements Portable External Hard Drive - USB 3.0 "
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Price = 109m,
-                            Title = "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Price = 109m,
-                            Title = "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Price = 114m,
-                            Title = "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Price = 599m,
-                            Title = "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Price = 999.99m,
-                            Title = "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED "
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

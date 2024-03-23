@@ -3,6 +3,7 @@ using System;
 using Finals.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Finals.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240323151141_FixedProductsSeedFifth")]
+    partial class FixedProductsSeedFifth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -106,7 +109,7 @@ namespace Finals.Migrations
                             Id = "80c8b6b1-e2b6-45e8-b044-8f2178a90111",
                             AccessFailedCount = 0,
                             Age = 20,
-                            ConcurrencyStamp = "59905d5e-5d5b-48e1-b9d2-da938eecb66c",
+                            ConcurrencyStamp = "987c4ef7-eb49-48e8-9637-c5bae58a9362",
                             Email = "accountant@test.com",
                             EmailConfirmed = false,
                             FirstName = "Giorgi",
@@ -115,11 +118,11 @@ namespace Finals.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ACCOUNTANT@TEST.COM",
                             NormalizedUserName = "ACCOUNTANT@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEiRtJ/olJk7qQD4OQjqntE4Z6BEnLu8ZnsEa0eCIokngmOFvO8tWo3bW8OKrLeDdw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENk+WvZnobsqHwxTWr50BGIusEHoEgUrmo+liOmxyReLKOeKDEHBjKsyuCa8VUesIQ==",
                             PhoneNumberConfirmed = false,
                             Role = 1,
                             Salary = 1500,
-                            SecurityStamp = "eb787a57-bfee-461f-95b1-3a1626d0246b",
+                            SecurityStamp = "94c12d7a-2020-4502-9393-153a7cfbb22b",
                             TwoFactorEnabled = false,
                             UserName = "Accountant"
                         });
@@ -218,37 +221,37 @@ namespace Finals.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 9,
+                            Id = -9,
                             Price = 64m,
                             Title = "WD 2TB Elements Portable External Hard Drive - USB 3.0 "
                         },
                         new
                         {
-                            Id = 10,
+                            Id = -10,
                             Price = 109m,
                             Title = "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s"
                         },
                         new
                         {
-                            Id = 11,
+                            Id = -11,
                             Price = 109m,
                             Title = "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5"
                         },
                         new
                         {
-                            Id = 12,
+                            Id = -12,
                             Price = 114m,
                             Title = "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive"
                         },
                         new
                         {
-                            Id = 13,
+                            Id = -13,
                             Price = 599m,
                             Title = "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin"
                         },
                         new
                         {
-                            Id = 14,
+                            Id = -14,
                             Price = 999.99m,
                             Title = "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED "
                         });

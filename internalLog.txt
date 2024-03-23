@@ -526,3 +526,222 @@ no such table: Logs
 2024-03-23 17:58:43.1639 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
 2024-03-23 17:58:43.1788 Info Configuration initialized.
 2024-03-23 17:58:43.1931 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 18:42:20.3901 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 18:42:20.4039 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 18:42:20.4091 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 18:42:20.4172 Info Configuration initialized.
+2024-03-23 18:42:20.4255 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 18:42:29.1786 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 18:42:29.1950 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 18:42:29.2013 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 18:42:29.2107 Info Configuration initialized.
+2024-03-23 18:42:29.2203 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 18:42:34.0538 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 18:42:34.0789 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 18:42:34.0901 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 18:42:34.1104 Info Configuration initialized.
+2024-03-23 18:42:34.1294 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 18:47:14.2775 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 18:47:14.3051 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 18:47:14.3152 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 18:47:14.3309 Info Configuration initialized.
+2024-03-23 18:47:14.3475 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 18:47:23.9225 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 18:47:23.9370 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 18:47:23.9425 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 18:47:23.9506 Info Configuration initialized.
+2024-03-23 18:47:23.9591 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 18:50:45.2480 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 18:50:45.2644 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 18:50:45.2708 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 18:50:45.2804 Info Configuration initialized.
+2024-03-23 18:50:45.2905 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:06:58.0710 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 19:06:58.0851 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 19:06:58.0907 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 19:06:58.0992 Info Configuration initialized.
+2024-03-23 19:06:58.1077 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:07:08.4320 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 19:07:08.4485 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 19:07:08.4548 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 19:07:08.4642 Info Configuration initialized.
+2024-03-23 19:07:08.4738 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:10:35.8127 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 19:10:35.8288 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 19:10:35.8349 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 19:10:35.8442 Info Configuration initialized.
+2024-03-23 19:10:35.8540 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:11:39.3813 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 19:11:39.3979 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 19:11:39.4042 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 19:11:39.4138 Info Configuration initialized.
+2024-03-23 19:11:39.4237 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:11:47.8787 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 19:11:47.8952 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 19:11:47.9016 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 19:11:47.9112 Info Configuration initialized.
+2024-03-23 19:11:47.9211 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:12:11.5909 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 19:12:11.6243 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 19:12:11.6389 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 19:12:11.6610 Info Configuration initialized.
+2024-03-23 19:12:11.6826 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:12:11.9413 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:12:11.9601 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:12:11.9615 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:12:11.9625 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:12:12.2367 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:12:23.0716 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 19:12:23.0858 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 19:12:23.0911 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 19:12:23.0992 Info Configuration initialized.
+2024-03-23 19:12:23.1076 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:12:23.1913 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:12:23.4304 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:13:20.6536 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 19:13:20.6676 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 19:13:20.6728 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 19:13:20.6809 Info Configuration initialized.
+2024-03-23 19:13:20.6893 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:13:20.7742 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:13:21.0127 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:13:21.7954 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:13:29.2339 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-23 19:13:29.2480 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-23 19:13:29.2534 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-23 19:13:29.2614 Info Configuration initialized.
+2024-03-23 19:13:29.2696 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-23 19:13:29.3534 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
+2024-03-23 19:13:29.5874 Error DatabaseTarget(Name=database): Error when writing to database. Exception: code = Error (1), message = System.Data.SQLite.SQLiteException (0x87AF001F): SQL logic error
+no such table: Logs
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLiteCommand command, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteCommand.GetStatement(Int32 index)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteNonQuery()
+   at NLog.Targets.DatabaseTarget.ExecuteDbCommandWithParameters(LogEventInfo logEvent, IDbConnection dbConnection, IDbTransaction dbTransaction)
+   at NLog.Targets.DatabaseTarget.WriteLogEventSuppressTransactionScope(LogEventInfo logEvent, String connectionString)
