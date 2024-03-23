@@ -14,24 +14,28 @@ namespace Finals.Controllers;
 public class LoansController : ControllerBase
 {
     private readonly ILoanService _loanService;
+    private readonly IInstallmentLoanService _installmentLoanService;
     private readonly ILogger<LoansController> _logger;
-    private readonly IValidator<LoanRequestDto> _validator;
+    private readonly IValidator<LoanRequestDto> _fastLoanValidator;
+    private readonly IValidator<InstallmentLoanRequestDto> _installmentLoanValidator;
 
-    public LoansController(ILoanService loanService, ILogger<LoansController> logger,
-        IValidator<LoanRequestDto> validator)
+    public LoansController(ILoanService loanService, IInstallmentLoanService installmentLoanService, ILogger<LoansController> logger,
+        IValidator<LoanRequestDto> fastLoanValidator, IValidator<InstallmentLoanRequestDto> installmentLoanValidator)
     {
         _loanService = loanService;
+        _installmentLoanService = installmentLoanService;
         _logger = logger;
-        _validator = validator;
+        _fastLoanValidator = fastLoanValidator;
+        _installmentLoanValidator = installmentLoanValidator;
     }
 
-    [HttpPost("new-loan")]
+    [HttpPost("new-fast-loan")]
     [Authorize]
-    public async Task<ActionResult<Loan>> CreateLoan([FromBody] LoanRequestDto loanDto)
+    public async Task<ActionResult<Loan>> CreateFastLoan([FromBody] LoanRequestDto loanDto)
     {
-        _logger.LogInformation("Attempting to create a new loan.");
+        _logger.LogInformation("Attempting to create a new fast loan.");
 
-        var validationResult = await _validator.ValidateAsync(loanDto);
+        var validationResult = await _fastLoanValidator.ValidateAsync(loanDto);
 
         if (!validationResult.IsValid)
         {
@@ -42,16 +46,44 @@ public class LoansController : ControllerBase
         try
         {
             var loan = await _loanService.CreateLoan(loanDto);
-            _logger.LogInformation("Loan created successfully.");
+            _logger.LogInformation("Fast loan created successfully.");
             return CreatedAtAction(nameof(GetLoan), new { id = loan.Id }, loan);
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Error creating loan: {ErrorMessage}", ex.Message);
+            _logger.LogError(ex, "Error creating a fast loan: {ErrorMessage}", ex.Message);
             return BadRequest(ex.Message);
         }
     }
 
+    
+    [HttpPost("new-installment-loan")]
+    [Authorize]
+    public async Task<ActionResult<Loan>> CreateInstallmentLoan([FromBody] InstallmentLoanRequestDto loanDto)
+    {
+        _logger.LogInformation("Attempting to create a new installment loan.");
+
+        var validationResult = await _installmentLoanValidator.ValidateAsync(loanDto);
+
+        if (!validationResult.IsValid)
+        {
+            _logger.LogInformation("Form Data is Invalid.");
+            return BadRequest(validationResult.Errors);
+        }
+
+        try
+        {
+            var loan = await _installmentLoanService.CreateInstallmentLoan(loanDto);
+            _logger.LogInformation("Installment loan created successfully.");
+            return CreatedAtAction(nameof(GetLoan), new { id = loan.Id }, loan);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Error creating an installment loan: {ErrorMessage}", ex.Message);
+            return BadRequest(ex.Message);
+        }
+    }
+    
     [HttpGet("{id:int}")]
     [Authorize]
     public async Task<ActionResult<LoanDto>> GetLoan(int id)
@@ -177,7 +209,7 @@ public class LoansController : ControllerBase
     {
         _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
 
-        var validationResult = await _validator.ValidateAsync(loanDto);
+        var validationResult = await _fastLoanValidator.ValidateAsync(loanDto);
 
         if (!validationResult.IsValid)
         {
