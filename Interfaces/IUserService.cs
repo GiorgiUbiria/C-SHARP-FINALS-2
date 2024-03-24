@@ -7,7 +7,7 @@ namespace Finals.Services;
 
 public interface IUserService
 {
-    Task<IdentityResult> RegisterUser(RegisterRequestDto request);
+    Task<RegisterResponseDto> RegisterUser(RegisterRequestDto request);
     Task<AuthResponseDto> AuthenticateUser(AuthRequestDto request);
     Task<ApplicationUser> GetCurrentUser(ClaimsPrincipal userClaims);
     Task<ApplicationUser> GetUserByEmail(string email, ClaimsPrincipal userClaims);

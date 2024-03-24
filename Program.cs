@@ -17,7 +17,7 @@ using NLog.Web;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoanRequestDtoValidator>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<FastLoanRequestDtoValidator>());
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AuthRequestDtoValidator>());
 builder.Services.AddFluentValidation(fv =>
     fv.RegisterValidatorsFromAssemblyContaining<InstallmentLoanRequestDtoValidator>());

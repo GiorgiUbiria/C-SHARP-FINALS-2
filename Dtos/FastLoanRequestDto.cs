@@ -2,7 +2,7 @@ using Finals.Enums;
 
 namespace Finals.Dtos;
 
-public class LoanRequestDto
+public class FastLoanRequestDto
 {
     public required int RequestedAmount { get; set; } = 300;
     

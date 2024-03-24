@@ -28,7 +28,7 @@ public class UserService : IUserService
         _logger = logger;
     }
 
-    public async Task<IdentityResult> RegisterUser(RegisterRequestDto request)
+    public async Task<RegisterResponseDto> RegisterUser(RegisterRequestDto request)
     {
         try
         {
@@ -46,7 +46,11 @@ public class UserService : IUserService
 
             var result = await _userManager.CreateAsync(user, request.Password!);
             _logger.LogInformation("User created successfully");
-            return result;
+            return new RegisterResponseDto
+            {
+                User = result,
+                Message = "New user created successfully"
+            };
         }
         catch (Exception ex)
         {

@@ -14,14 +14,11 @@ public class LoansController : ControllerBase
 {
     private readonly ILoanService _loanService;
     private readonly ILogger<LoansController> _logger;
-    private readonly IValidator<LoanRequestDto> _validator;
 
-    public LoansController(ILoanService loanService, ILogger<LoansController> logger,
-        IValidator<LoanRequestDto> validator)
+    public LoansController(ILoanService loanService, ILogger<LoansController> logger)
     {
         _loanService = loanService;
         _logger = logger;
-        _validator = validator;
     }
 
     [HttpGet]
@@ -82,33 +79,6 @@ public class LoansController : ControllerBase
         catch (InvalidOperationException ex)
         {
             _logger.LogError(ex, "Error deleting loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
-            return BadRequest(ex.Message);
-        }
-    }
-
-    [HttpPut("{id}")]
-    [Authorize(Roles = "Customer, Accountant")]
-    public async Task<IActionResult> ModifyLoan(int id, [FromBody] LoanRequestDto loanDto)
-    {
-        _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
-
-        var validationResult = await _validator.ValidateAsync(loanDto);
-
-        if (!validationResult.IsValid)
-        {
-            _logger.LogInformation("Form Data is Invalid.");
-            return BadRequest(validationResult.Errors);
-        }
-
-        try
-        {
-            var modifiedLoanDto = await _loanService.ModifyLoan(id, loanDto);
-            _logger.LogInformation("Loan with ID {LoanId} modified successfully.", id);
-            return Ok(modifiedLoanDto);
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Error modifying loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
             return BadRequest(ex.Message);
         }
     }

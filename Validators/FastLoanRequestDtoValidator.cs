@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace Finals.Validators;
 
-public class LoanRequestDtoValidator : AbstractValidator<LoanRequestDto>
+public class FastLoanRequestDtoValidator : AbstractValidator<FastLoanRequestDto>
 {
-    public LoanRequestDtoValidator()
+    public FastLoanRequestDtoValidator()
     {
         RuleFor(x => x.RequestedAmount)
             .GreaterThanOrEqualTo(300).WithMessage("Requested Amount must be greater than 300");

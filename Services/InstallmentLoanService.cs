@@ -21,7 +21,7 @@ public class InstallmentLoanService : IInstallmentLoanService
         _logger = logger;
         _getUserFromContext = getUserFromContext;
     }
-    
+
     public async Task<Loan> CreateInstallmentLoan(InstallmentLoanRequestDto loanDto)
     {
         var user = await _getUserFromContext.GetUser();
@@ -64,7 +64,69 @@ public class InstallmentLoanService : IInstallmentLoanService
 
         return loan;
     }
-    
+
+    public async Task<Loan> ModifyInstallmentLoan(int id, InstallmentLoanRequestDto installmentLoanDto)
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
+
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                throw new InvalidOperationException("User not found.");
+            }
+
+            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
+            if (loan == null)
+            {
+                _logger.LogInformation("Loan not found.");
+                throw new InvalidOperationException("Loan not found.");
+            }
+
+            if (loan.LoanType != LoanType.INSTALLMENT)
+            {
+                _logger.LogInformation("Cannot modify loans that are not of type Installment.");
+                throw new InvalidOperationException("Cannot modify loans that are not of type Installment.");
+            }
+
+            if (user.Role == Role.Customer &&
+                (loan.ApplicationUserId != user.Id || loan.LoanStatus != LoanStatus.PENDING))
+            {
+                _logger.LogInformation("Operation not allowed.");
+                throw new InvalidOperationException("Operation not allowed.");
+            }
+
+            var product = await _dbContext.Products.FindAsync(installmentLoanDto.ProductId);
+            if (product == null)
+            {
+                throw new InvalidOperationException("Product not found.");
+            }
+
+            if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
+            {
+                loan.LoanPeriod = installmentLoanDto.LoanPeriod;
+                loan.ProductId = installmentLoanDto.ProductId;
+                loan.RequstedAmount = (int)product.Price;
+                loan.Product = product;
+                    await _dbContext.SaveChangesAsync();
+
+                _logger.LogInformation("Loan modified successfully.");
+                return loan;
+            }
+
+            _logger.LogInformation("Operation not allowed.");
+            throw new InvalidOperationException("Operation not allowed.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while modifying loan with ID: {LoanId}. Error: {ErrorMessage}", id,
+                ex.Message);
+            throw;
+        }
+    }
+
     public async Task<InstallmentLoanDto> GetLoan(int id)
     {
         try
@@ -85,8 +147,9 @@ public class InstallmentLoanService : IInstallmentLoanService
                 return null;
             }
 
-            var loanDto = new InstallmentLoanDto() 
+            var loanDto = new InstallmentLoanDto()
             {
+                Id = loan.Id,
                 RequestedAmount = loan.RequstedAmount,
                 FinalAmount = loan.FinalAmount,
                 LoanPeriod = loan.LoanPeriod,

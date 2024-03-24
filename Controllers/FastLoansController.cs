@@ -15,10 +15,10 @@ public class FastLoansController : ControllerBase
 {
     private readonly IFastLoanService _fastLoanService;
     private readonly ILogger<LoansController> _logger;
-    private readonly IValidator<LoanRequestDto> _fastLoanValidator;
+    private readonly IValidator<FastLoanRequestDto> _fastLoanValidator;
 
     public FastLoansController(IFastLoanService fastLoanService, ILogger<LoansController> logger,
-        IValidator<LoanRequestDto> fastLoanValidator)
+        IValidator<FastLoanRequestDto> fastLoanValidator)
     {
         _fastLoanService = fastLoanService;
         _logger = logger;
@@ -28,11 +28,11 @@ public class FastLoansController : ControllerBase
     [HttpPost]
     [Authorize]
     [Route("new-fast")]
-    public async Task<ActionResult<Loan>> CreateFastLoan([FromBody] LoanRequestDto loanDto)
+    public async Task<ActionResult<Loan>> CreateFastLoan([FromBody] FastLoanRequestDto fastLoanDto)
     {
         _logger.LogInformation("Attempting to create a new fast loan.");
 
-        var validationResult = await _fastLoanValidator.ValidateAsync(loanDto);
+        var validationResult = await _fastLoanValidator.ValidateAsync(fastLoanDto);
 
         if (!validationResult.IsValid)
         {
@@ -42,7 +42,7 @@ public class FastLoansController : ControllerBase
 
         try
         {
-            var loan = await _fastLoanService.CreateFastLoan(loanDto);
+            var loan = await _fastLoanService.CreateFastLoan(fastLoanDto);
             _logger.LogInformation("Fast loan created successfully.");
 
             return Ok(loan);
@@ -53,9 +53,36 @@ public class FastLoansController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+    
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Customer, Accountant")]
+    public async Task<IActionResult> ModifyLoan(int id, [FromBody] FastLoanRequestDto fastLoanDto)
+    {
+        _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
+
+        var validationResult = await _fastLoanValidator.ValidateAsync(fastLoanDto);
+
+        if (!validationResult.IsValid)
+        {
+            _logger.LogInformation("Form Data is Invalid.");
+            return BadRequest(validationResult.Errors);
+        }
+
+        try
+        {
+            var modifiedLoanDto = await _fastLoanService.ModifyFastLoan(id, fastLoanDto);
+            _logger.LogInformation("Loan with ID {LoanId} modified successfully.", id);
+            return Ok(modifiedLoanDto);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Error modifying loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
+            return BadRequest(ex.Message);
+        }
+    }
 
     [NonAction]
-    public async Task<ActionResult<LoanDto>> GetFastLoan(int id)
+    public async Task<ActionResult<FastLoanDto>> GetFastLoan(int id)
     {
         _logger.LogInformation("Attempting to retrieve loan with ID: {LoanId}", id);
 

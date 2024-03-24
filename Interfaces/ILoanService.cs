@@ -11,7 +11,6 @@ public interface ILoanService
     Task<LoansDto> GetAcceptedLoans();
     Task<LoansDto> GetDeclinedLoans();
     Task<bool> DeleteLoan(int id);
-    Task<Loan> ModifyLoan(int id, LoanRequestDto loanDto);
     Task<bool> DeclineLoan(int id);
     Task<bool> AcceptLoan(int id);
 }

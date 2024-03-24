@@ -42,14 +42,14 @@ public class UsersController : ControllerBase
 
         var result = await _userService.RegisterUser(request);
 
-        if (result.Succeeded)
+        if (result.User.Succeeded)
         {
             request.Password = "";
             _logger.LogInformation("User registered successfully.");
             return CreatedAtAction(nameof(Register), new { email = request.Email }, request);
         }
 
-        foreach (var error in result.Errors)
+        foreach (var error in result.User.Errors)
         {
             ModelState.AddModelError(error.Code, error.Description);
         }

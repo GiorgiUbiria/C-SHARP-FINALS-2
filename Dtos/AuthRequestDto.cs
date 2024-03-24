@@ -4,5 +4,5 @@ public class AuthRequestDto
 {
     public required string Email { get; set; } = "test@test.com";
 
-    public required string Password { get; set; } = string.Empty;
+    public required string Password { get; set; } = "testPassword";
 }

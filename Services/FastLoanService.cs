@@ -22,7 +22,7 @@ public class FastLoanService : IFastLoanService
         _getUserFromContext = getUserFromContext;
     }
 
-    public async Task<Loan> CreateFastLoan(LoanRequestDto loanDto)
+    public async Task<Loan> CreateFastLoan(FastLoanRequestDto fastLoanDto)
     {
         var user = await _getUserFromContext.GetUser();
         if (user == null)
@@ -36,7 +36,7 @@ public class FastLoanService : IFastLoanService
         }
 
         decimal maxAmount = 0;
-        switch (loanDto.LoanPeriod)
+        switch (fastLoanDto.LoanPeriod)
         {
             case LoanPeriod.HalfYear:
             case LoanPeriod.OneYear:
@@ -73,7 +73,7 @@ public class FastLoanService : IFastLoanService
                 throw new ArgumentException("Invalid loan type.");
         }
 
-        if (loanDto.RequestedAmount > maxAmount)
+        if (fastLoanDto.RequestedAmount > maxAmount)
         {
             throw new InvalidOperationException(
                 $"Requested loan amount exceeds the maximum allowed amount ({maxAmount}).");
@@ -81,12 +81,12 @@ public class FastLoanService : IFastLoanService
 
         var loan = new Loan
         {
-            RequstedAmount = loanDto.RequestedAmount,
-            FinalAmount = loanDto.RequestedAmount +
-                          (loanDto.RequestedAmount * ((int)loanDto.LoanPeriod / 100)),
-            LoanPeriod = loanDto.LoanPeriod,
-            LoanCurrency = loanDto.LoanCurrency,
-            LoanType = loanDto.LoanType,
+            RequstedAmount = fastLoanDto.RequestedAmount,
+            FinalAmount = fastLoanDto.RequestedAmount +
+                          (fastLoanDto.RequestedAmount * ((int)fastLoanDto.LoanPeriod / 100)),
+            LoanPeriod = fastLoanDto.LoanPeriod,
+            LoanCurrency = fastLoanDto.LoanCurrency,
+            LoanType = fastLoanDto.LoanType,
             LoanStatus = LoanStatus.PENDING,
             ProductId = null,
             Product = null,
@@ -98,8 +98,60 @@ public class FastLoanService : IFastLoanService
 
         return loan;
     }
-    
-    public async Task<LoanDto> GetFastLoan(int id)
+
+    public async Task<Loan> ModifyFastLoan(int id, FastLoanRequestDto fastLoanDto)
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
+
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                throw new InvalidOperationException("User not found.");
+            }
+
+            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
+            if (loan == null)
+            {
+                _logger.LogInformation("Loan not found.");
+                throw new InvalidOperationException("Loan not found.");
+            }
+
+            if (user.Role == Role.Customer &&
+                (loan.ApplicationUserId != user.Id || loan.LoanStatus != LoanStatus.PENDING))
+            {
+                _logger.LogInformation("Operation not allowed.");
+                throw new InvalidOperationException("Operation not allowed.");
+            }
+
+            if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
+            {
+                loan.RequstedAmount = fastLoanDto.RequestedAmount;
+                loan.FinalAmount = fastLoanDto.RequestedAmount +
+                                   (fastLoanDto.RequestedAmount * ((int)fastLoanDto.LoanPeriod / 100));
+                loan.LoanPeriod = fastLoanDto.LoanPeriod;
+                loan.LoanCurrency = fastLoanDto.LoanCurrency;
+                loan.LoanType = fastLoanDto.LoanType;
+                await _dbContext.SaveChangesAsync();
+
+                _logger.LogInformation("Loan modified successfully.");
+                return loan;
+            }
+
+            _logger.LogInformation("Operation not allowed.");
+            throw new InvalidOperationException("Operation not allowed.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while modifying loan with ID: {LoanId}. Error: {ErrorMessage}", id,
+                ex.Message);
+            throw;
+        }
+    }
+
+    public async Task<FastLoanDto> GetFastLoan(int id)
     {
         try
         {
@@ -119,8 +171,9 @@ public class FastLoanService : IFastLoanService
                 return null;
             }
 
-            var loanDto = new LoanDto
+            var loanDto = new FastLoanDto
             {
+                Id = loan.Id,
                 RequestedAmount = loan.RequstedAmount,
                 FinalAmount = loan.FinalAmount,
                 LoanPeriod = loan.LoanPeriod,

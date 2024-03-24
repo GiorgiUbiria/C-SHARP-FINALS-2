@@ -44,12 +44,15 @@ public class LoanService : ILoanService
 
             var loanDto = new LoanDto
             {
+                Id = loan.Id,
                 RequestedAmount = loan.RequstedAmount,
                 FinalAmount = loan.FinalAmount,
                 LoanPeriod = loan.LoanPeriod,
                 LoanType = loan.LoanType,
                 LoanCurrency = loan.LoanCurrency,
-                LoanStatus = loan.LoanStatus
+                LoanStatus = loan.LoanStatus,
+                ProductId = (int)loan.ProductId,
+                Product = loan.Product
             };
 
             _logger.LogInformation("Loan with ID {LoanId} retrieved successfully.", id);
@@ -99,12 +102,15 @@ public class LoanService : ILoanService
             {
                 var loanDto = new LoanDto
                 {
+                    Id = loan.Id,
                     RequestedAmount = loan.RequstedAmount,
                     FinalAmount = loan.FinalAmount,
                     LoanPeriod = loan.LoanPeriod,
                     LoanType = loan.LoanType,
                     LoanCurrency = loan.LoanCurrency,
-                    LoanStatus = loan.LoanStatus
+                    LoanStatus = loan.LoanStatus,
+                    ProductId = (int)loan.ProductId,
+                    Product = loan.Product
                 };
 
                 loansDto.Loans.Add(loanDto);
@@ -157,12 +163,15 @@ public class LoanService : ILoanService
             {
                 var loanDto = new LoanDto
                 {
+                    Id = loan.Id,
                     RequestedAmount = loan.RequstedAmount,
                     FinalAmount = loan.FinalAmount,
                     LoanPeriod = loan.LoanPeriod,
                     LoanType = loan.LoanType,
                     LoanCurrency = loan.LoanCurrency,
-                    LoanStatus = loan.LoanStatus
+                    LoanStatus = loan.LoanStatus,
+                    ProductId = (int)loan.ProductId,
+                    Product = loan.Product
                 };
 
                 loansDto.Loans.Add(loanDto);
@@ -215,12 +224,15 @@ public class LoanService : ILoanService
             {
                 var loanDto = new LoanDto
                 {
+                    Id = loan.Id,
                     RequestedAmount = loan.RequstedAmount,
                     FinalAmount = loan.FinalAmount,
                     LoanPeriod = loan.LoanPeriod,
                     LoanType = loan.LoanType,
                     LoanCurrency = loan.LoanCurrency,
-                    LoanStatus = loan.LoanStatus
+                    LoanStatus = loan.LoanStatus,
+                    ProductId = (int)loan.ProductId,
+                    Product = loan.Product
                 };
 
                 loansDto.Loans.Add(loanDto);
@@ -273,12 +285,15 @@ public class LoanService : ILoanService
             {
                 var loanDto = new LoanDto
                 {
+                    Id = loan.Id,
                     RequestedAmount = loan.RequstedAmount,
                     FinalAmount = loan.FinalAmount,
                     LoanPeriod = loan.LoanPeriod,
                     LoanType = loan.LoanType,
                     LoanCurrency = loan.LoanCurrency,
-                    LoanStatus = loan.LoanStatus
+                    LoanStatus = loan.LoanStatus,
+                    ProductId = (int)loan.ProductId,
+                    Product = loan.Product
                 };
 
                 loansDto.Loans.Add(loanDto);
@@ -335,58 +350,6 @@ public class LoanService : ILoanService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error occurred while deleting loan with ID: {LoanId}. Error: {ErrorMessage}", id,
-                ex.Message);
-            throw;
-        }
-    }
-
-    public async Task<Loan> ModifyLoan(int id, LoanRequestDto loanDto)
-    {
-        try
-        {
-            _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
-
-            var user = await _getUserFromContext.GetUser();
-            if (user == null)
-            {
-                _logger.LogInformation("User not found.");
-                throw new InvalidOperationException("User not found.");
-            }
-
-            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
-            if (loan == null)
-            {
-                _logger.LogInformation("Loan not found.");
-                throw new InvalidOperationException("Loan not found.");
-            }
-
-            if (user.Role == Role.Customer &&
-                (loan.ApplicationUserId != user.Id || loan.LoanStatus != LoanStatus.PENDING))
-            {
-                _logger.LogInformation("Operation not allowed.");
-                throw new InvalidOperationException("Operation not allowed.");
-            }
-
-            if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
-            {
-                loan.RequstedAmount = loanDto.RequestedAmount;
-                loan.FinalAmount = loanDto.RequestedAmount +
-                                   (loanDto.RequestedAmount * ((int)loanDto.LoanPeriod / 100));
-                loan.LoanPeriod = loanDto.LoanPeriod;
-                loan.LoanCurrency = loanDto.LoanCurrency;
-                loan.LoanType = loanDto.LoanType;
-                await _dbContext.SaveChangesAsync();
-
-                _logger.LogInformation("Loan modified successfully.");
-                return loan;
-            }
-
-            _logger.LogInformation("Operation not allowed.");
-            throw new InvalidOperationException("Operation not allowed.");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error occurred while modifying loan with ID: {LoanId}. Error: {ErrorMessage}", id,
                 ex.Message);
             throw;
         }
