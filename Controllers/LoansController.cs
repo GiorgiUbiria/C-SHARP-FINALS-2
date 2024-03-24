@@ -1,7 +1,6 @@
 using Asp.Versioning;
 using Finals.Dtos;
 using Finals.Interfaces;
-using Finals.Models;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,96 +8,20 @@ using Microsoft.AspNetCore.Mvc;
 namespace Finals.Controllers;
 
 [ApiVersion(1.0)]
-[ApiController]
 [Route("api/[controller]")]
+[ApiController]
 public class LoansController : ControllerBase
 {
     private readonly ILoanService _loanService;
-    private readonly IInstallmentLoanService _installmentLoanService;
     private readonly ILogger<LoansController> _logger;
-    private readonly IValidator<LoanRequestDto> _fastLoanValidator;
-    private readonly IValidator<InstallmentLoanRequestDto> _installmentLoanValidator;
+    private readonly IValidator<LoanRequestDto> _validator;
 
-    public LoansController(ILoanService loanService, IInstallmentLoanService installmentLoanService, ILogger<LoansController> logger,
-        IValidator<LoanRequestDto> fastLoanValidator, IValidator<InstallmentLoanRequestDto> installmentLoanValidator)
+    public LoansController(ILoanService loanService, ILogger<LoansController> logger,
+        IValidator<LoanRequestDto> validator)
     {
         _loanService = loanService;
-        _installmentLoanService = installmentLoanService;
         _logger = logger;
-        _fastLoanValidator = fastLoanValidator;
-        _installmentLoanValidator = installmentLoanValidator;
-    }
-
-    [HttpPost("new-fast-loan")]
-    [Authorize]
-    public async Task<ActionResult<Loan>> CreateFastLoan([FromBody] LoanRequestDto loanDto)
-    {
-        _logger.LogInformation("Attempting to create a new fast loan.");
-
-        var validationResult = await _fastLoanValidator.ValidateAsync(loanDto);
-
-        if (!validationResult.IsValid)
-        {
-            _logger.LogInformation("Form Data is Invalid.");
-            return BadRequest(validationResult.Errors);
-        }
-
-        try
-        {
-            var loan = await _loanService.CreateLoan(loanDto);
-            _logger.LogInformation("Fast loan created successfully.");
-            return CreatedAtAction(nameof(GetLoan), new { id = loan.Id }, loan);
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Error creating a fast loan: {ErrorMessage}", ex.Message);
-            return BadRequest(ex.Message);
-        }
-    }
-
-    
-    [HttpPost("new-installment-loan")]
-    [Authorize]
-    public async Task<ActionResult<Loan>> CreateInstallmentLoan([FromBody] InstallmentLoanRequestDto loanDto)
-    {
-        _logger.LogInformation("Attempting to create a new installment loan.");
-
-        var validationResult = await _installmentLoanValidator.ValidateAsync(loanDto);
-
-        if (!validationResult.IsValid)
-        {
-            _logger.LogInformation("Form Data is Invalid.");
-            return BadRequest(validationResult.Errors);
-        }
-
-        try
-        {
-            var loan = await _installmentLoanService.CreateInstallmentLoan(loanDto);
-            _logger.LogInformation("Installment loan created successfully.");
-            return CreatedAtAction(nameof(GetLoan), new { id = loan.Id }, loan);
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Error creating an installment loan: {ErrorMessage}", ex.Message);
-            return BadRequest(ex.Message);
-        }
-    }
-    
-    [HttpGet("{id:int}")]
-    [Authorize]
-    public async Task<ActionResult<LoanDto>> GetLoan(int id)
-    {
-        _logger.LogInformation("Attempting to retrieve loan with ID: {LoanId}", id);
-
-        var loanDto = await _loanService.GetLoan(id);
-        if (loanDto == null)
-        {
-            _logger.LogInformation("Loan with ID {LoanId} not found.", id);
-            return NotFound();
-        }
-
-        _logger.LogInformation("Loan with ID {LoanId} retrieved successfully.", id);
-        return loanDto;
+        _validator = validator;
     }
 
     [HttpGet]
@@ -119,61 +42,21 @@ public class LoansController : ControllerBase
         return Ok(loanDtos);
     }
 
-    [HttpGet]
+    [HttpGet("{id:int}")]
     [Authorize]
-    [Route("pending")]
-    public async Task<IActionResult> GetPendingLoans()
+    public async Task<ActionResult<LoanDto>> GetLoan(int id)
     {
-        _logger.LogInformation($"Attempting to retrieve pending loans.");
+        _logger.LogInformation("Attempting to retrieve loan with ID: {LoanId}", id);
 
-        var loanDtos = await _loanService.GetPendingLoans();
-
-        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        var loanDto = await _loanService.GetLoan(id);
+        if (loanDto == null)
         {
-            _logger.LogInformation("No pending loans found.");
-            return NoContent();
+            _logger.LogInformation("Loan with ID {LoanId} not found.", id);
+            return NotFound();
         }
 
-        _logger.LogInformation($"Pending loans retrieved successfully.");
-        return Ok(loanDtos);
-    }
-
-    [HttpGet]
-    [Authorize]
-    [Route("declined")]
-    public async Task<IActionResult> GetDeclinedLoans()
-    {
-        _logger.LogInformation($"Attempting to retrieve declined loans.");
-
-        var loanDtos = await _loanService.GetDeclinedLoans();
-
-        if (loanDtos == null || loanDtos.Loans.Count == 0)
-        {
-            _logger.LogInformation("No declined loans found.");
-            return NoContent();
-        }
-
-        _logger.LogInformation($"Declined loans retrieved successfully.");
-        return Ok(loanDtos);
-    }
-
-    [HttpGet]
-    [Authorize]
-    [Route("accepted")]
-    public async Task<IActionResult> GetAccpetedLoans()
-    {
-        _logger.LogInformation($"Attempting to retrieve accepted loans.");
-
-        var loanDtos = await _loanService.GetAcceptedLoans();
-
-        if (loanDtos == null || loanDtos.Loans.Count == 0)
-        {
-            _logger.LogInformation("No accepted loans found.");
-            return NoContent();
-        }
-
-        _logger.LogInformation($"Accepted loans retrieved successfully.");
-        return Ok(loanDtos);
+        _logger.LogInformation("Loan with ID {LoanId} retrieved successfully.", id);
+        return loanDto;
     }
 
     [HttpDelete("{id}")]
@@ -209,7 +92,7 @@ public class LoansController : ControllerBase
     {
         _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
 
-        var validationResult = await _fastLoanValidator.ValidateAsync(loanDto);
+        var validationResult = await _validator.ValidateAsync(loanDto);
 
         if (!validationResult.IsValid)
         {
@@ -282,5 +165,62 @@ public class LoansController : ControllerBase
             _logger.LogError(ex, "Error declining loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
             return BadRequest(ex.Message);
         }
+    }
+
+    [HttpGet]
+    [Authorize]
+    [Route("pending")]
+    public async Task<IActionResult> GetPendingLoans()
+    {
+        _logger.LogInformation($"Attempting to retrieve pending loans.");
+
+        var loanDtos = await _loanService.GetPendingLoans();
+
+        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        {
+            _logger.LogInformation("No pending loans found.");
+            return NoContent();
+        }
+
+        _logger.LogInformation($"Pending loans retrieved successfully.");
+        return Ok(loanDtos);
+    }
+
+    [HttpGet]
+    [Authorize]
+    [Route("declined")]
+    public async Task<IActionResult> GetDeclinedLoans()
+    {
+        _logger.LogInformation($"Attempting to retrieve declined loans.");
+
+        var loanDtos = await _loanService.GetDeclinedLoans();
+
+        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        {
+            _logger.LogInformation("No declined loans found.");
+            return NoContent();
+        }
+
+        _logger.LogInformation($"Declined loans retrieved successfully.");
+        return Ok(loanDtos);
+    }
+
+    [HttpGet]
+    [Authorize]
+    [Route("accepted")]
+    public async Task<IActionResult> GetAccpetedLoans()
+    {
+        _logger.LogInformation($"Attempting to retrieve accepted loans.");
+
+        var loanDtos = await _loanService.GetAcceptedLoans();
+
+        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        {
+            _logger.LogInformation("No accepted loans found.");
+            return NoContent();
+        }
+
+        _logger.LogInformation($"Accepted loans retrieved successfully.");
+        return Ok(loanDtos);
     }
 }

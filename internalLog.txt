@@ -765,3 +765,168 @@ no such table: Logs
 2024-03-23 22:21:02.9803 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
 2024-03-23 22:21:02.9977 Info Configuration initialized.
 2024-03-23 22:21:03.0150 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:04:49.0331 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:04:49.0523 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:04:49.0602 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:04:49.0738 Info Configuration initialized.
+2024-03-24 21:04:49.0849 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:05:14.8212 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:05:14.8402 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:05:14.8481 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:05:14.8600 Info Configuration initialized.
+2024-03-24 21:05:14.8742 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:07:33.7550 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:07:33.7730 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:07:33.7808 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:07:33.7936 Info Configuration initialized.
+2024-03-24 21:07:33.8055 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:10:53.3993 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:10:53.4328 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:10:53.4476 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:10:53.4703 Info Configuration initialized.
+2024-03-24 21:10:53.4923 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:11:53.3859 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:11:53.4035 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:11:53.4112 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:11:53.4228 Info Configuration initialized.
+2024-03-24 21:11:53.4343 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:13:04.5745 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:13:04.6072 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:13:04.6217 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:13:04.6437 Info Configuration initialized.
+2024-03-24 21:13:04.6651 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:14:41.7378 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:14:41.7555 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:14:41.7634 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:14:41.7752 Info Configuration initialized.
+2024-03-24 21:14:41.7866 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:15:02.4053 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:15:02.4233 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:15:02.4308 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:15:02.4424 Info Configuration initialized.
+2024-03-24 21:15:02.4536 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:16:30.1475 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:16:30.1674 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:16:30.1757 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:16:30.1886 Info Configuration initialized.
+2024-03-24 21:16:30.2011 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:19:15.1881 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:19:15.2054 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:19:15.2133 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:19:15.2249 Info Configuration initialized.
+2024-03-24 21:19:15.2359 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:28:47.1348 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:28:47.1549 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:28:47.1630 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:28:47.1760 Info Configuration initialized.
+2024-03-24 21:28:47.1890 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:32:17.8683 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:32:17.8876 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:32:17.8958 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:32:17.9080 Info Configuration initialized.
+2024-03-24 21:32:17.9223 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:35:34.6145 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:35:34.6360 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:35:34.6472 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:35:34.6630 Info Configuration initialized.
+2024-03-24 21:35:34.6781 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:37:47.6252 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:37:47.6581 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:37:47.6725 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:37:47.6946 Info Configuration initialized.
+2024-03-24 21:37:47.7161 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:41:49.1450 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:41:49.1788 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:41:49.1938 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:41:49.2166 Info Configuration initialized.
+2024-03-24 21:41:49.2388 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:44:43.0964 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:44:43.1135 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:44:43.1210 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:44:43.1324 Info Configuration initialized.
+2024-03-24 21:44:43.1433 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:45:43.9870 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:45:44.0041 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:45:44.0114 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:45:44.0235 Info Configuration initialized.
+2024-03-24 21:45:44.0352 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:51:55.6882 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:51:55.7085 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:51:55.7174 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:51:55.7318 Info Configuration initialized.
+2024-03-24 21:51:55.7463 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:52:47.5686 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:52:47.5870 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:52:47.5948 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:52:47.6069 Info Configuration initialized.
+2024-03-24 21:52:47.6186 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:53:26.0331 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:53:26.0498 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:53:26.0572 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:53:26.0688 Info Configuration initialized.
+2024-03-24 21:53:26.0798 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 21:54:17.7427 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 21:54:17.7595 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 21:54:17.7667 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 21:54:17.7775 Info Configuration initialized.
+2024-03-24 21:54:17.7882 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:05:35.4846 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:05:35.5058 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:05:35.5148 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:05:35.5299 Info Configuration initialized.
+2024-03-24 22:05:35.5444 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:08:18.3931 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:08:18.4264 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:08:18.4408 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:08:18.4629 Info Configuration initialized.
+2024-03-24 22:08:18.4846 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:11:37.3662 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:11:37.3803 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:11:37.3855 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:11:37.3937 Info Configuration initialized.
+2024-03-24 22:11:37.4021 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:12:00.7753 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:12:00.7900 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:12:00.7954 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:12:00.8037 Info Configuration initialized.
+2024-03-24 22:12:00.8125 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:12:07.0147 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:12:07.0338 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:12:07.0421 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:12:07.0544 Info Configuration initialized.
+2024-03-24 22:12:07.0665 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:13:12.1310 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:13:12.1492 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:13:12.1572 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:13:12.1695 Info Configuration initialized.
+2024-03-24 22:13:12.1815 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:16:47.0931 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:16:47.1111 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:16:47.1192 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:16:47.1307 Info Configuration initialized.
+2024-03-24 22:16:47.1418 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:18:56.2194 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:18:56.2384 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:18:56.2471 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:18:56.2598 Info Configuration initialized.
+2024-03-24 22:18:56.2721 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:20:11.0389 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:20:11.0580 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:20:11.0667 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:20:11.0804 Info Configuration initialized.
+2024-03-24 22:20:11.0933 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:26:15.2983 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:26:15.3153 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:26:15.3228 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:26:15.3343 Info Configuration initialized.
+2024-03-24 22:26:15.3462 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:28:23.6230 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:28:23.6411 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:28:23.6491 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:28:23.6610 Info Configuration initialized.
+2024-03-24 22:28:23.6725 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-24 22:33:28.5681 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-24 22:33:28.5874 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-24 22:33:28.5962 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-24 22:33:28.6099 Info Configuration initialized.
+2024-03-24 22:33:28.6229 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.

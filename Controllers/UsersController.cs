@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Finals.Dtos;
 using Finals.Models;
 using Finals.Services;
@@ -7,8 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Finals.Controllers;
 
+[ApiVersion(1.0)]
+[Route("api/[controller]")]
 [ApiController]
-[Route("/api/[controller]")]
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;

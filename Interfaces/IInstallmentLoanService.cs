@@ -6,4 +6,5 @@ namespace Finals.Interfaces;
 public interface IInstallmentLoanService
 {
    Task<Loan> CreateInstallmentLoan(InstallmentLoanRequestDto loanDto);
+   Task<InstallmentLoanDto> GetLoan(int id);
 }

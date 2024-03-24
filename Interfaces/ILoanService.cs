@@ -5,7 +5,6 @@ namespace Finals.Interfaces;
 
 public interface ILoanService
 {
-    Task<Loan> CreateLoan(LoanRequestDto loanDto);
     Task<LoanDto> GetLoan(int id);
     Task<LoansDto> GetAllLoans();
     Task<LoansDto> GetPendingLoans();

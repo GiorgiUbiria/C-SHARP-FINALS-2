@@ -10,10 +10,6 @@ public class InstallmentLoanRequestDtoValidator : AbstractValidator<InstallmentL
         RuleFor(x => x.ProductId)
             .NotNull().WithMessage("ProductId is required.");
         RuleFor(x => x.LoanPeriod)
-            .NotEmpty().IsInEnum().WithMessage("Invalid loan period");
-        RuleFor(x => x.LoanType)
-            .NotEmpty().IsInEnum().WithMessage("Invalid loan type");
-        RuleFor(x => x.LoanCurrency)
-            .NotEmpty().IsInEnum().WithMessage("Invalid currency");
+            .IsInEnum().WithMessage("Invalid loan period");
     } 
 }

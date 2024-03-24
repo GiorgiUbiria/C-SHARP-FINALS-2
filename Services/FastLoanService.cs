@@ -8,21 +8,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Finals.Services;
 
-public class InstallmentLoanService : IInstallmentLoanService
+public class FastLoanService : IFastLoanService
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly ILogger<LoanService> _logger;
     private readonly GetUserFromContext _getUserFromContext;
 
-    public InstallmentLoanService(ApplicationDbContext dbContext,
+    public FastLoanService(ApplicationDbContext dbContext,
         ILogger<LoanService> logger, GetUserFromContext getUserFromContext)
     {
         _dbContext = dbContext;
         _logger = logger;
         _getUserFromContext = getUserFromContext;
     }
-    
-    public async Task<Loan> CreateInstallmentLoan(InstallmentLoanRequestDto loanDto)
+
+    public async Task<Loan> CreateFastLoan(LoanRequestDto loanDto)
     {
         var user = await _getUserFromContext.GetUser();
         if (user == null)
@@ -35,27 +35,61 @@ public class InstallmentLoanService : IInstallmentLoanService
             throw new InvalidOperationException("User is blocked.");
         }
 
-        var product = await _dbContext.Products.FindAsync(loanDto.ProductId);
-        if (product == null)
+        decimal maxAmount = 0;
+        switch (loanDto.LoanPeriod)
         {
-            throw new InvalidOperationException("Product not found.");
+            case LoanPeriod.HalfYear:
+            case LoanPeriod.OneYear:
+                if (user.Salary >= 1000 && user.Salary < 1500)
+                {
+                    maxAmount = 2000;
+                }
+                else if (user.Salary >= 1500)
+                {
+                    maxAmount = 2000;
+                }
+
+                break;
+            case LoanPeriod.TwoYears:
+            case LoanPeriod.FiveYears:
+                if (user.Salary >= 1500 && user.Salary < 3500)
+                {
+                    maxAmount = 7500;
+                }
+                else if (user.Salary >= 3500)
+                {
+                    maxAmount = 7500;
+                }
+
+                break;
+            case LoanPeriod.TenYears:
+                if (user.Salary >= 3500)
+                {
+                    maxAmount = 20000;
+                }
+
+                break;
+            default:
+                throw new ArgumentException("Invalid loan type.");
         }
 
-        if (user.Salary < product.Price * 3)
+        if (loanDto.RequestedAmount > maxAmount)
         {
-            throw new InvalidOperationException("User's salary is insufficient to afford the selected product.");
+            throw new InvalidOperationException(
+                $"Requested loan amount exceeds the maximum allowed amount ({maxAmount}).");
         }
 
         var loan = new Loan
         {
-            RequstedAmount = (int)product.Price,
-            FinalAmount = (int)product.Price,
+            RequstedAmount = loanDto.RequestedAmount,
+            FinalAmount = loanDto.RequestedAmount +
+                          (loanDto.RequestedAmount * ((int)loanDto.LoanPeriod / 100)),
             LoanPeriod = loanDto.LoanPeriod,
-            ProductId = loanDto.ProductId,
-            LoanCurrency = Currency.GEL,
-            LoanType = LoanType.INSTALLMENT,
+            LoanCurrency = loanDto.LoanCurrency,
+            LoanType = loanDto.LoanType,
             LoanStatus = LoanStatus.PENDING,
-            Product = product,
+            ProductId = null,
+            Product = null,
             ApplicationUser = user
         };
 
@@ -65,7 +99,7 @@ public class InstallmentLoanService : IInstallmentLoanService
         return loan;
     }
     
-    public async Task<InstallmentLoanDto> GetLoan(int id)
+    public async Task<LoanDto> GetFastLoan(int id)
     {
         try
         {
@@ -85,16 +119,14 @@ public class InstallmentLoanService : IInstallmentLoanService
                 return null;
             }
 
-            var loanDto = new InstallmentLoanDto() 
+            var loanDto = new LoanDto
             {
                 RequestedAmount = loan.RequstedAmount,
                 FinalAmount = loan.FinalAmount,
                 LoanPeriod = loan.LoanPeriod,
                 LoanType = loan.LoanType,
                 LoanCurrency = loan.LoanCurrency,
-                LoanStatus = loan.LoanStatus,
-                ProductId = (int)loan.ProductId,
-                Product = loan?.Product
+                LoanStatus = loan.LoanStatus
             };
 
             _logger.LogInformation("Loan with ID {LoanId} retrieved successfully.", id);
