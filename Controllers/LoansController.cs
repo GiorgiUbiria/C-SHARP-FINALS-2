@@ -27,16 +27,16 @@ public class LoansController : ControllerBase
     {
         _logger.LogInformation("Attempting to retrieve all loans.");
 
-        var loanDtos = await _loanService.GetAllLoans();
+        var loansDto = await _loanService.GetAllLoans();
 
-        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        if (loansDto == null || loansDto.Loans.Count == 0)
         {
             _logger.LogInformation("No loans found.");
             return NoContent();
         }
 
         _logger.LogInformation("All loans retrieved successfully.");
-        return Ok(loanDtos);
+        return Ok(loansDto);
     }
 
     [HttpGet("{id:int}")]
@@ -163,16 +163,16 @@ public class LoansController : ControllerBase
     {
         _logger.LogInformation($"Attempting to retrieve declined loans.");
 
-        var loanDtos = await _loanService.GetDeclinedLoans();
+        var loansDto = await _loanService.GetDeclinedLoans();
 
-        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        if (loansDto == null || loansDto.Loans.Count == 0)
         {
             _logger.LogInformation("No declined loans found.");
             return NoContent();
         }
 
         _logger.LogInformation($"Declined loans retrieved successfully.");
-        return Ok(loanDtos);
+        return Ok(loansDto);
     }
 
     [HttpGet]
@@ -182,15 +182,15 @@ public class LoansController : ControllerBase
     {
         _logger.LogInformation($"Attempting to retrieve accepted loans.");
 
-        var loanDtos = await _loanService.GetAcceptedLoans();
+        var loansDto = await _loanService.GetAcceptedLoans();
 
-        if (loanDtos == null || loanDtos.Loans.Count == 0)
+        if (loansDto == null || loansDto.Loans.Count == 0)
         {
             _logger.LogInformation("No accepted loans found.");
             return NoContent();
         }
 
         _logger.LogInformation($"Accepted loans retrieved successfully.");
-        return Ok(loanDtos);
+        return Ok(loansDto);
     }
 }
