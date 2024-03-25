@@ -10,14 +10,11 @@ public class ProductService : IProductService
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly ILogger<ProductService> _logger;
-    private readonly GetUserFromContext _getUserFromContext;
 
-    public ProductService(ApplicationDbContext dbContext, ILogger<ProductService> logger,
-        GetUserFromContext getUserFromContext)
+    public ProductService(ApplicationDbContext dbContext, ILogger<ProductService> logger)
     {
         _logger = logger;
         _dbContext = dbContext;
-        _getUserFromContext = getUserFromContext;
     }
 
     public async Task<ProductDto> GetProduct(int id)
@@ -25,13 +22,6 @@ public class ProductService : IProductService
         try
         {
             _logger.LogInformation("Attempting to retrieve product with ID: {ProductId}", id);
-
-            var user = await _getUserFromContext.GetUser();
-            if (user == null)
-            {
-                _logger.LogInformation("User not found.");
-                return null;
-            }
 
             var product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
             if (product == null)
@@ -64,13 +54,6 @@ public class ProductService : IProductService
         {
             _logger.LogInformation("Attempting to retrieve all products.");
 
-            var user = await _getUserFromContext.GetUser();
-            if (user == null)
-            {
-                _logger.LogInformation("User not found.");
-                return null;
-            }
-
             var products = _dbContext.Products.AsQueryable();
             if (products == null || !products.Any())
             {
@@ -78,19 +61,16 @@ public class ProductService : IProductService
                 return null;
             }
 
-            var productsDto = new ProductsDto();
-            
-            foreach (var product in products)
+            var productsDto = new ProductsDto
             {
-                var productDto = new ProductDto() 
+                Products = products.Select(product => new ProductDto
                 {
                     Id = product.Id,
                     Price = product.Price,
                     Title = product.Title
-                };
+                }).ToList()
+            };
 
-                productsDto.Products.Add(productDto);
-            }
             _logger.LogInformation("All products retrieved successfully.");
             return productsDto;
         }

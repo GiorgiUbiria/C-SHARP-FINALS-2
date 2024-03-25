@@ -63,6 +63,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILoanService, LoanService>();
 builder.Services.AddScoped<IFastLoanService, FastLoanService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IInstallmentLoanService, InstallmentLoanService>();
 builder.Services.AddScoped<GetUserFromContext>();
 
