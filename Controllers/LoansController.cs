@@ -57,7 +57,7 @@ public class LoansController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Accountant")]
+    [Authorize]
     public async Task<IActionResult> DeleteLoan(int id)
     {
         _logger.LogInformation("Attempting to delete loan with ID: {LoanId}", id);
