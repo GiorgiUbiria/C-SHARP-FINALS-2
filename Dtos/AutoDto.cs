@@ -1,6 +1,6 @@
 namespace Finals.Dtos;
 
-public class CarDto
+public class AutoDto
 {
     public required int Id { get; set; }
 

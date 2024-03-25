@@ -2,9 +2,9 @@ using Finals.Enums;
 
 namespace Finals.Dtos;
 
-public class CarLoanRequestDto
+public class AutoLoanRequestDto
 {
-    public int CarId { get; set; } = 0;
+    public string Model { get; set; } = string.Empty;
 
     public LoanPeriod LoanPeriod { get; set; } = LoanPeriod.OneYear;
 }

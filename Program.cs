@@ -64,6 +64,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILoanService, LoanService>();
 builder.Services.AddScoped<IFastLoanService, FastLoanService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<IGptService, GptService>();
+builder.Services.AddScoped<IAutoLoanService, AutoLoanService>();
 builder.Services.AddScoped<IInstallmentLoanService, InstallmentLoanService>();
 builder.Services.AddScoped<GetUserFromContext>();
 
