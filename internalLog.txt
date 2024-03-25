@@ -960,3 +960,13 @@ no such table: Logs
 2024-03-25 13:37:47.5245 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
 2024-03-25 13:37:47.5475 Info Configuration initialized.
 2024-03-25 13:37:47.5699 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-25 14:05:36.7496 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-25 14:05:36.7783 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-25 14:05:36.7889 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-25 14:05:36.8055 Info Configuration initialized.
+2024-03-25 14:05:36.8227 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-25 14:06:00.8359 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-25 14:06:00.8648 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-25 14:06:00.8753 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-25 14:06:00.8917 Info Configuration initialized.
+2024-03-25 14:06:00.9089 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.

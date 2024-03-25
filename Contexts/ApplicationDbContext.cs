@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityUserContext<ApplicationUser>
     public DbSet<Loan> Loans => Set<Loan>();
     public DbSet<Log> Logs => Set<Log>();
     public DbSet<Product> Products => Set<Product>();
+    public DbSet<Car> Cars => Set<Car>();
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILogger<ApplicationDbContext> logger,
         IConfiguration configuration) : base(options)
@@ -52,14 +53,25 @@ public class ApplicationDbContext : IdentityUserContext<ApplicationUser>
                 .IsRequired();
             
             modelBuilder.Entity<Loan>()
+                .ToTable("Loan")
                 .HasOne(l => l.Product)
-                .WithOne() // No navigation property on Product side
-                .HasForeignKey<Loan>(l => l.ProductId) // Explicitly specify the foreign key
+                .WithOne()
+                .HasForeignKey<Loan>(l => l.ProductId)
                 .IsRequired(false);
-            
-            modelBuilder.Entity<Loan>()
-                .HasCheckConstraint("CK_Loan_Product_For_Installment", "((LoanType = 2 AND ProductId IS NOT NULL) OR LoanType != 2)");
 
+            modelBuilder.Entity<Loan>()
+                .ToTable("Loan")
+                .HasOne(l => l.Car)
+                .WithOne()
+                .HasForeignKey<Loan>(l => l.CarId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Loan>()
+                .ToTable("Loan", tbl => tbl.HasCheckConstraint("CK_Loan_Product_For_Installment", "((LoanType = 2 AND ProductId IS NOT NULL) OR LoanType != 2)"));
+
+            modelBuilder.Entity<Loan>()
+                .ToTable("Loan", tbl => tbl.HasCheckConstraint("CK_Loan_Car_For_CarLoan", "((LoanType = 1 AND CarId IS NOT NULL) OR LoanType != 1)"));
+            
             modelBuilder.Entity<ApplicationUser>().HasData(
                 new ApplicationUser
                 {

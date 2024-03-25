@@ -2,7 +2,7 @@ namespace Finals.Dtos;
 
 public class ExternalProductDto
 {
-    public int id { get; set; }
-    public string title { get; set; }
-    public decimal price { get; set; }
+    public required int id { get; set; }
+    public required string title { get; set; }
+    public required decimal price { get; set; }
 }

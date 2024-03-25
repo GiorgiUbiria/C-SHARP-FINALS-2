@@ -52,7 +52,9 @@ public class LoanService : ILoanService
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
                 ProductId = (int)loan.ProductId,
-                Product = loan.Product
+                Product = loan.Product,
+                CarId = (int)loan.CarId,
+                Car = loan.Car
             };
 
             _logger.LogInformation("Loan with ID {LoanId} retrieved successfully.", id);
@@ -108,7 +110,9 @@ public class LoanService : ILoanService
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
                 ProductId = (int)loan.ProductId,
-                Product = loan.Product
+                Product = loan.Product,
+                CarId = (int)loan.CarId,
+                Car = loan.Car
             }).ToList();
 
             _logger.LogInformation("All loans retrieved successfully.");
@@ -164,7 +168,9 @@ public class LoanService : ILoanService
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
                 ProductId = (int)loan.ProductId,
-                Product = loan.Product
+                Product = loan.Product,
+                CarId = (int)loan.CarId,
+                Car = loan.Car
             }).ToList();
 
             _logger.LogInformation("Pending loans retrieved successfully.");
@@ -220,7 +226,9 @@ public class LoanService : ILoanService
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
                 ProductId = (int)loan.ProductId,
-                Product = loan.Product
+                Product = loan.Product,
+                CarId = (int)loan.CarId,
+                Car = loan.Car
             }).ToList();
 
             _logger.LogInformation("Accepted loans retrieved successfully.");
@@ -276,7 +284,9 @@ public class LoanService : ILoanService
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
                 ProductId = (int)loan.ProductId,
-                Product = loan.Product
+                Product = loan.Product,
+                CarId = (int)loan.CarId,
+                Car = loan.Car
             }).ToList();
 
             _logger.LogInformation("Declined loans retrieved successfully.");

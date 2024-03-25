@@ -19,4 +19,8 @@ public class LoanDto
     public required int ProductId { get; set; }
     
     public required Product Product { get; set; }
+    
+    public required int CarId { get; set; }
+    
+    public required Car Car { get; set; }
 }
