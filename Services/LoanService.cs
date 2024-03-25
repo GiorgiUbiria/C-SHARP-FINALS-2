@@ -98,23 +98,18 @@ public class LoanService : ILoanService
                 return loansDto;
             }
 
-            foreach (var loan in loansFromDb)
+            loansDto.Loans = loansFromDb.Select(loan => new LoanDto
             {
-                var loanDto = new LoanDto
-                {
-                    Id = loan.Id,
-                    RequestedAmount = loan.RequstedAmount,
-                    FinalAmount = loan.FinalAmount,
-                    LoanPeriod = loan.LoanPeriod,
-                    LoanType = loan.LoanType,
-                    LoanCurrency = loan.LoanCurrency,
-                    LoanStatus = loan.LoanStatus,
-                    ProductId = (int)loan.ProductId,
-                    Product = loan.Product
-                };
-
-                loansDto.Loans.Add(loanDto);
-            }
+                Id = loan.Id,
+                RequestedAmount = loan.RequstedAmount,
+                FinalAmount = loan.FinalAmount,
+                LoanPeriod = loan.LoanPeriod,
+                LoanType = loan.LoanType,
+                LoanCurrency = loan.LoanCurrency,
+                LoanStatus = loan.LoanStatus,
+                ProductId = (int)loan.ProductId,
+                Product = loan.Product
+            }).ToList();
 
             _logger.LogInformation("All loans retrieved successfully.");
             return loansDto;
@@ -159,23 +154,18 @@ public class LoanService : ILoanService
                 return loansDto;
             }
 
-            foreach (var loan in loansFromDb)
+            loansDto.Loans = loansFromDb.Select(loan => new LoanDto
             {
-                var loanDto = new LoanDto
-                {
-                    Id = loan.Id,
-                    RequestedAmount = loan.RequstedAmount,
-                    FinalAmount = loan.FinalAmount,
-                    LoanPeriod = loan.LoanPeriod,
-                    LoanType = loan.LoanType,
-                    LoanCurrency = loan.LoanCurrency,
-                    LoanStatus = loan.LoanStatus,
-                    ProductId = (int)loan.ProductId,
-                    Product = loan.Product
-                };
-
-                loansDto.Loans.Add(loanDto);
-            }
+                Id = loan.Id,
+                RequestedAmount = loan.RequstedAmount,
+                FinalAmount = loan.FinalAmount,
+                LoanPeriod = loan.LoanPeriod,
+                LoanType = loan.LoanType,
+                LoanCurrency = loan.LoanCurrency,
+                LoanStatus = loan.LoanStatus,
+                ProductId = (int)loan.ProductId,
+                Product = loan.Product
+            }).ToList();
 
             _logger.LogInformation("Pending loans retrieved successfully.");
             return loansDto;
@@ -220,23 +210,18 @@ public class LoanService : ILoanService
                 return loansDto;
             }
 
-            foreach (var loan in loansFromDb)
+            loansDto.Loans = loansFromDb.Select(loan => new LoanDto
             {
-                var loanDto = new LoanDto
-                {
-                    Id = loan.Id,
-                    RequestedAmount = loan.RequstedAmount,
-                    FinalAmount = loan.FinalAmount,
-                    LoanPeriod = loan.LoanPeriod,
-                    LoanType = loan.LoanType,
-                    LoanCurrency = loan.LoanCurrency,
-                    LoanStatus = loan.LoanStatus,
-                    ProductId = (int)loan.ProductId,
-                    Product = loan.Product
-                };
-
-                loansDto.Loans.Add(loanDto);
-            }
+                Id = loan.Id,
+                RequestedAmount = loan.RequstedAmount,
+                FinalAmount = loan.FinalAmount,
+                LoanPeriod = loan.LoanPeriod,
+                LoanType = loan.LoanType,
+                LoanCurrency = loan.LoanCurrency,
+                LoanStatus = loan.LoanStatus,
+                ProductId = (int)loan.ProductId,
+                Product = loan.Product
+            }).ToList();
 
             _logger.LogInformation("Accepted loans retrieved successfully.");
             return loansDto;
@@ -281,23 +266,18 @@ public class LoanService : ILoanService
                 return loansDto;
             }
 
-            foreach (var loan in loansFromDb)
+            loansDto.Loans = loansFromDb.Select(loan => new LoanDto
             {
-                var loanDto = new LoanDto
-                {
-                    Id = loan.Id,
-                    RequestedAmount = loan.RequstedAmount,
-                    FinalAmount = loan.FinalAmount,
-                    LoanPeriod = loan.LoanPeriod,
-                    LoanType = loan.LoanType,
-                    LoanCurrency = loan.LoanCurrency,
-                    LoanStatus = loan.LoanStatus,
-                    ProductId = (int)loan.ProductId,
-                    Product = loan.Product
-                };
-
-                loansDto.Loans.Add(loanDto);
-            }
+                Id = loan.Id,
+                RequestedAmount = loan.RequstedAmount,
+                FinalAmount = loan.FinalAmount,
+                LoanPeriod = loan.LoanPeriod,
+                LoanType = loan.LoanType,
+                LoanCurrency = loan.LoanCurrency,
+                LoanStatus = loan.LoanStatus,
+                ProductId = (int)loan.ProductId,
+                Product = loan.Product
+            }).ToList();
 
             _logger.LogInformation("Declined loans retrieved successfully.");
             return loansDto;
