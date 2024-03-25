@@ -8,9 +8,9 @@ public class GptService : IGptService
 {
     private readonly string _apiKey;
 
-    public GptService()
+    public GptService(IConfiguration configuration)
     {
-        _apiKey = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("OpenAI")["Key"];
+        _apiKey = configuration.GetValue<string>("OPENAI_API_KEY"); 
     }
 
     public async Task<decimal> GetCarPriceAsync(string model)

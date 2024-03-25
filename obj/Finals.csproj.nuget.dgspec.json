@@ -42,6 +42,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "DotNetEnv": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[11.9.0, )"
