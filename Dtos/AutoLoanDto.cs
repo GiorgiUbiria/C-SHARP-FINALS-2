@@ -3,7 +3,7 @@ using Finals.Models;
 
 namespace Finals.Dtos;
 
-public class CarLoanDto
+public class AutoLoanDto
 {
     public required int Id { get; set; }
 

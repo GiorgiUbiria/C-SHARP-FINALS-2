@@ -1,5 +1,4 @@
 using Finals.Dtos;
-using Finals.Enums;
 using FluentValidation;
 
 namespace Finals.Validators;
