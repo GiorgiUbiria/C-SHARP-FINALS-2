@@ -83,6 +83,7 @@ public class FastLoanService : IFastLoanService
         {
             RequstedAmount = fastLoanDto.RequestedAmount,
             FinalAmount = Helpers.LoanCalculator.CalculateFinalAmount(fastLoanDto.RequestedAmount, fastLoanDto.LoanPeriod),
+            AmountLeft = Helpers.LoanCalculator.CalculateFinalAmount(fastLoanDto.RequestedAmount, fastLoanDto.LoanPeriod),
             LoanPeriod = fastLoanDto.LoanPeriod,
             LoanCurrency = fastLoanDto.LoanCurrency,
             LoanType = fastLoanDto.LoanType,
@@ -133,6 +134,7 @@ public class FastLoanService : IFastLoanService
             {
                 loan.RequstedAmount = fastLoanDto.RequestedAmount;
                 loan.FinalAmount = Helpers.LoanCalculator.CalculateFinalAmount(fastLoanDto.RequestedAmount, fastLoanDto.LoanPeriod);
+                loan.AmountLeft = Helpers.LoanCalculator.CalculateFinalAmount(fastLoanDto.RequestedAmount, fastLoanDto.LoanPeriod);
                 loan.LoanPeriod = fastLoanDto.LoanPeriod;
                 loan.LoanCurrency = fastLoanDto.LoanCurrency;
                 await _dbContext.SaveChangesAsync();
@@ -177,6 +179,7 @@ public class FastLoanService : IFastLoanService
                 Id = loan.Id,
                 RequestedAmount = loan.RequstedAmount,
                 FinalAmount = loan.FinalAmount,
+                AmountLeft = loan.AmountLeft,
                 LoanPeriod = loan.LoanPeriod,
                 LoanType = loan.LoanType,
                 LoanCurrency = loan.LoanCurrency,

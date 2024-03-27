@@ -55,6 +55,7 @@ public class InstallmentLoanService : IInstallmentLoanService
         {
             RequstedAmount = (int)product.Price,
             FinalAmount = Helpers.LoanCalculator.CalculateFinalAmount((int)product.Price, loanDto.LoanPeriod),
+            AmountLeft = Helpers.LoanCalculator.CalculateFinalAmount((int)product.Price, loanDto.LoanPeriod),
             LoanPeriod = loanDto.LoanPeriod,
             ProductId = loanDto.ProductId,
             LoanCurrency = Currency.GEL,
@@ -119,6 +120,7 @@ public class InstallmentLoanService : IInstallmentLoanService
                 loan.ProductId = installmentLoanDto.ProductId;
                 loan.RequstedAmount = (int)product.Price;
                 loan.FinalAmount = Helpers.LoanCalculator.CalculateFinalAmount((int)product.Price, installmentLoanDto.LoanPeriod);
+                loan.AmountLeft = Helpers.LoanCalculator.CalculateFinalAmount((int)product.Price, installmentLoanDto.LoanPeriod);
                 loan.Product = product;
                     await _dbContext.SaveChangesAsync();
 

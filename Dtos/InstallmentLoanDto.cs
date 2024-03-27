@@ -6,7 +6,8 @@ namespace Finals.Dtos;
 public class InstallmentLoanDto
 {
     public required int Id { get; set; }
-    public required int RequestedAmount { get; set; } = 300;
+    
+    public required decimal RequestedAmount { get; set; } = 300;
     
     public required decimal FinalAmount { get; set; } = 300 + (300 * ((decimal)LoanPeriod.OneYear / 100));
     

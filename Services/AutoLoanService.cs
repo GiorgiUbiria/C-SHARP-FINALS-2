@@ -58,6 +58,7 @@ public class AutoLoanService : IAutoLoanService
         {
             RequstedAmount = (int)price,
             FinalAmount = Helpers.LoanCalculator.CalculateFinalAmount((int)price, autoLoanRequestDto.LoanPeriod),
+            AmountLeft = Helpers.LoanCalculator.CalculateFinalAmount((int)price, autoLoanRequestDto.LoanPeriod),
             LoanPeriod = autoLoanRequestDto.LoanPeriod,
             LoanCurrency = Currency.GEL,
             LoanType = LoanType.AUTO,
@@ -140,6 +141,8 @@ public class AutoLoanService : IAutoLoanService
                 loan.RequstedAmount = (int)price;
                 loan.CarId = car.Id;
                 loan.FinalAmount =
+                    Helpers.LoanCalculator.CalculateFinalAmount((int)price, autoLoanRequestDto.LoanPeriod);
+                loan.AmountLeft =
                     Helpers.LoanCalculator.CalculateFinalAmount((int)price, autoLoanRequestDto.LoanPeriod);
                 loan.Car = car;
                 await _dbContext.SaveChangesAsync();

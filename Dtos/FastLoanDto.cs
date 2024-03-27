@@ -6,9 +6,11 @@ public class FastLoanDto
 {
         public required int Id { get; set; }
         
-        public required int RequestedAmount { get; set; } = 300;
+        public required decimal RequestedAmount { get; set; } = 300;
     
-        public required decimal FinalAmount { get; set; } = 300 + (300 * ((decimal)LoanPeriod.OneYear / 100));
+        public required decimal FinalAmount { get; set; } = 300;
+
+        public required decimal AmountLeft { get; set; } = 300;
     
         public required LoanPeriod LoanPeriod { get; set; } = LoanPeriod.OneYear;
 

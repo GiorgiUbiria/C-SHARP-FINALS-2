@@ -49,12 +49,13 @@ public class LoanService : ILoanService
                     Id = loan.Id,
                     RequestedAmount = loan.RequstedAmount,
                     FinalAmount = loan.FinalAmount,
+                    AmountLeft = loan.AmountLeft,
                     LoanPeriod = loan.LoanPeriod,
                     LoanType = loan.LoanType,
                     LoanCurrency = loan.LoanCurrency,
                     LoanStatus = loan.LoanStatus,
-                    ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
-                    CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
+                    ProductId = loan.ProductId.HasValue ? loan.ProductId.Value : default,
+                    CarId = loan.CarId.HasValue ? loan.CarId.Value : default,
                     Product = loan.Product,
                     Car = loan.Car,
                     UserEmail = loan.ApplicationUserEmail
@@ -79,12 +80,13 @@ public class LoanService : ILoanService
                     Id = loan.Id,
                     RequestedAmount = loan.RequstedAmount,
                     FinalAmount = loan.FinalAmount,
+                    AmountLeft = loan.AmountLeft,
                     LoanPeriod = loan.LoanPeriod,
                     LoanType = loan.LoanType,
                     LoanCurrency = loan.LoanCurrency,
                     LoanStatus = loan.LoanStatus,
-                    ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
-                    CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
+                    ProductId = loan.ProductId.HasValue ? loan.ProductId.Value : default,
+                    CarId = loan.CarId.HasValue ? loan.CarId.Value : default,
                     Product = loan.Product,
                     Car = loan.Car,
                     UserEmail = loan.ApplicationUserEmail
@@ -144,12 +146,13 @@ public class LoanService : ILoanService
                 Id = loan.Id,
                 RequestedAmount = loan.RequstedAmount,
                 FinalAmount = loan.FinalAmount,
+                AmountLeft = loan.AmountLeft,
                 LoanPeriod = loan.LoanPeriod,
                 LoanType = loan.LoanType,
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
-                ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
-                CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
+                ProductId = loan.ProductId.HasValue ? loan.ProductId.Value : default,
+                CarId = loan.CarId.HasValue ? loan.CarId.Value : default,
                 Product = loan.Product,
                 Car = loan.Car,
                 UserEmail = loan.ApplicationUserEmail
@@ -203,12 +206,13 @@ public class LoanService : ILoanService
                 Id = loan.Id,
                 RequestedAmount = loan.RequstedAmount,
                 FinalAmount = loan.FinalAmount,
+                AmountLeft = loan.AmountLeft,
                 LoanPeriod = loan.LoanPeriod,
                 LoanType = loan.LoanType,
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
-                ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
-                CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
+                ProductId = loan.ProductId.HasValue ? loan.ProductId.Value : default,
+                CarId = loan.CarId.HasValue ? loan.CarId.Value : default,
                 Product = loan.Product,
                 Car = loan.Car,
                 UserEmail = loan.ApplicationUserEmail
@@ -262,15 +266,16 @@ public class LoanService : ILoanService
                 Id = loan.Id,
                 RequestedAmount = loan.RequstedAmount,
                 FinalAmount = loan.FinalAmount,
+                AmountLeft = loan.AmountLeft,
                 LoanPeriod = loan.LoanPeriod,
                 LoanType = loan.LoanType,
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
-                ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
-                CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
+                ProductId = loan.ProductId.HasValue ? loan.ProductId.Value : default,
+                CarId = loan.CarId.HasValue ? loan.CarId.Value : default,
                 Product = loan.Product,
                 Car = loan.Car,
-                UserEmail = loan.ApplicationUserEmail 
+                UserEmail = loan.ApplicationUserEmail
             }).ToList();
 
             _logger.LogInformation("Accepted loans retrieved successfully.");
@@ -321,15 +326,16 @@ public class LoanService : ILoanService
                 Id = loan.Id,
                 RequestedAmount = loan.RequstedAmount,
                 FinalAmount = loan.FinalAmount,
+                AmountLeft = loan.AmountLeft,
                 LoanPeriod = loan.LoanPeriod,
                 LoanType = loan.LoanType,
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
-                ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
-                CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
+                ProductId = loan.ProductId.HasValue ? loan.ProductId.Value : default,
+                CarId = loan.CarId.HasValue ? loan.CarId.Value : default,
                 Product = loan.Product,
                 Car = loan.Car,
-                UserEmail = loan.ApplicationUserEmail 
+                UserEmail = loan.ApplicationUserEmail
             }).ToList();
 
             _logger.LogInformation("Declined loans retrieved successfully.");
@@ -475,6 +481,44 @@ public class LoanService : ILoanService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error occurred while declining loan with ID: {LoanId}. Error: {ErrorMessage}", id,
+                ex.Message);
+            throw;
+        }
+    }
+
+    public async Task<bool> PayOneMonthDue(int loanId)
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to pay one month's due for loan with ID: {LoanId}", loanId);
+
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                return false;
+            }
+
+            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l =>
+                l.Id == loanId && l.ApplicationUserId == user.Id && l.LoanStatus == LoanStatus.ACCEPTED);
+
+            if (loan == null)
+            {
+                _logger.LogInformation(
+                    "Loan not found, or it does not belong to the current user, or its status is not accepted.");
+                return false;
+            }
+
+            // TODO: Deduct from amount left
+            double dueAmount = (double)loan.FinalAmount / (int)loan.LoanPeriod;
+
+            _logger.LogInformation("One month's due paid successfully for loan with ID: {LoanId}", loanId);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex,
+                "Error occurred while paying one month's due for loan with ID: {LoanId}. Error: {ErrorMessage}", loanId,
                 ex.Message);
             throw;
         }
