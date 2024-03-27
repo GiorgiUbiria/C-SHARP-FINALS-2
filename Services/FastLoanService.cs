@@ -82,8 +82,7 @@ public class FastLoanService : IFastLoanService
         var loan = new Loan
         {
             RequstedAmount = fastLoanDto.RequestedAmount,
-            FinalAmount = fastLoanDto.RequestedAmount +
-                          (fastLoanDto.RequestedAmount * ((int)fastLoanDto.LoanPeriod / 100)),
+            FinalAmount = Helpers.LoanCalculator.CalculateFinalAmount(fastLoanDto.RequestedAmount, fastLoanDto.LoanPeriod),
             LoanPeriod = fastLoanDto.LoanPeriod,
             LoanCurrency = fastLoanDto.LoanCurrency,
             LoanType = fastLoanDto.LoanType,
@@ -129,11 +128,9 @@ public class FastLoanService : IFastLoanService
             if (user.Role == Role.Accountant || loan.LoanStatus == LoanStatus.PENDING)
             {
                 loan.RequstedAmount = fastLoanDto.RequestedAmount;
-                loan.FinalAmount = fastLoanDto.RequestedAmount +
-                                   (fastLoanDto.RequestedAmount * ((int)fastLoanDto.LoanPeriod / 100));
+                loan.FinalAmount = Helpers.LoanCalculator.CalculateFinalAmount(fastLoanDto.RequestedAmount, fastLoanDto.LoanPeriod);
                 loan.LoanPeriod = fastLoanDto.LoanPeriod;
                 loan.LoanCurrency = fastLoanDto.LoanCurrency;
-                loan.LoanType = fastLoanDto.LoanType;
                 await _dbContext.SaveChangesAsync();
 
                 _logger.LogInformation("Loan modified successfully.");
