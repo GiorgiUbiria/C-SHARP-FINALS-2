@@ -6,4 +6,5 @@ namespace Finals.Interfaces;
 public interface IAutoLoanService
 {
     Task<(Car car, Loan loan)> GetCarAndLoanAsync(AutoLoanRequestDto autoLoanRequestDto);
+    Task<Loan> ModifyAutoLoan(int id, AutoLoanRequestDto autoLoanRequestDto);
 }

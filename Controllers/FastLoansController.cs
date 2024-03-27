@@ -55,7 +55,7 @@ public class FastLoansController : ControllerBase
     }
     
     [HttpPut("{id}")]
-    [Authorize(Roles = "Customer, Accountant")]
+    [Authorize]
     public async Task<IActionResult> ModifyLoan(int id, [FromBody] FastLoanRequestDto fastLoanDto)
     {
         _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);

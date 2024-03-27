@@ -14,7 +14,8 @@ public class AutoLoansController : ControllerBase
     private readonly ILogger<AutoLoansController> _logger;
     private readonly IValidator<AutoLoanRequestDto> _autoLoanValidator;
 
-    public AutoLoansController(IAutoLoanService autoLoanService, ILogger<AutoLoansController> logger, IValidator<AutoLoanRequestDto> autoLoanValidator)
+    public AutoLoansController(IAutoLoanService autoLoanService, ILogger<AutoLoansController> logger,
+        IValidator<AutoLoanRequestDto> autoLoanValidator)
     {
         _autoLoanService = autoLoanService;
         _logger = logger;
@@ -34,7 +35,7 @@ public class AutoLoansController : ControllerBase
             _logger.LogInformation("Form Data is Invalid.");
             return BadRequest(validationResult.Errors);
         }
-        
+
         try
         {
             var autoLoan = await _autoLoanService.GetCarAndLoanAsync(autoLoanRequestDto);
@@ -44,6 +45,33 @@ public class AutoLoansController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error creating an auto loan: {ErrorMessage}", ex.Message);
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<IActionResult> ModifyLoan(int id, [FromBody] AutoLoanRequestDto autoLoanRequestDto)
+    {
+        _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
+
+        var validationResult = await _autoLoanValidator.ValidateAsync(autoLoanRequestDto);
+
+        if (!validationResult.IsValid)
+        {
+            _logger.LogInformation("Form Data is Invalid.");
+            return BadRequest(validationResult.Errors);
+        }
+
+        try
+        {
+            var modifiedLoanDto = await _autoLoanService.ModifyAutoLoan(id, autoLoanRequestDto);
+            _logger.LogInformation("Loan with ID {LoanId} modified successfully.", id);
+            return Ok(modifiedLoanDto);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Error modifying loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
             return BadRequest(ex.Message);
         }
     }

@@ -55,6 +55,33 @@ public class InstallmentLoansController : ControllerBase
         }
     }
 
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<IActionResult> ModifyLoan(int id, [FromBody] InstallmentLoanRequestDto installmentLoanRequestDto)
+    {
+        _logger.LogInformation("Attempting to modify loan with ID: {LoanId}", id);
+
+        var validationResult = await _installmentLoanValidator.ValidateAsync(installmentLoanRequestDto);
+
+        if (!validationResult.IsValid)
+        {
+            _logger.LogInformation("Form Data is Invalid.");
+            return BadRequest(validationResult.Errors);
+        }
+
+        try
+        {
+            var modifiedLoanDto = await _installmentLoanService.ModifyInstallmentLoan(id, installmentLoanRequestDto);
+            _logger.LogInformation("Loan with ID {LoanId} modified successfully.", id);
+            return Ok(modifiedLoanDto);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Error modifying loan with ID {LoanId}: {ErrorMessage}", id, ex.Message);
+            return BadRequest(ex.Message);
+        }
+    }
+
     [NonAction]
     public async Task<ActionResult<InstallmentLoanDto>> GetInstallmentLoan(int id)
     {
