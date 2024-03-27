@@ -1085,3 +1085,13 @@ no such table: Logs
 2024-03-27 19:39:41.9728 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
 2024-03-27 19:39:41.9978 Info Configuration initialized.
 2024-03-27 19:39:42.0199 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-27 20:27:08.4443 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-27 20:27:08.4681 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-27 20:27:08.4784 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-27 20:27:08.4948 Info Configuration initialized.
+2024-03-27 20:27:08.5106 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
+2024-03-27 20:39:33.6681 Info Registered target NLog.Targets.DatabaseTarget(Name=database)
+2024-03-27 20:39:33.6858 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-27 20:39:33.6934 Info Validating config: TargetNames=database, ConfigItems=32, FilePath=/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/NLog.config
+2024-03-27 20:39:33.7054 Info Configuration initialized.
+2024-03-27 20:39:33.7170 Warn Logger: Microsoft.Hosting.Lifetime configured with duplicate output to target: DatabaseTarget(Name=database). LoggingRule with NamePattern='Microsoft.Hosting.Lifetime' and Level=Info has been skipped.
