@@ -41,6 +41,11 @@ public class InstallmentLoanService : IInstallmentLoanService
             throw new InvalidOperationException("Product not found.");
         }
 
+        if (loanDto.LoanPeriod == LoanPeriod.FiveYears || loanDto.LoanPeriod == LoanPeriod.TenYears)
+        {
+            throw new InvalidOperationException("Installment loan can't be longer than two years.");
+        }
+
         if (user.Salary < product.Price * 3)
         {
             throw new InvalidOperationException("User's salary is insufficient to afford the selected product.");

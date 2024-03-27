@@ -33,6 +33,11 @@ public class AutoLoanService : IAutoLoanService
 
         decimal price = await _gptService.GetCarPriceAsync(autoLoanRequestDto.Model);
 
+        if (autoLoanRequestDto.LoanPeriod != LoanPeriod.TenYears)
+        {
+            throw new InvalidOperationException("Auto loan can only be of length - 10 years.");
+        }
+        
         if (price > user.Salary * 10)
         {
             throw new InvalidOperationException(
