@@ -24,6 +24,7 @@ public class AutoLoansController : ControllerBase
 
     [HttpPost]
     [Authorize]
+    [Route("new")]
     public async Task<IActionResult> CreateAutoLoan([FromBody] AutoLoanRequestDto autoLoanRequestDto)
     {
         _logger.LogInformation("Attempting to create a new auto loan.");

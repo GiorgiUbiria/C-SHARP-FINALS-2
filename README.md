@@ -3,8 +3,9 @@
 - **GET** - */api/products/**{id}*** - **WORKS** - { JSON } - Auth No, Forbidden No
 
 # Users 
-- *TEST USER EMAIL 1: gulo@mail.ru/Gulordava@123* 
-- *TEST USER EMAIL 2: gulordava@gmail.com/Gulordava@123*
+- *TEST USER EMAIL 1: gulordava@gmail.com/Gulordava@123 - 1.5k Salary*
+- *TEST USER EMAIL 2: antique@yahoo.com/Antique@123 - 300k Salary*
+- *TEST USER EMAIL 3: accountant@test.com/Accountant@123 - 10k Salary*
 - **GET** - */api/users/ - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
 - **GET** - */api/users/me - **WORKS*** - { JSON } - Auth Yes, Forbidden for others,
 - **POST** - */api/users/register* - **WORKS** - { JSON } - Auth No, Forbidden No,
@@ -21,4 +22,16 @@
 - **GET** - */api/loans/accepted - **WORKS*** - [ ARR { JSON } ] - Auth Yes, Forbidden Partially,
 - **POST** - */api/loans/{id}/accept - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
 - **POST** - */api/loans/{id}/decline - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
-- **DELETE** - */api/loans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially,
+- **DELETE** - */api/loans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
+
+#InstallmentLoans
+- **POST** - */api/installmentloans/new-installment - **WORKS*** - { JSON } - Auth Yes, Forbidden No,
+- **PATCH** - */api/installmentloans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
+
+#FastLoans
+- **POST** - */api/fastloans/new-fast - **WORKS*** - { JSON } - Auth Yes, Forbidden No,
+- **PATCH** - */api/fastloans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
+ 
+#AutoLoans
+- **POST** - */api/autoloans/new-auto - **WORKS*** - { JSON } - Auth Yes, Forbidden No,
+- **PATCH** - */api/autoloans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially

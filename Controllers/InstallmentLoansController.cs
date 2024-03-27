@@ -28,7 +28,7 @@ public class InstallmentLoansController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    [Route("new-installment")]
+    [Route("new")]
     public async Task<ActionResult<Loan>> CreateInstallmentLoan([FromBody] InstallmentLoanRequestDto loanDto)
     {
         _logger.LogInformation("Attempting to create a new installment loan.");

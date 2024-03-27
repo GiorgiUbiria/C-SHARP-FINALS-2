@@ -27,7 +27,7 @@ public class FastLoansController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    [Route("new-fast")]
+    [Route("new")]
     public async Task<ActionResult<Loan>> CreateFastLoan([FromBody] FastLoanRequestDto fastLoanDto)
     {
         _logger.LogInformation("Attempting to create a new fast loan.");

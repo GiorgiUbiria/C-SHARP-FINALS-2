@@ -10,7 +10,7 @@ public class GptService : IGptService
 
     public GptService(IConfiguration configuration)
     {
-        _apiKey = configuration.GetValue<string>("OPENAI_API_KEY"); 
+        _apiKey = configuration.GetValue<string>("OpenAI:Key");
     }
 
     public async Task<decimal> GetCarPriceAsync(string model)
