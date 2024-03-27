@@ -63,10 +63,12 @@ public class AutoLoanService : IAutoLoanService
             LoanType = LoanType.AUTO,
             LoanStatus = LoanStatus.PENDING,
             ApplicationUser = user,
+            ApplicationUserId = user.Id,
             Product = null,
             ProductId = null,
             CarId = car.Id,
-            Car = car
+            Car = car,
+            ApplicationUserEmail = user.Email,
         };
 
         _dbContext.Loans.Add(loan);

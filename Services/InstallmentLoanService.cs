@@ -61,7 +61,11 @@ public class InstallmentLoanService : IInstallmentLoanService
             LoanType = LoanType.INSTALLMENT,
             LoanStatus = LoanStatus.PENDING,
             Product = product,
-            ApplicationUser = user
+            Car = null,
+            CarId = null,
+            ApplicationUser = user,
+            ApplicationUserId = user.Id,
+            ApplicationUserEmail = user?.Email
         };
 
         _dbContext.Loans.Add(loan);

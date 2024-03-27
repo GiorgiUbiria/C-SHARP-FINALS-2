@@ -89,7 +89,11 @@ public class FastLoanService : IFastLoanService
             LoanStatus = LoanStatus.PENDING,
             ProductId = null,
             Product = null,
-            ApplicationUser = user
+            CarId = null,
+            Car = null,
+            ApplicationUser = user,
+            ApplicationUserId = user.Id,
+            ApplicationUserEmail = user?.Email
         };
 
         _dbContext.Loans.Add(loan);

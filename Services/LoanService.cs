@@ -35,30 +35,69 @@ public class LoanService : ILoanService
                 return null;
             }
 
-            var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id && l.ApplicationUserId == user.Id);
-            if (loan == null)
+            if (user.Role == Role.Accountant)
             {
-                _logger.LogInformation("Loan not found.");
+                var loan = await _dbContext.Loans.FirstOrDefaultAsync(l => l.Id == id);
+                if (loan == null)
+                {
+                    _logger.LogInformation("Loan not found.");
+                    return null;
+                }
+
+                var loanDto = new LoanDto
+                {
+                    Id = loan.Id,
+                    RequestedAmount = loan.RequstedAmount,
+                    FinalAmount = loan.FinalAmount,
+                    LoanPeriod = loan.LoanPeriod,
+                    LoanType = loan.LoanType,
+                    LoanCurrency = loan.LoanCurrency,
+                    LoanStatus = loan.LoanStatus,
+                    ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
+                    CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
+                    Product = loan.Product,
+                    Car = loan.Car,
+                    UserEmail = loan.ApplicationUserEmail
+                };
+
+                _logger.LogInformation("Loan with ID {LoanId} retrieved successfully.", id);
+                return loanDto;
+            }
+            else if (user.Role == Role.Customer)
+            {
+                var loan = await _dbContext.Loans.FirstOrDefaultAsync(l =>
+                    l.Id == id && l.ApplicationUserId == user.Id);
+
+                if (loan == null)
+                {
+                    _logger.LogInformation("Loan not found for the current user.");
+                    return null;
+                }
+
+                var loanDto = new LoanDto
+                {
+                    Id = loan.Id,
+                    RequestedAmount = loan.RequstedAmount,
+                    FinalAmount = loan.FinalAmount,
+                    LoanPeriod = loan.LoanPeriod,
+                    LoanType = loan.LoanType,
+                    LoanCurrency = loan.LoanCurrency,
+                    LoanStatus = loan.LoanStatus,
+                    ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
+                    CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
+                    Product = loan.Product,
+                    Car = loan.Car,
+                    UserEmail = loan.ApplicationUserEmail
+                };
+
+                _logger.LogInformation("Loan with ID {LoanId} retrieved successfully for the current user.", id);
+                return loanDto;
+            }
+            else
+            {
+                _logger.LogInformation("Unauthorized access.");
                 return null;
             }
-
-            var loanDto = new LoanDto
-            {
-                Id = loan.Id,
-                RequestedAmount = loan.RequstedAmount,
-                FinalAmount = loan.FinalAmount,
-                LoanPeriod = loan.LoanPeriod,
-                LoanType = loan.LoanType,
-                LoanCurrency = loan.LoanCurrency,
-                LoanStatus = loan.LoanStatus,
-                ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
-                CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
-                Product = loan.Product,
-                Car = loan.Car
-            };
-
-            _logger.LogInformation("Loan with ID {LoanId} retrieved successfully.", id);
-            return loanDto;
         }
         catch (Exception ex)
         {
@@ -112,7 +151,8 @@ public class LoanService : ILoanService
                 ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
                 CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
                 Product = loan.Product,
-                Car = loan.Car
+                Car = loan.Car,
+                UserEmail = loan.ApplicationUserEmail
             }).ToList();
 
             _logger.LogInformation("All loans retrieved successfully.");
@@ -170,7 +210,8 @@ public class LoanService : ILoanService
                 ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
                 CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
                 Product = loan.Product,
-                Car = loan.Car
+                Car = loan.Car,
+                UserEmail = loan.ApplicationUserEmail
             }).ToList();
 
             _logger.LogInformation("Pending loans retrieved successfully.");
@@ -228,7 +269,8 @@ public class LoanService : ILoanService
                 ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
                 CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
                 Product = loan.Product,
-                Car = loan.Car
+                Car = loan.Car,
+                UserEmail = loan.ApplicationUserEmail 
             }).ToList();
 
             _logger.LogInformation("Accepted loans retrieved successfully.");
@@ -286,7 +328,8 @@ public class LoanService : ILoanService
                 ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
                 CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
                 Product = loan.Product,
-                Car = loan.Car
+                Car = loan.Car,
+                UserEmail = loan.ApplicationUserEmail 
             }).ToList();
 
             _logger.LogInformation("Declined loans retrieved successfully.");

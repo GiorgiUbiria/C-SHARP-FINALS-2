@@ -24,6 +24,8 @@ public class Loan
     
     public string ApplicationUserId { get; set; }
     
+    public string ApplicationUserEmail { get; set; }
+    
     public ApplicationUser ApplicationUser { get; set; }
     
     public int? ProductId { get; set; } 
