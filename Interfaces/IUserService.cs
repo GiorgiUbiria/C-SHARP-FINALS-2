@@ -9,9 +9,9 @@ public interface IUserService
 {
     Task<RegisterResponseDto> RegisterUser(RegisterRequestDto request);
     Task<AuthResponseDto> AuthenticateUser(AuthRequestDto request);
-    Task<ApplicationUser> GetCurrentUser(ClaimsPrincipal userClaims);
-    Task<ApplicationUser> GetUserByEmail(string email, ClaimsPrincipal userClaims);
-    Task<bool> BlockUser(string email);
-    Task<bool> UnblockUser(string email);
-    Task<bool> MakeAccountant(string email);
+    Task<UserDto> GetCurrentUser(ClaimsPrincipal userClaims);
+    Task<UserDto> GetUserByEmail(string email, ClaimsPrincipal userClaims);
+    Task<UserStatusDto> BlockUser(string email);
+    Task<UserStatusDto> UnblockUser(string email);
+    Task<UserStatusDto> MakeAccountant(string email);
 }

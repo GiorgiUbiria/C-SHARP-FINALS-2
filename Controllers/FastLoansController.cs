@@ -54,7 +54,7 @@ public class FastLoansController : ControllerBase
         }
     }
     
-    [HttpPut("{id}")]
+    [HttpPatch("{id}")]
     [Authorize]
     public async Task<IActionResult> ModifyLoan(int id, [FromBody] FastLoanRequestDto fastLoanDto)
     {

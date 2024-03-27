@@ -84,7 +84,7 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Authorize]
-    [Route("me")]
+    [Route("user/me")]
     public async Task<ActionResult<ApplicationUser>> GetCurrentUser()
     {
         _logger.LogInformation("Attempting to retrieve current user.");
@@ -128,7 +128,7 @@ public class UsersController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "Accountant")]
-    [Route("block")]
+    [Route("user/block")]
     public async Task<IActionResult> BlockUser(string email)
     {
         _logger.LogInformation("Attempting to block user with Email: {email}", email);
@@ -136,10 +136,10 @@ public class UsersController : ControllerBase
         try
         {
             var result = await _userService.BlockUser(email);
-            if (result)
+            if (result.Action)
             {
                 _logger.LogInformation("User with Email {email} blocked successfully.", email);
-                return Ok();
+                return Ok(result);
             }
             else
             {
@@ -155,13 +155,13 @@ public class UsersController : ControllerBase
         catch (UnauthorizedAccessException)
         {
             _logger.LogInformation("Unauthorized access: User not authorized to block.");
-            return StatusCode(403);
+            return Forbid();
         }
     }
 
     [HttpPost]
     [Authorize(Roles = "Accountant")]
-    [Route("unblock")]
+    [Route("user/unblock")]
     public async Task<IActionResult> UnblockUser(string email)
     {
         _logger.LogInformation("Attempting to unblock user with Email: {email}", email);
@@ -169,10 +169,10 @@ public class UsersController : ControllerBase
         try
         {
             var result = await _userService.UnblockUser(email);
-            if (result)
+            if (result.Action)
             {
                 _logger.LogInformation("User with Email {email} unblocked successfully.", email);
-                return Ok();
+                return Ok(result);
             }
             else
             {
@@ -188,13 +188,13 @@ public class UsersController : ControllerBase
         catch (UnauthorizedAccessException)
         {
             _logger.LogInformation("Unauthorized access: User not authorized to unblock.");
-            return StatusCode(403);
+            return Forbid();
         }
     }
 
     [HttpPost]
     [Authorize(Roles = "Accountant")]
-    [Route("make-accountant")]
+    [Route("user/make-accountant")]
     public async Task<IActionResult> MakeAccountant(string email)
     {
         _logger.LogInformation("Attempting to make user with Email: {email} an accountant.", email);
@@ -202,10 +202,10 @@ public class UsersController : ControllerBase
         try
         {
             var result = await _userService.MakeAccountant(email);
-            if (result)
+            if (result.Action)
             {
                 _logger.LogInformation("User with Email {email} made accountant successfully.",email);
-                return Ok();
+                return Ok(result);
             }
             else
             {
@@ -222,7 +222,7 @@ public class UsersController : ControllerBase
         catch (UnauthorizedAccessException)
         {
             _logger.LogInformation("Unauthorized access: User not authorized to make accountant.");
-            return StatusCode(403);
+            return Forbid();
         }
     }
 }

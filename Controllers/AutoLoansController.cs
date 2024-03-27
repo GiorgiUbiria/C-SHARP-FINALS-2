@@ -49,7 +49,7 @@ public class AutoLoansController : ControllerBase
         }
     }
 
-    [HttpPut("{id}")]
+    [HttpPatch("{id}")]
     [Authorize]
     public async Task<IActionResult> ModifyLoan(int id, [FromBody] AutoLoanRequestDto autoLoanRequestDto)
     {

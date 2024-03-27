@@ -13,16 +13,16 @@ namespace Finals.Services;
 public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext _dbContext;
     private readonly ITokenService _tokenService;
     private readonly GetUserFromContext _getUserFromContext;
     private readonly ILogger<UserService> _logger;
 
-    public UserService(UserManager<ApplicationUser> userManager, ApplicationDbContext context,
+    public UserService(UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext,
         ITokenService tokenService, GetUserFromContext getUserFromContext, ILogger<UserService> logger)
     {
         _userManager = userManager;
-        _context = context;
+        _dbContext = dbContext;
         _tokenService = tokenService;
         _getUserFromContext = getUserFromContext;
         _logger = logger;
@@ -79,7 +79,7 @@ public class UserService : IUserService
                 return null;
             }
 
-            var userInDb = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            var userInDb = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
             if (userInDb == null)
             {
                 _logger.LogInformation("User with email {Email} not found in the database.", request.Email);
@@ -104,14 +104,26 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<ApplicationUser> GetCurrentUser(ClaimsPrincipal userClaims)
+    public async Task<UserDto> GetCurrentUser(ClaimsPrincipal userClaims)
     {
         try
         {
             _logger.LogInformation("Attempting to retrieve current user.");
 
             var currentUser = await _getUserFromContext.GetUser();
-            return currentUser;
+
+            var userDto = new UserDto
+            {
+                Role = currentUser.Role,
+                IsBlocked = currentUser.IsBlocked,
+                FirstName = currentUser.FirstName,
+                LastName = currentUser.LastName,
+                Age = currentUser.Age,
+                Salary = currentUser.Salary,
+                Loans = currentUser.Loans,
+            };
+
+            return userDto;
         }
         catch (Exception ex)
         {
@@ -120,7 +132,58 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<ApplicationUser> GetUserByEmail(string email, ClaimsPrincipal userClaims)
+    public async Task<UsersDto> GetAllUsers()
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to retrieve all users.");
+
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                return null;
+            }
+
+            IQueryable<ApplicationUser> usersFromDb = Enumerable.Empty<ApplicationUser>().AsQueryable();
+
+            if (user.Role != Role.Accountant)
+            {
+                throw new InvalidOperationException("Only accountants can retrieve user information.");
+            }
+
+            usersFromDb = _dbContext.Users.AsQueryable();
+
+            var usersDto = new UsersDto();
+
+            if (usersFromDb == null || !usersFromDb.Any())
+            {
+                _logger.LogInformation("No users found.");
+                return usersDto;
+            }
+
+            usersDto.Users = usersFromDb.Select(user => new UserDto
+            {
+                Role = user.Role,
+                IsBlocked = user.IsBlocked,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Age = user.Age,
+                Salary = user.Salary,
+                Loans = user.Loans,
+            }).ToList();
+
+            _logger.LogInformation("All users retrieved successfully.");
+            return usersDto;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving all loans: {ErrorMessage}", ex.Message);
+            throw;
+        }
+    }
+
+    public async Task<UserDto> GetUserByEmail(string email, ClaimsPrincipal userClaims)
     {
         try
         {
@@ -138,7 +201,19 @@ public class UserService : IUserService
             var user = await _userManager.FindByEmailAsync(email);
 
             _logger.LogInformation("User with email {Email} retrieved successfully.", email);
-            return user;
+
+            var userDto = new UserDto
+            {
+                Role = user.Role,
+                IsBlocked = user.IsBlocked,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Age = user.Age,
+                Salary = user.Salary,
+                Loans = user.Loans,
+            };
+
+            return userDto;
         }
         catch (Exception ex)
         {
@@ -148,7 +223,7 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<bool> BlockUser(string email)
+    public async Task<UserStatusDto> BlockUser(string email)
     {
         try
         {
@@ -192,13 +267,29 @@ public class UserService : IUserService
             if (result.Succeeded)
             {
                 _logger.LogInformation("User with Email {email} blocked successfully.", email);
-                return true;
+                var userStatus = new UserStatusDto
+                {
+                    Email = userToBlock.Email,
+                    isBlocked = userToBlock.IsBlocked,
+                    Role = userToBlock.Role,
+                    Action = true
+                };
+
+                return userStatus;
             }
             else
             {
                 _logger.LogError("Failed to block user with Email {email}: {Errors}", email,
                     string.Join(", ", result.Errors));
-                return false;
+                var userStatus = new UserStatusDto
+                {
+                    Email = userToBlock.Email,
+                    isBlocked = userToBlock.IsBlocked,
+                    Role = userToBlock.Role,
+                    Action = false
+                };
+
+                return userStatus;
             }
         }
         catch (Exception ex)
@@ -209,7 +300,7 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<bool> UnblockUser(string email)
+    public async Task<UserStatusDto> UnblockUser(string email)
     {
         try
         {
@@ -253,13 +344,29 @@ public class UserService : IUserService
             if (result.Succeeded)
             {
                 _logger.LogInformation("User with Email {email} unblocked successfully.", email);
-                return true;
+                var userStatus = new UserStatusDto
+                {
+                    Email = userToUnblock.Email,
+                    isBlocked = userToUnblock.IsBlocked,
+                    Role = userToUnblock.Role,
+                    Action = true
+                };
+
+                return userStatus;
             }
             else
             {
                 _logger.LogError("Failed to unblock user with Email {email}: {Errors}", email,
                     string.Join(", ", result.Errors));
-                return false;
+                var userStatus = new UserStatusDto
+                {
+                    Email = userToUnblock.Email,
+                    isBlocked = userToUnblock.IsBlocked,
+                    Role = userToUnblock.Role,
+                    Action = false
+                };
+
+                return userStatus;
             }
         }
         catch (Exception ex)
@@ -270,7 +377,7 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<bool> MakeAccountant(string email)
+    public async Task<UserStatusDto> MakeAccountant(string email)
     {
         try
         {
@@ -315,13 +422,29 @@ public class UserService : IUserService
             if (result.Succeeded)
             {
                 _logger.LogInformation("User with Email {email} upgraded to Accountant successfully.", email);
-                return true;
+                var userStatus = new UserStatusDto
+                {
+                    Email = userToModify.Email,
+                    isBlocked = userToModify.IsBlocked,
+                    Role = userToModify.Role,
+                    Action = true
+                };
+
+                return userStatus;
             }
             else
             {
                 _logger.LogError("Failed to upgrade user with Email {email} to Accountant: {Errors}", email,
                     string.Join(", ", result.Errors));
-                return false;
+                var userStatus = new UserStatusDto
+                {
+                    Email = userToModify.Email,
+                    isBlocked = userToModify.IsBlocked,
+                    Role = userToModify.Role,
+                    Action = false
+                };
+
+                return userStatus;
             }
         }
         catch (Exception ex)
