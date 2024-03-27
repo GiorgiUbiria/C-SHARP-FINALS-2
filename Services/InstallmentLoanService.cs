@@ -46,7 +46,7 @@ public class InstallmentLoanService : IInstallmentLoanService
             throw new InvalidOperationException("Installment loan can't be longer than two years.");
         }
 
-        if (user.Salary < product.Price * 3)
+        if (user.Salary < product.Price * 10)
         {
             throw new InvalidOperationException("User's salary is insufficient to afford the selected product.");
         }

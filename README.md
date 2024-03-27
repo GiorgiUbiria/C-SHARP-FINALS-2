@@ -24,14 +24,14 @@
 - **POST** - */api/loans/{id}/decline - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
 - **DELETE** - */api/loans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
 
-#InstallmentLoans
+# InstallmentLoans
 - **POST** - */api/installmentloans/new-installment - **WORKS*** - { JSON } - Auth Yes, Forbidden No,
 - **PATCH** - */api/installmentloans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
 
-#FastLoans
+# FastLoans
 - **POST** - */api/fastloans/new-fast - **WORKS*** - { JSON } - Auth Yes, Forbidden No,
 - **PATCH** - */api/fastloans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
  
-#AutoLoans
+# AutoLoans
 - **POST** - */api/autoloans/new-auto - **WORKS*** - { JSON } - Auth Yes, Forbidden No,
 - **PATCH** - */api/autoloans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
