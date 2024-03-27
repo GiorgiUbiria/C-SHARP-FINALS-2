@@ -99,9 +99,34 @@ public class UsersController : ControllerBase
         _logger.LogInformation("Current user retrieved successfully.");
         return Ok(user);
     }
+    
+    [HttpGet]
+    [Authorize(Roles = "Accountant")]
+    public async Task<ActionResult<ApplicationUser>> GetAllUsers()
+    {
+        _logger.LogInformation("Attempting to retrieve all users");
+
+        try
+        {
+            var users = await _userService.GetAllUsers();
+            if (users == null)
+            {
+                _logger.LogInformation("Users not found.");
+                return NotFound();
+            }
+
+            _logger.LogInformation("Users retrieved successfully.");
+            return Ok(users);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            _logger.LogInformation("Unauthorized access: User not authenticated.");
+            return Forbid();
+        }
+    }
 
     [HttpPost("{email}")]
-    [Authorize]
+    [Authorize(Roles = "Accountant")]
     public async Task<ActionResult<ApplicationUser>> GetUserByEmail([FromQuery] string email)
     {
         _logger.LogInformation("Attempting to retrieve user by email: {Email}", email);
@@ -200,7 +225,7 @@ public class UsersController : ControllerBase
             var result = await _userService.MakeAccountant(email);
             if (result.Action)
             {
-                _logger.LogInformation("User with Email {email} made accountant successfully.",email);
+                _logger.LogInformation("User with Email {email} made accountant successfully.", email);
                 return Ok(result);
             }
             else

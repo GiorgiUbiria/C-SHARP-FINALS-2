@@ -9,9 +9,9 @@
 - **POST** - */api/users/login - **WORKS*** - { JSON } - Auth No, Forbidden No,
 - **GET** - */api/users/ - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
 - **GET** - */api/users/me - **WORKS*** - { JSON } - Auth Yes, Forbidden for others,
-- **GET** - */api/users/user/block - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer, 
-- **GET** - */api/users/user/unblock - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer, 
-- **GET** - */api/users/user/make-accountant - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer
+- **GET** - */api/users/{email}/block - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer, 
+- **GET** - */api/users/{email}/unblock - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer, 
+- **GET** - */api/users/{email}/make-accountant - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer
  
 # Loans 
 - **POST** - */api/loans* - **WORKS** - [ ARR { JSON } ] - Auth YES, Forbidden Partially,

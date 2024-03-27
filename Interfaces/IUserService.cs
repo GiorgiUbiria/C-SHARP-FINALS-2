@@ -9,6 +9,7 @@ public interface IUserService
 {
     Task<RegisterResponseDto> RegisterUser(RegisterRequestDto request);
     Task<AuthResponseDto> AuthenticateUser(AuthRequestDto request);
+    Task<UsersDto> GetAllUsers();
     Task<UserDto> GetCurrentUser(ClaimsPrincipal userClaims);
     Task<UserDto> GetUserByEmail(string email, ClaimsPrincipal userClaims);
     Task<UserStatusDto> BlockUser(string email);

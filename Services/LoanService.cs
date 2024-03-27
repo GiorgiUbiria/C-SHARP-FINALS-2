@@ -51,9 +51,9 @@ public class LoanService : ILoanService
                 LoanType = loan.LoanType,
                 LoanCurrency = loan.LoanCurrency,
                 LoanStatus = loan.LoanStatus,
-                ProductId = (int)loan.ProductId,
+                ProductId = loan.ProductId.HasValue ? (int)loan.ProductId.Value : default,
+                CarId = loan.CarId.HasValue ? (int)loan.CarId.Value : default,
                 Product = loan.Product,
-                CarId = (int)loan.CarId,
                 Car = loan.Car
             };
 
