@@ -1,50 +1,55 @@
-# Routes 
+# Loan API
 
-## Products
+Welcome to the Loan API documentation. This API provides endpoints to manage loans for various products, including
+installment loans, fast loans, and auto loans. Below are the available routes and their functionalities.
 
-- **GET** - */api/products* - **WORKS** - [ ARR { JSON } ] - Auth No, Forbidden No,
-- **GET** - */api/products/**{id}*** - **WORKS** - { JSON } - Auth No, Forbidden No
+## Routes
 
-## Users
+### Products
 
-- *TEST USER EMAIL 1: gulordava@gmail.com/Gulordava@123 - 1.5k Salary*
-- *TEST USER EMAIL 2: antique@yahoo.com/Antique@123 - 300k Salary*
-- *TEST USER EMAIL 3: accountant@test.com/Accountant@123 - 10k Salary*
-- **GET** - */api/users/ - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
-- **GET** - */api/users/me - **WORKS*** - { JSON } - Auth Yes, Forbidden for others,
-- **POST** - */api/users/register* - **WORKS** - { JSON } - Auth No, Forbidden No,
-- **POST** - */api/users/login - **WORKS*** - { JSON } - Auth No, Forbidden No,
-- **POST** - */api/users/{email}/block - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
-- **POST** - */api/users/{email}/unblock - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
-- **POST** - */api/users/{email}/make-accountant - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer
+- **GET** - */api/products* - Retrieves a list of available products.
+- **GET** - */api/products/{id}* - Retrieves details of a specific product by its ID.
 
-## Loans
+### Users
 
-- **GET** - */api/loans* - **WORKS** - [ ARR { JSON } ] - Auth YES, Forbidden Partially,
-- **GET** - */api/loans/{id} - **WORKS*** - { JSON } - Auth YES, Forbidden Partially,
-- **GET** - */api/loans/pending - **WORKS*** - [ ARR { JSON } ] - Auth Yes, Forbidden Partially,
-- **GET** - */api/loans/declined - **WORKS*** - [ ARR { JSON } ] - Auth Yes, Forbidden Partially,
-- **GET** - */api/loans/accepted - **WORKS*** - [ ARR { JSON } ] - Auth Yes, Forbidden Partially,
-- **POST** - */api/loans/{id}/accept - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
-- **POST** - */api/loans/{id}/decline - **WORKS*** - { JSON } - Auth Yes, Forbidden for Customer,
-- **DELETE** - */api/loans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
+- **GET** - */api/users/* - Retrieves a list of users. Only accessible to authorized users with the appropriate
+  permissions.
+- **GET** - */api/users/me* - Retrieves the details of the authenticated user.
+- **POST** - */api/users/register* - Registers a new user.
+- **POST** - */api/users/login* - Logs in a user.
+- **POST** - */api/users/{email}/block* - Blocks a user. Requires authorization and appropriate permissions.
+- **POST** - */api/users/{email}/unblock* - Unblocks a user. Requires authorization and appropriate permissions.
+- **POST** - */api/users/{email}/make-accountant* - Grants accountant role to a user. Requires authorization and
+  appropriate permissions.
 
-## Installment Loans
+### Loans
 
-- **POST** - */api/installmentloans/new-installment - **WORKS*** - { JSON } - Auth Yes, Forbidden No,
-- **PATCH** - */api/installmentloans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
+- **GET** - */api/loans* - Retrieves a list of loans. Requires authorization.
+- **GET** - */api/loans/{id}* - Retrieves details of a specific loan by its ID. Requires authorization.
+- **GET** - */api/loans/pending* - Retrieves a list of pending loans. Requires authorization.
+- **GET** - */api/loans/declined* - Retrieves a list of declined loans. Requires authorization.
+- **GET** - */api/loans/accepted* - Retrieves a list of accepted loans. Requires authorization.
+- **POST** - */api/loans/{id}/accept* - Accepts a loan. Requires authorization and appropriate permissions.
+- **POST** - */api/loans/{id}/decline* - Declines a loan. Requires authorization and appropriate permissions.
+- **DELETE** - */api/loans/{id}* - Deletes a loan. Requires authorization.
 
-## Fast Loans
+### Installment Loans
 
-- **POST** - */api/fastloans/new-fast - **WORKS*** - { JSON } - Auth Yes, Forbidden No,
-- **PATCH** - */api/fastloans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
+- **POST** - */api/installmentloans/new-installment* - Creates a new installment loan. Requires authorization.
+- **PATCH** - */api/installmentloans/{id}* - Modifies an existing installment loan. Requires authorization.
 
-## Auto Loans
+### Fast Loans
 
-- **POST** - */api/autoloans/new-auto - **WORKS*** - { JSON } - Auth Yes, Forbidden No,
-- **PATCH** - */api/autoloans/{id} - **WORKS*** - { JSON } - Auth Yes, Forbidden Partially
+- **POST** - */api/fastloans/new-fast* - Creates a new fast loan. Requires authorization.
+- **PATCH** - */api/fastloans/{id}* - Modifies an existing fast loan. Requires authorization.
 
-## Avaiable Products
+### Auto Loans
+
+- **POST** - */api/autoloans/new-auto* - Creates a new auto loan. Requires authorization.
+- **PATCH** - */api/autoloans/{id}* - Modifies an existing auto loan. Requires authorization.
+
+## Available Products
+
 ```json
 {
   "products": [
