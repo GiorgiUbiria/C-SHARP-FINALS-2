@@ -200,3 +200,15 @@
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/obj/Debug/net8.0/Finals.Tests.pdb
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/obj/Debug/net8.0/Finals.Tests.genruntimeconfig.cache
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/obj/Debug/net8.0/ref/Finals.Tests.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/NLog.config
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/appsettings.Development.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/appsettings.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/Finals.deps.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/Finals.runtimeconfig.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/Finals.Tests.deps.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/Finals.Tests.runtimeconfig.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/Finals.Tests/obj/Finals.Test.csproj.nuget.dgspec.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/Finals.Tests/obj/Finals.Tests.csproj.nuget.dgspec.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/Finals.Tests/obj/project.assets.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/bin/Debug/net8.0/Finals.Tests/obj/project.packagespec.json
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/bin/Debug/net8.0/Finals.Tests/obj/Debug/net8.0/Finals.Tests.sourcelink.json

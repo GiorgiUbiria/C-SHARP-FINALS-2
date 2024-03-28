@@ -82,9 +82,11 @@ namespace Finals.Tests.Controllers
                 Age = 20,
                 Salary = 1600
             };
+
             var validationResult = new ValidationResult(new List<ValidationFailure>());
             _mockRegisterValidator.Setup(validator => validator.ValidateAsync(request, CancellationToken.None))
                 .ReturnsAsync(validationResult);
+
             var user = new ApplicationUser { Email = "test@example.com" };
             _mockUserService.Setup(service => service.RegisterUser(It.IsAny<RegisterRequestDto>()))
                 .ReturnsAsync(new RegisterResponseDto
