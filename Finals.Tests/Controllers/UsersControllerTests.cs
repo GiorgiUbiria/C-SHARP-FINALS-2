@@ -298,5 +298,92 @@ namespace Finals.Tests.Controllers
 
             Assert.IsInstanceOf<ForbidResult>(result.Result);
         }
+
+        [Test]
+        public async Task BlockUser_ReturnsUserStatusDto_WhenUserIsBlockedSuccessfully()
+        {
+            var email = "test@example.com";
+            var blockResult = new UserStatusDto { Action = true };
+            _mockUserService.Setup(service => service.BlockUser(email)).ReturnsAsync(blockResult);
+
+            var result = await _controller.BlockUser(email);
+
+            Assert.IsInstanceOf<OkObjectResult>(result);
+            var okResult = result as OkObjectResult;
+            Assert.AreEqual(blockResult, okResult.Value);
+        }
+
+        [Test]
+        public async Task BlockUser_ReturnsFalse_WhenInvalidOperationExceptionOccurs()
+        {
+            var email = "test@example.com";
+            _mockUserService.Setup(service => service.BlockUser(email)).ThrowsAsync(new InvalidOperationException());
+
+            var result = await _controller.BlockUser(email);
+
+            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+        }
+
+        [Test]
+        public async Task BlockUser_ReturnsForbid_WhenUnauthorizedAccessExceptionOccurs()
+        {
+            var email = "test@example.com";
+            _mockUserService.Setup(service => service.BlockUser(email)).ThrowsAsync(new UnauthorizedAccessException());
+
+            var result = await _controller.BlockUser(email);
+
+            Assert.IsInstanceOf<ForbidResult>(result);
+        }
+
+        [Test]
+        public async Task UnblockUser_ReturnsUserStatusDto_WhenUserIsUnblockedSuccessfully()
+        {
+            var email = "test@example.com";
+            var unblockResult = new UserStatusDto { Action = true };
+            _mockUserService.Setup(service => service.UnblockUser(email)).ReturnsAsync(unblockResult);
+
+            var result = await _controller.UnblockUser(email);
+
+            Assert.IsInstanceOf<OkObjectResult>(result);
+        }
+
+        [Test]
+        public async Task UnblockUser_ReturnsBadRequest_WhenInvalidOperationExceptionOccurs()
+        {
+            var email = "test@example.com";
+            var errorMessage = "Error message";
+            _mockUserService.Setup(service => service.UnblockUser(email))
+                .ThrowsAsync(new InvalidOperationException(errorMessage));
+
+            var result = await _controller.UnblockUser(email);
+
+            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            var badRequestResult = result as BadRequestObjectResult;
+            Assert.AreEqual(errorMessage, badRequestResult.Value);
+        }
+
+        [Test]
+        public async Task UnblockUser_ReturnsForbid_WhenUnauthorizedAccessExceptionOccurs()
+        {
+            var email = "test@example.com";
+            _mockUserService.Setup(service => service.UnblockUser(email))
+                .ThrowsAsync(new UnauthorizedAccessException());
+
+            var result = await _controller.UnblockUser(email);
+
+            Assert.IsInstanceOf<ForbidResult>(result);
+        }
+
+        [Test]
+        public async Task MakeAccountant_ReturnsOk_WhenUserIsUpgradedToAccountantSuccessfully()
+        {
+            var email = "test@example.com";
+            var makeAccountantResult = new UserStatusDto { Action = true };
+            _mockUserService.Setup(service => service.MakeAccountant(email)).ReturnsAsync(makeAccountantResult);
+
+            var result = await _controller.MakeAccountant(email);
+
+            Assert.IsInstanceOf<OkObjectResult>(result);
+        }
     }
 }
