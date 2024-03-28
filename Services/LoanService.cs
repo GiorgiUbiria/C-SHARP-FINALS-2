@@ -486,7 +486,7 @@ public class LoanService : ILoanService
         }
     }
 
-    public async Task<bool> PayOneMonthDue(int loanId)
+    public async Task<MonthlyPaymentDto> PayOneMonthDue(int loanId)
     {
         try
         {
@@ -496,7 +496,7 @@ public class LoanService : ILoanService
             if (user == null)
             {
                 _logger.LogInformation("User not found.");
-                return false;
+                throw new InvalidOperationException("User not found.");
             }
 
             var loan = await _dbContext.Loans.FirstOrDefaultAsync(l =>
@@ -506,14 +506,51 @@ public class LoanService : ILoanService
             {
                 _logger.LogInformation(
                     "Loan not found, or it does not belong to the current user, or its status is not accepted.");
-                return false;
+                throw new InvalidOperationException(
+                    "Loan not found, or it does not belong to the current user, or its status is not accepted.");
             }
 
-            // TODO: Deduct from amount left
-            double dueAmount = (double)loan.FinalAmount / (int)loan.LoanPeriod;
+            decimal monthly = 0;
+            switch (loan.LoanPeriod)
+            {
+                case LoanPeriod.HalfYear:
+                    monthly = loan.FinalAmount / 6;
+                    break;
+                case LoanPeriod.OneYear:
+                    monthly = loan.FinalAmount / 12;
+                    break;
+                case LoanPeriod.TwoYears:
+                    monthly = loan.FinalAmount / 24;
+                    break;
+                case LoanPeriod.FiveYears:
+                    monthly = loan.FinalAmount / 60;
+                    break;
+                case LoanPeriod.TenYears:
+                    monthly = loan.FinalAmount / 120;
+                    break;
+                default:
+                    _logger.LogInformation("Invalid loan period or loan amount.");
+                    throw new InvalidOperationException("Invalid loan period or loan amount.");
+            }
+
+            if (monthly == 0)
+            {
+                _logger.LogInformation("Invalid loan period or loan amount.");
+                throw new InvalidOperationException("Invalid loan period or loan amount.");
+            }
+
+            loan.AmountLeft -= monthly;
+            await _dbContext.SaveChangesAsync();
 
             _logger.LogInformation("One month's due paid successfully for loan with ID: {LoanId}", loanId);
-            return true;
+
+            return new MonthlyPaymentDto
+            {
+                Id = loan.Id,
+                InitialAmount = loan.FinalAmount,
+                AmountLeft = loan.AmountLeft,
+                MonthlyDue = monthly
+            };
         }
         catch (Exception ex)
         {

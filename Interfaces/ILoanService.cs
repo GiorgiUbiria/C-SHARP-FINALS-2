@@ -1,5 +1,6 @@
 using Finals.Dtos;
 using Finals.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Finals.Interfaces;
 
@@ -13,4 +14,5 @@ public interface ILoanService
     Task<bool> DeleteLoan(int id);
     Task<bool> DeclineLoan(int id);
     Task<bool> AcceptLoan(int id);
+    Task<MonthlyPaymentDto> PayOneMonthDue(int loanId);
 }

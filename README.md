@@ -31,6 +31,7 @@ installment loans, fast loans, and auto loans. Below are the available routes an
 - **GET** - */api/loans/accepted* - Retrieves a list of accepted loans. Requires authorization.
 - **POST** - */api/loans/{id}/accept* - Accepts a loan. Requires authorization and appropriate permissions.
 - **POST** - */api/loans/{id}/decline* - Declines a loan. Requires authorization and appropriate permissions.
+- **POST** - */api/loans/{id}/pay-monthly* - Pays a monthly due. Requires authorization.
 - **DELETE** - */api/loans/{id}* - Deletes a loan. Requires authorization.
 
 ### Installment Loans

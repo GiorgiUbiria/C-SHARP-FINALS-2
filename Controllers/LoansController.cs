@@ -193,4 +193,29 @@ public class LoansController : ControllerBase
         _logger.LogInformation($"Accepted loans retrieved successfully.");
         return Ok(loansDto);
     }
+
+    [HttpPost("{id}/pay-monthly")]
+    [Authorize]
+    public async Task<IActionResult> PayOneMonthDue(int id)
+    {
+        _logger.LogInformation("Attempting to pay one month's due for loan with ID: {LoanId}", id);
+
+        try
+        {
+            var monthlyPayment = await _loanService.PayOneMonthDue(id);
+            _logger.LogInformation("One month's due paid successfully for loan with ID: {LoanId}", id);
+            return Ok(monthlyPayment);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Error paying one month's due for loan with ID: {LoanId}: {ErrorMessage}", id,
+                ex.Message);
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while processing the request for loan with ID: {LoanId}", id);
+            return StatusCode(500);
+        }
+    }
 }
