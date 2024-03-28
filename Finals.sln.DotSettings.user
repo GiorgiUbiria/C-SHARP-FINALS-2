@@ -4,8 +4,19 @@
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/CustomBuildToolPath/@EntryValue">/usr/lib64/dotnet/sdk/8.0.102/MSBuild.dll</s:String>
 	<s:Int64 x:Key="/Default/Environment/Hierarchy/Build/BuildTool/MsbuildVersion/@EntryValue">1114112</s:Int64>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4186843c_002D9529_002D4a68_002Dac27_002D800b356e59cb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateInstallmentLoan_ReturnsBadRequest_WhenFormDataIsInvalid" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::74D00867-010E-49F0-BFAE-6D5BEE92ED36::net8.0::Finals.Tests.Controllers.InstallmentLoansControllerTests.CreateInstallmentLoan_ReturnsBadRequest_WhenFormDataIsInvalid&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=93838b7e_002De274_002D472c_002Da69b_002D4e7d7a6ade0d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;Finals.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Project Location="/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests" Presentation="&amp;lt;Finals.Tests&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=aff8d464_002D0239_002D487a_002Daa2a_002D5aa7302deb98/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;Finals.Tests&amp;gt; #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests" Presentation="&amp;lt;Finals.Tests&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f3003afe_002Dfc41_002D4219_002D87aa_002Ded8786000b5b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Solution /&gt;
 &lt;/SessionState&gt;</s:String>
 	
 	
