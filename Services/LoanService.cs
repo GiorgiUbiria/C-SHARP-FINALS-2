@@ -348,6 +348,66 @@ public class LoanService : ILoanService
         }
     }
 
+    public async Task<LoansDto> GetCompletedLoans()
+    {
+        try
+        {
+            _logger.LogInformation("Attempting to retrieve completed loans.");
+
+            var user = await _getUserFromContext.GetUser();
+            if (user == null)
+            {
+                _logger.LogInformation("User not found.");
+                return null;
+            }
+
+            IQueryable<Loan> loansFromDb = Enumerable.Empty<Loan>().AsQueryable();
+
+            if (user.Role == Role.Accountant)
+            {
+                loansFromDb = _dbContext.Loans.Where(l => l.LoanStatus == LoanStatus.COMPLETED).AsQueryable();
+            }
+            else if (user.Role == Role.Customer)
+            {
+                loansFromDb = _dbContext.Loans
+                    .Where(l => l.ApplicationUserId == user.Id && l.LoanStatus == LoanStatus.COMPLETED).AsQueryable();
+            }
+
+            var loansDto = new LoansDto();
+
+            if (loansFromDb == null || !loansFromDb.Any())
+            {
+                _logger.LogInformation("No completed loans found for the user.");
+                return loansDto;
+            }
+
+            loansDto.Loans = loansFromDb.Select(loan => new LoanDto
+            {
+                Id = loan.Id,
+                RequestedAmount = loan.RequstedAmount,
+                FinalAmount = loan.FinalAmount,
+                AmountLeft = loan.AmountLeft,
+                LoanPeriod = loan.LoanPeriod,
+                LoanType = loan.LoanType,
+                LoanCurrency = loan.LoanCurrency,
+                LoanStatus = loan.LoanStatus,
+                ProductId = loan.ProductId.HasValue ? loan.ProductId.Value : default,
+                CarId = loan.CarId.HasValue ? loan.CarId.Value : default,
+                Product = loan.Product,
+                Car = loan.Car,
+                UserEmail = loan.ApplicationUserEmail
+            }).ToList();
+
+            _logger.LogInformation("Completed loans retrieved successfully.");
+            return loansDto;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while retrieving declined loans: {ErrorMessage}", ex.Message);
+            throw;
+        }
+    }
+
     public async Task<bool> DeleteLoan(int id)
     {
         try
@@ -505,9 +565,9 @@ public class LoanService : ILoanService
             if (loan == null)
             {
                 _logger.LogInformation(
-                    "Loan not found, or it does not belong to the current user, or its status is not accepted.");
+                    "Loan not found, or it does not belong to the current user, or its status is not accepted, or it is completed.");
                 throw new InvalidOperationException(
-                    "Loan not found, or it does not belong to the current user, or its status is not accepted.");
+                    "Loan not found, or it does not belong to the current user, or its status is not accepted, or it is completed.");
             }
 
             decimal monthly = 0;
@@ -540,6 +600,12 @@ public class LoanService : ILoanService
             }
 
             loan.AmountLeft -= monthly;
+
+            if (loan.AmountLeft == 0)
+            {
+                loan.LoanStatus = LoanStatus.COMPLETED;
+            }
+
             await _dbContext.SaveChangesAsync();
 
             _logger.LogInformation("One month's due paid successfully for loan with ID: {LoanId}", loanId);

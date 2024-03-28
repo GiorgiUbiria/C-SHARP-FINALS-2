@@ -106,7 +106,7 @@ namespace Finals.Migrations
                             Id = "80c8b6b1-e2b6-45e8-b044-8f2178a90111",
                             AccessFailedCount = 0,
                             Age = 20,
-                            ConcurrencyStamp = "eecd0f20-bd13-47c6-b81e-d170b21290ed",
+                            ConcurrencyStamp = "17ed9fac-2208-4527-aac4-e993aadb9ca0",
                             Email = "accountant@test.com",
                             EmailConfirmed = false,
                             FirstName = "Giorgi",
@@ -115,11 +115,11 @@ namespace Finals.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ACCOUNTANT@TEST.COM",
                             NormalizedUserName = "ACCOUNTANT@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG9Y/WPhJGVSPPXpnMvfEnFiS067aToVddMf5TpZLHxswl5uqr99a0ojOmlAeD2EDw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH1BDHXgEq6oF3k+FOXF++zreUsn2LR1oxONcSrOkq4rZgjlb3pTqUt0gB0u5JC6ag==",
                             PhoneNumberConfirmed = false,
                             Role = 1,
                             Salary = 1500,
-                            SecurityStamp = "5e8ce3e0-79c4-4308-b728-3a2af1d20e5c",
+                            SecurityStamp = "57d087d1-94b2-4cb1-9be6-7d8005c8c898",
                             TwoFactorEnabled = false,
                             UserName = "Accountant"
                         });

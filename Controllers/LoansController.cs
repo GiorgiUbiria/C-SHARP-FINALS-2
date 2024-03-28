@@ -142,7 +142,7 @@ public class LoansController : ControllerBase
     [Route("pending")]
     public async Task<IActionResult> GetPendingLoans()
     {
-        _logger.LogInformation($"Attempting to retrieve pending loans.");
+        _logger.LogInformation("Attempting to retrieve pending loans.");
 
         var loanDtos = await _loanService.GetPendingLoans();
 
@@ -152,7 +152,7 @@ public class LoansController : ControllerBase
             return NoContent();
         }
 
-        _logger.LogInformation($"Pending loans retrieved successfully.");
+        _logger.LogInformation("Pending loans retrieved successfully.");
         return Ok(loanDtos);
     }
 
@@ -161,7 +161,7 @@ public class LoansController : ControllerBase
     [Route("declined")]
     public async Task<IActionResult> GetDeclinedLoans()
     {
-        _logger.LogInformation($"Attempting to retrieve declined loans.");
+        _logger.LogInformation("Attempting to retrieve declined loans.");
 
         var loansDto = await _loanService.GetDeclinedLoans();
 
@@ -171,7 +171,26 @@ public class LoansController : ControllerBase
             return NoContent();
         }
 
-        _logger.LogInformation($"Declined loans retrieved successfully.");
+        _logger.LogInformation("Declined loans retrieved successfully.");
+        return Ok(loansDto);
+    }
+
+    [HttpGet]
+    [Authorize]
+    [Route("accpeted")]
+    public async Task<IActionResult> GetCompletedLoans()
+    {
+        _logger.LogInformation("Attempting to retrieve completed loans.");
+
+        var loansDto = await _loanService.GetCompletedLoans();
+
+        if (loansDto == null || loansDto.Loans.Count == 0)
+        {
+            _logger.LogInformation("No completed loans found.");
+            return NoContent();
+        }
+
+        _logger.LogInformation("Completed loans retrieved successfully.");
         return Ok(loansDto);
     }
 
@@ -180,7 +199,7 @@ public class LoansController : ControllerBase
     [Route("accepted")]
     public async Task<IActionResult> GetAccpetedLoans()
     {
-        _logger.LogInformation($"Attempting to retrieve accepted loans.");
+        _logger.LogInformation("Attempting to retrieve accepted loans.");
 
         var loansDto = await _loanService.GetAcceptedLoans();
 
@@ -190,7 +209,7 @@ public class LoansController : ControllerBase
             return NoContent();
         }
 
-        _logger.LogInformation($"Accepted loans retrieved successfully.");
+        _logger.LogInformation("Accepted loans retrieved successfully.");
         return Ok(loansDto);
     }
 

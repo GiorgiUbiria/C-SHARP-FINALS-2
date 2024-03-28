@@ -5,4 +5,5 @@ public enum LoanStatus
     PENDING,
     ACCEPTED,
     DECLINED,
+    COMPLETED,
 }
