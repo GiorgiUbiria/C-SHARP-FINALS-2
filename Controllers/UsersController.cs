@@ -102,7 +102,7 @@ public class UsersController : ControllerBase
     
     [HttpGet]
     [Authorize(Roles = "Accountant")]
-    public async Task<ActionResult<ApplicationUser>> GetAllUsers()
+    public async Task<ActionResult<UsersDto>> GetAllUsers()
     {
         _logger.LogInformation("Attempting to retrieve all users");
 
@@ -125,7 +125,7 @@ public class UsersController : ControllerBase
         }
     }
 
-    [HttpPost("{email}")]
+    [HttpGet("{email}")]
     [Authorize(Roles = "Accountant")]
     public async Task<ActionResult<ApplicationUser>> GetUserByEmail([FromQuery] string email)
     {

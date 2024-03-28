@@ -226,5 +226,38 @@ namespace Finals.Tests.Controllers
             var okResult = result.Result as OkObjectResult;
             Assert.AreEqual(userDto, okResult.Value);
         }
+        
+        [Test]
+        public async Task GetAllUsers_ReturnsOk_WhenUsersAreFound()
+        {
+            var users = new UsersDto();
+            _mockUserService.Setup(service => service.GetAllUsers()).ReturnsAsync(users);
+
+            var result = await _controller.GetAllUsers();
+
+            Assert.IsInstanceOf<OkObjectResult>(result.Result);
+            var okResult = result.Result as OkObjectResult;
+            Assert.AreEqual(users, okResult.Value);
+        }
+
+        [Test]
+        public async Task GetAllUsers_ReturnsNotFound_WhenNoUsersAreFound()
+        {
+            _mockUserService.Setup(service => service.GetAllUsers()).ReturnsAsync((UsersDto)null);
+
+            var result = await _controller.GetAllUsers();
+
+            Assert.IsInstanceOf<NotFoundResult>(result.Result);
+        }
+
+        [Test]
+        public async Task GetAllUsers_ReturnsForbid_WhenUnauthorized()
+        {
+            _mockUserService.Setup(service => service.GetAllUsers()).ThrowsAsync(new UnauthorizedAccessException());
+
+            var result = await _controller.GetAllUsers();
+
+            Assert.IsInstanceOf<ForbidResult>(result.Result);
+        }
     }
 }

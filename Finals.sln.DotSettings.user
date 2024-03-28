@@ -20,6 +20,12 @@
     &lt;TestId&gt;NUnit3x::74D00867-010E-49F0-BFAE-6D5BEE92ED36::net8.0::Finals.Test.Controllers.UsersControllerTests.Register_ReturnsCreatedAtAction_WhenRegistrationSucceeds&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b08187c2_002D5d10_002D4e86_002D905c_002D1d62c7fe9c83/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;Finals.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests" Presentation="&amp;lt;Finals.Tests&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b6f02dda_002D9c62_002D4fed_002Da778_002D6adfef65fc6d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;Finals.Test&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Project Location="/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Test" Presentation="&amp;lt;Finals.Test&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e925a6f5_002D3366_002D48f3_002D9de7_002D942fb8261922/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;Finals.Tests&amp;gt; #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests" Presentation="&amp;lt;Finals.Tests&amp;gt;" /&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

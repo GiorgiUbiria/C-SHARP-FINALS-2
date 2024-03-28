@@ -1,3 +1,5 @@
 ./Properties
 ./packages
 ./.idea
+./bin
+./obj
