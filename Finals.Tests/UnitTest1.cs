@@ -1,4 +1,4 @@
-namespace Finals.Test;
+namespace Finals.Tests;
 
 public class Tests
 {

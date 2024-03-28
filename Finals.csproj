@@ -34,4 +34,22 @@
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Finals.Tests\UnitTest1.cs">
+        <Link>Finals.Test\UnitTest1.cs</Link>
+      </Compile>
+      <Compile Update="Finals.Tests\GlobalUsings.cs">
+        <Link>Finals.Test\GlobalUsings.cs</Link>
+      </Compile>
+      <Compile Update="Finals.Tests\Controllers\ProductsControllerTests.cs">
+        <Link>Finals.Test\Controllers\ProductsControllerTests.cs</Link>
+      </Compile>
+      <Compile Update="Finals.Tests\Controllers\FastLoansControllerTests.cs">
+        <Link>Finals.Test\Controllers\FastLoansControllerTests.cs</Link>
+      </Compile>
+      <Compile Update="Finals.Tests\Controllers\UsersControllerTests.cs">
+        <Link>Finals.Test\Controllers\UsersControllerTests.cs</Link>
+      </Compile>
+    </ItemGroup>
+
 </Project>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c/eXWL8YeKUlpan/8Bwm20hz4P29YQG4K2E2QZ4nw86CGy6znH2sP2a835XYAg2Dhvk795bdHj5S24UmlYJUyQ==",
+  "dgSpecHash": "AxapEsDJr3fjo0Sp24rVnayMXarIuAV2gd5mnxRIY3ha0bJYSJGmqEpKWFyBhTbgDUt2dbmBefcntB1Em++WcA==",
   "success": true,
-  "projectFilePath": "/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Test/Finals.Test.csproj",
+  "projectFilePath": "/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/Finals.Tests.csproj",
   "expectedPackageFiles": [
     "/home/faziskado/.nuget/packages/asp.versioning.abstractions/8.0.0/asp.versioning.abstractions.8.0.0.nupkg.sha512",
     "/home/faziskado/.nuget/packages/asp.versioning.http/8.0.0/asp.versioning.http.8.0.0.nupkg.sha512",

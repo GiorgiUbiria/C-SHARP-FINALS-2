@@ -3,7 +3,7 @@ using Finals.Dtos;
 using Finals.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Finals.Test.Controllers;
+namespace Finals.Tests.Controllers;
 
 using Moq;
 using NUnit.Framework;

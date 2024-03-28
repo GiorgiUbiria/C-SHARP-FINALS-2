@@ -8727,11 +8727,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Test/Finals.Test.csproj",
-      "projectName": "Finals.Test",
-      "projectPath": "/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Test/Finals.Test.csproj",
+      "projectUniqueName": "/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/Finals.Tests.csproj",
+      "projectName": "Finals.Tests",
+      "projectPath": "/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/Finals.Tests.csproj",
       "packagesPath": "/home/faziskado/.nuget/packages/",
-      "outputPath": "/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Test/obj/",
+      "outputPath": "/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/Finals.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/faziskado/.nuget/NuGet/NuGet.Config"
