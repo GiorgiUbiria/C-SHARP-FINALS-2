@@ -1,7 +1,5 @@
 using Asp.Versioning;
-using Finals.Dtos;
 using Finals.Interfaces;
-using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -177,7 +175,7 @@ public class LoansController : ControllerBase
 
     [HttpGet]
     [Authorize]
-    [Route("accpeted")]
+    [Route("completed")]
     public async Task<IActionResult> GetCompletedLoans()
     {
         _logger.LogInformation("Attempting to retrieve completed loans.");
