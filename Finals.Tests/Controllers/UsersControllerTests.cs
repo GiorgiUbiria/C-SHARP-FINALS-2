@@ -226,7 +226,7 @@ namespace Finals.Tests.Controllers
             var okResult = result.Result as OkObjectResult;
             Assert.AreEqual(userDto, okResult.Value);
         }
-        
+
         [Test]
         public async Task GetAllUsers_ReturnsOk_WhenUsersAreFound()
         {
@@ -256,6 +256,45 @@ namespace Finals.Tests.Controllers
             _mockUserService.Setup(service => service.GetAllUsers()).ThrowsAsync(new UnauthorizedAccessException());
 
             var result = await _controller.GetAllUsers();
+
+            Assert.IsInstanceOf<ForbidResult>(result.Result);
+        }
+
+        [Test]
+        public async Task GetUserByEmail_ReturnsOk_WhenUserIsFound()
+        {
+            var email = "test@example.com";
+            var userDto = new UserDto(); // Populate with some mock user data
+            _mockUserService.Setup(service => service.GetUserByEmail(email, It.IsAny<ClaimsPrincipal>()))
+                .ReturnsAsync(userDto);
+
+            var result = await _controller.GetUserByEmail(email);
+
+            Assert.IsInstanceOf<OkObjectResult>(result.Result);
+            var okResult = result.Result as OkObjectResult;
+            Assert.AreEqual(userDto, okResult.Value);
+        }
+
+        [Test]
+        public async Task GetUserByEmail_ReturnsNotFound_WhenUserIsNotFound()
+        {
+            var email = "nonexistent@example.com";
+            _mockUserService.Setup(service => service.GetUserByEmail(email, It.IsAny<ClaimsPrincipal>()))
+                .ReturnsAsync((UserDto)null);
+
+            var result = await _controller.GetUserByEmail(email);
+
+            Assert.IsInstanceOf<NotFoundResult>(result.Result);
+        }
+
+        [Test]
+        public async Task GetUserByEmail_ReturnsForbid_WhenUnauthorized()
+        {
+            var email = "test@example.com";
+            _mockUserService.Setup(service => service.GetUserByEmail(email, It.IsAny<ClaimsPrincipal>()))
+                .ThrowsAsync(new UnauthorizedAccessException());
+
+            var result = await _controller.GetUserByEmail(email);
 
             Assert.IsInstanceOf<ForbidResult>(result.Result);
         }

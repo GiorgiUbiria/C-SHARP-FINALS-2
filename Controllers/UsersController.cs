@@ -127,7 +127,7 @@ public class UsersController : ControllerBase
 
     [HttpGet("{email}")]
     [Authorize(Roles = "Accountant")]
-    public async Task<ActionResult<ApplicationUser>> GetUserByEmail([FromQuery] string email)
+    public async Task<ActionResult<UserDto>> GetUserByEmail([FromQuery] string email)
     {
         _logger.LogInformation("Attempting to retrieve user by email: {Email}", email);
 
