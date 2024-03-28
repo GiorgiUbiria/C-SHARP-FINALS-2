@@ -5,6 +5,10 @@ installment loans, fast loans, and auto loans. Below are the available routes an
 
 ## Routes
 
+### Authentication
+- **POST** - */api/users/register* - Registers a new user.
+- **POST** - */api/users/login* - Logs in a user.
+
 ### Products
 
 - **GET** - */api/products* - Retrieves a list of available products.
@@ -15,8 +19,6 @@ installment loans, fast loans, and auto loans. Below are the available routes an
 - **GET** - */api/users/* - Retrieves a list of users. Only accessible to authorized users with the appropriate
   permissions.
 - **GET** - */api/users/me* - Retrieves the details of the authenticated user.
-- **POST** - */api/users/register* - Registers a new user.
-- **POST** - */api/users/login* - Logs in a user.
 - **POST** - */api/users/{email}/block* - Blocks a user. Requires authorization and appropriate permissions.
 - **POST** - */api/users/{email}/unblock* - Unblocks a user. Requires authorization and appropriate permissions.
 - **POST** - */api/users/{email}/make-accountant* - Grants accountant role to a user. Requires authorization and
