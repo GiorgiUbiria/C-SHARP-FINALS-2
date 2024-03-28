@@ -8,7 +8,7 @@ public class FastLoanRequestDtoValidator : AbstractValidator<FastLoanRequestDto>
     public FastLoanRequestDtoValidator()
     {
         RuleFor(x => x.RequestedAmount)
-            .GreaterThanOrEqualTo(300).WithMessage("Requested Amount must be greater than 300");
+            .GreaterThanOrEqualTo(500).WithMessage("Requested Amount must be greater than 500");
         RuleFor(x => x.LoanPeriod)
             .IsInEnum().WithMessage("Invalid loan period");
         RuleFor(x => x.LoanType)
