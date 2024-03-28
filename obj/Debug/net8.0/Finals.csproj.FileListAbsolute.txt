@@ -181,3 +181,8 @@
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/OpenAI_API.dll
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/DotNetEnv.dll
 /home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/Sprache.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/Castle.Core.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/Moq.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/Moq.EntityFrameworkCore.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/nunit.framework.dll
+/home/faziskado/Projects/RiderProjects/C-SHARP-FINALS-2/Finals/bin/Debug/net8.0/nunit.framework.legacy.dll

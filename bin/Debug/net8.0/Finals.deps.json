@@ -21,8 +21,11 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "8.0.2",
           "Microsoft.Extensions.Logging": "8.0.0",
           "Microsoft.IdentityModel.Tokens": "7.4.1",
+          "Moq": "4.20.70",
+          "Moq.EntityFrameworkCore": "8.0.1.2",
           "NLog.Database": "5.2.8",
           "NLog.Web.AspNetCore": "5.3.8",
+          "NUnit": "4.1.0",
           "OpenAI": "1.11.0",
           "Swashbuckle.AspNetCore": "6.4.0",
           "System.Data.SQLite": "1.0.118",
@@ -63,6 +66,17 @@
           "lib/net8.0/Asp.Versioning.Mvc.dll": {
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.8742.36024"
+          }
+        }
+      },
+      "Castle.Core/5.1.1": {
+        "dependencies": {
+          "System.Diagnostics.EventLog": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Castle.Core.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.1.0"
           }
         }
       },
@@ -850,6 +864,29 @@
           }
         }
       },
+      "Moq/4.20.70": {
+        "dependencies": {
+          "Castle.Core": "5.1.1"
+        },
+        "runtime": {
+          "lib/net6.0/Moq.dll": {
+            "assemblyVersion": "4.20.70.0",
+            "fileVersion": "4.20.70.0"
+          }
+        }
+      },
+      "Moq.EntityFrameworkCore/8.0.1.2": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.2",
+          "Moq": "4.20.70"
+        },
+        "runtime": {
+          "lib/net8.0/Moq.EntityFrameworkCore.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.2.0"
+          }
+        }
+      },
       "NETStandard.Library/1.6.1": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -946,6 +983,18 @@
           "lib/net8.0/NLog.Web.AspNetCore.dll": {
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.3.8.1035"
+          }
+        }
+      },
+      "NUnit/4.1.0": {
+        "runtime": {
+          "lib/net6.0/nunit.framework.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.0.1.0"
+          },
+          "lib/net6.0/nunit.framework.legacy.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.0.1.0"
           }
         }
       },
@@ -1452,6 +1501,7 @@
           "System.Threading": "4.3.0"
         }
       },
+      "System.Diagnostics.EventLog/6.0.0": {},
       "System.Diagnostics.Tools/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -2097,6 +2147,13 @@
       "path": "asp.versioning.mvc/8.0.0",
       "hashPath": "asp.versioning.mvc.8.0.0.nupkg.sha512"
     },
+    "Castle.Core/5.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
+      "path": "castle.core/5.1.1",
+      "hashPath": "castle.core.5.1.1.nupkg.sha512"
+    },
     "DotNetEnv/3.0.0": {
       "type": "package",
       "serviceable": true,
@@ -2608,6 +2665,20 @@
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
     },
+    "Moq/4.20.70": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4rNnAwdpXJBuxqrOCzCyICXHSImOTRktCgCWXWykuF1qwoIsVvEnR7PjbMk/eLOxWvhmj5Kwt+kDV3RGUYcNwg==",
+      "path": "moq/4.20.70",
+      "hashPath": "moq.4.20.70.nupkg.sha512"
+    },
+    "Moq.EntityFrameworkCore/8.0.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LAgsu4wwRLlUjM8+t0FFwk4hy7of4BfeKqe52UUfXNaDKYUzYCZqwTcId1dB3FHiuailsmowei6lej1t//d8Ng==",
+      "path": "moq.entityframeworkcore/8.0.1.2",
+      "hashPath": "moq.entityframeworkcore.8.0.1.2.nupkg.sha512"
+    },
     "NETStandard.Library/1.6.1": {
       "type": "package",
       "serviceable": true,
@@ -2649,6 +2720,13 @@
       "sha512": "sha512-Rt2OCulpAF6rSrZWZzPgHikAI8SDKkq3/52xA/uJ4JtmNjoizULN/IBYtYlZojbPbXiFm3uadOO2rOvvMhjXBQ==",
       "path": "nlog.web.aspnetcore/5.3.8",
       "hashPath": "nlog.web.aspnetcore.5.3.8.nupkg.sha512"
+    },
+    "NUnit/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MT/DpAhjtiytzhTgTqIhBuWx4y26PKfDepYUHUM+5uv4TsryHC2jwFo5e6NhWkApCm/G6kZ80dRjdJFuAxq3rg==",
+      "path": "nunit/4.1.0",
+      "hashPath": "nunit.4.1.0.nupkg.sha512"
     },
     "OpenAI/1.11.0": {
       "type": "package",
@@ -3013,6 +3091,13 @@
       "sha512": "sha512-tD6kosZnTAGdrEa0tZSuFyunMbt/5KYDnHdndJYGqZoNy00XVXyACd5d6KnE1YgYv3ne2CjtAfNXo/fwEhnKUA==",
       "path": "system.diagnostics.diagnosticsource/4.3.0",
       "hashPath": "system.diagnostics.diagnosticsource.4.3.0.nupkg.sha512"
+    },
+    "System.Diagnostics.EventLog/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lcyUiXTsETK2ALsZrX+nWuHSIQeazhqPphLfaRxzdGaG93+0kELqpgEHtwWOlQe7+jSFnKwaCAgL4kjeZCQJnw==",
+      "path": "system.diagnostics.eventlog/6.0.0",
+      "hashPath": "system.diagnostics.eventlog.6.0.0.nupkg.sha512"
     },
     "System.Diagnostics.Tools/4.3.0": {
       "type": "package",

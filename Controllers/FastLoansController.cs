@@ -14,10 +14,10 @@ namespace Finals.Controllers;
 public class FastLoansController : ControllerBase
 {
     private readonly IFastLoanService _fastLoanService;
-    private readonly ILogger<LoansController> _logger;
+    private readonly ILogger<FastLoansController> _logger;
     private readonly IValidator<FastLoanRequestDto> _fastLoanValidator;
 
-    public FastLoansController(IFastLoanService fastLoanService, ILogger<LoansController> logger,
+    public FastLoansController(IFastLoanService fastLoanService, ILogger<FastLoansController> logger,
         IValidator<FastLoanRequestDto> fastLoanValidator)
     {
         _fastLoanService = fastLoanService;
